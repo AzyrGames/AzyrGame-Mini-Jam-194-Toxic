@@ -1,33 +1,34 @@
 [gd_scene load_steps=6 format=3 uid="uid://crbbmjtqbmfn0"]
 
 [ext_resource type="PackedScene" uid="uid://blfbqbkkgmjan" path="res://2.Object/ConcreteObject/Entity/Character/entity_character_rafiz.tscn" id="1_qudss"]
-
-[sub_resource type="Gradient" id="Gradient_qudss"]
-offsets = PackedFloat32Array(0.03487265)
-colors = PackedColorArray(0.010180006, 0.0036000002, 0.06, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_tpeoa"]
-gradient = SubResource("Gradient_qudss")
-width = 1280
-height = 1280
-
-[sub_resource type="Gradient" id="Gradient_ahp1e"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.026763177, 0.017426677, 0.09433297, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_o2rhd"]
-gradient = SubResource("Gradient_ahp1e")
-width = 128
-height = 128
+[ext_resource type="PackedScene" uid="uid://6fh8dpo4usfj" path="res://4.Level/PlayArea/play_area.tscn" id="2_ahp1e"]
+[ext_resource type="Script" uid="uid://dn7rm61wq3t3s" path="res://addons/godot_projectile_engine/core/projectile_environment/projectile_environment.gd" id="3_tpeoa"]
+[ext_resource type="PackedScene" uid="uid://dojfpl5mjxea7" path="res://2.Object/ConcreteObject/Entity/Enemy/EnemySquare/enemy_square.tscn" id="4_o2rhd"]
+[ext_resource type="PackedScene" uid="uid://dcs42iltjwhlg" path="res://2.Object/ConcreteObject/Entity/Enemy/EnemyCircle/enemy_circle.tscn" id="5_ihijm"]
 
 [node name="Game" type="Node2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("GradientTexture2D_tpeoa")
+[node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-texture = SubResource("GradientTexture2D_o2rhd")
+[node name="PlayArea" parent="." instance=ExtResource("2_ahp1e")]
+
+[node name="ProjectileEnvironment2D" type="Node2D" parent="."]
+script = ExtResource("3_tpeoa")
+metadata/_custom_type_script = "uid://dn7rm61wq3t3s"
 
 [node name="EntityCharacterRafiz" parent="." instance=ExtResource("1_qudss")]
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="EnemySquare" parent="." instance=ExtResource("4_o2rhd")]
+position = Vector2(-25, -39)
+
+[node name="EnemySquare2" parent="." instance=ExtResource("4_o2rhd")]
+position = Vector2(-25, -39)
+
+[node name="EnemyCircle" parent="." instance=ExtResource("5_ihijm")]
+position = Vector2(15, -35)
+
+[node name="EnemyCircle2" parent="." instance=ExtResource("5_ihijm")]
+position = Vector2(-32, -15)
+
+[node name="EnemyCircle3" parent="." instance=ExtResource("5_ihijm")]
+position = Vector2(-30, 29)

@@ -1,17 +1,26 @@
 # class_name ComponentManager
 extends Node
 
-enum Components {HEALTH, HURT_BOX}
+enum Components {
+	HEALTH, 
+	HURT_BOX,
+	HIT_BOX,
+	}
+
+
 const COMPONENT_NAMES: Dictionary[Components, String] = {
 	Components.HEALTH: "Health",
-	Components.HURT_BOX: "HurtBox"
+	Components.HURT_BOX: "HurtBox",
+	Components.HIT_BOX: "HitBox"
 }
-var NAMES_TO_COMPONENTS: Dictionary[String, Components] = {}
+
+
+var nams_to_component: Dictionary[String, Components] = {}
 var nodes_by_component: Dictionary[Components, Array] = {}
 
 func _ready() -> void:
 	for key: Components in COMPONENT_NAMES:
-		NAMES_TO_COMPONENTS[COMPONENT_NAMES[key]] = key
+		nams_to_component[COMPONENT_NAMES[key]] = key
 
 func register_component(_node: Node, _component: Components) -> void:
 	if not COMPONENT_NAMES.has(_component):

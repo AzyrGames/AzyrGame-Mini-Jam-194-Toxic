@@ -8,10 +8,12 @@ class_name EntityCharacterRafiz2D
 
 func _ready() -> void:
 	super()
+	GameManager.entity_character = self
 	_update_phyiscs()
 
 var _mouse_pos: Vector2
 
+var last_collision: KinematicCollision2D
 
 func _physics_process(_delta: float) -> void:
 	super(_delta)
@@ -19,16 +21,23 @@ func _physics_process(_delta: float) -> void:
 		rotation = _target_direction.angle()
 	_mouse_pos = get_global_mouse_position()
 	_target_direction = (_mouse_pos - global_position).normalized()
-	velocity = calculate_velocity(_delta)
+	calculate_velocity(_delta)
+	last_collision = get_last_slide_collision()
+	if last_collision:
+		velocity = velocity.reflect(last_collision.get_normal()) / 1.5 * -1.0
 	move_and_slide()
+	
 	pass
 
 
 func _input(event: InputEvent) -> void:
-	if Input.is_action_pressed("action_2"):
+	if Input.is_action_just_pressed("action_2"):
 		_is_moving = true
-	else:
+	if Input.is_action_just_released("action_2"):
 		_is_moving = false
 
+	if Input.is_action_just_pressed("action_1"):
+		active_projectile_wrapper(true)
+	if Input.is_action_just_released("action_1"):
+		active_projectile_wrapper(false)
 
-	pass

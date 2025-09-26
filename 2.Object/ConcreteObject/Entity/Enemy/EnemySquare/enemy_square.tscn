@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://dojfpl5mjxea7"]
+
+[ext_resource type="PackedScene" uid="uid://bngbo8gd3xorr" path="res://2.Object/Base/Entity/Enemy/entity_enemy.tscn" id="1_tgpij"]
+[ext_resource type="Texture2D" uid="uid://dinbyguk248ru" path="res://8.Asset/2D/Enemy/texture_enemy_square1.png" id="2_13gqh"]
+[ext_resource type="BehaviorTree" uid="uid://dqaojq46pajuu" path="res://3.System/AI/BehaviourTrees/enemy_square_behavior.tres" id="2_hwv7n"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hwv7n"]
+radius = 5.0990195
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_13gqh"]
+radius = 7.0
+
+[node name="EnemySquare" node_paths=PackedStringArray("enemy_sprite") instance=ExtResource("1_tgpij")]
+collision_layer = 256
+collision_mask = 32
+enemy_sprite = NodePath("Sprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_hwv7n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox2D" index="0"]
+shape = SubResource("CircleShape2D_13gqh")
+
+[node name="BTPlayer" parent="." index="3"]
+behavior_tree = ExtResource("2_hwv7n")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="5"]
+texture_filter = 1
+texture = ExtResource("2_13gqh")

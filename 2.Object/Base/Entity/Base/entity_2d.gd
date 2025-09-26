@@ -19,6 +19,11 @@ class_name Entity2D
 		friction_ticks = value
 		_update_phyiscs()
 
+@export var enemy_sprite: Sprite2D
+@export var is_rotate_sprite: bool = true
+@export var sprite_rotate_speed: float = 3
+
+
 var _acceleration_value: float = 1500.0
 var _friction_value: float = 1000.0
 var _target_direction: Vector2 = Vector2.ZERO
@@ -30,11 +35,13 @@ var speed_modifier_stack: PackedFloat32Array
 var move_direction: Vector2
 
 
+
 @export_category("Component")
 @export var health: Health
 @export var hurt_box: HurtBox2D
+@export var weapon: ProjectileWrapper2D
 
-var _is_moving: bool = true
+var _is_moving: bool = false
 
 
 
@@ -43,6 +50,7 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	rotate_texture()
 	pass
 
 func _update_phyiscs() -> void:
@@ -50,10 +58,27 @@ func _update_phyiscs() -> void:
 	_friction_value = max_speed / friction_ticks
 	pass
 
+
+
 func calculate_velocity(_delta: float) -> Vector2:
 	_desired_velocity = _target_direction * max_speed
 	if _is_moving and _desired_velocity != Vector2.ZERO:
-		_calculated_velocity = _calculated_velocity.move_toward(_desired_velocity, _acceleration_value)
+		velocity = velocity.move_toward(_desired_velocity, _acceleration_value)
 	else:
-		_calculated_velocity = _calculated_velocity.move_toward(Vector2.ZERO, _friction_value)
-	return _calculated_velocity
+		velocity = velocity.move_toward(Vector2.ZERO, _friction_value)
+	return velocity
+
+
+func active_projectile_wrapper(_value: bool) -> void:
+	if !weapon: return
+	weapon.active = _value
+	pass
+
+
+func rotate_texture() -> void:
+	if !is_rotate_sprite: return
+	if !enemy_sprite: return
+	enemy_sprite.rotate(deg_to_rad(sprite_rotate_speed))
+	if _is_moving:
+		enemy_sprite.rotate(deg_to_rad(velocity.length() / 5))
+	pass

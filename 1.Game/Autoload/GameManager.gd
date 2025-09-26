@@ -8,6 +8,12 @@ signal game_state_loaded()
 signal frame_frozen(time_scale: float, duration: float)
 signal frame_unfrozen()
 
+
+## Character Varaible
+var entity_character: EntityCharacter2D
+
+
+
 # Game state variables
 var is_game_active: bool = false
 var is_game_paused: bool = false

@@ -26,6 +26,7 @@ Utils="*res://9.Utils/Utils.gd"
 GameWindow="*res://1.Game/Autoload/GameWindow.gd"
 GameManager="*res://1.Game/Autoload/GameManager.gd"
 SaveLoadManager="*res://1.Game/SaveLoad/SaveLoadManager.gd"
+ProjectileEngine="*res://addons/godot_projectile_engine/GodotProjectileEngine.gd"
 
 [debug]
 
@@ -39,6 +40,10 @@ window/size/viewport_width=240
 window/size/viewport_height=135
 window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_projectile_engine/plugin.cfg")
 
 [input]
 
@@ -92,6 +97,11 @@ action_2={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":88,"key_label":0,"unicode":120,"location":0,"echo":false,"script":null)
 ]
 }
+
+[limbo_ai]
+
+behavior_tree/behavior_tree_default_dir="res://3.System/AI/BehaviourTrees"
+behavior_tree/user_task_dirs=PackedStringArray("res://3.System/AI/Tasks")
 
 [rendering]
 

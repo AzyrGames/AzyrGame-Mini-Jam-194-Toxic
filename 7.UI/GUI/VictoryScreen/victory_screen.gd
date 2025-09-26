@@ -20,7 +20,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_new_game_button_pressed() -> void:
-	# GameManager.clear_game()
+	# GameManager.cleanup_game()
 	# GameManager.start_game()
 
 	# GuiManager.switch_gui_panel(GuiManager.GUIPanel.CLOSED)

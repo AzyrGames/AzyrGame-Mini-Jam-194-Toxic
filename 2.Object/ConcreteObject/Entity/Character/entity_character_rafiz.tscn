@@ -1,21 +1,71 @@
-[gd_scene load_steps=5 format=3 uid="uid://blfbqbkkgmjan"]
+[gd_scene load_steps=13 format=3 uid="uid://blfbqbkkgmjan"]
 
 [ext_resource type="PackedScene" uid="uid://d2m43c842xryf" path="res://2.Object/ConcreteObject/BaseEntity/base_entity_2d.tscn" id="1_jout7"]
 [ext_resource type="Script" uid="uid://cqa8daniccovi" path="res://2.Object/ConcreteObject/Entity/Character/entity_character_rafiz.gd" id="2_jh22c"]
+[ext_resource type="Script" uid="uid://cgi5wxrd3qs15" path="res://addons/godot_projectile_engine/core/projectile_wrapper/projectile_wrapper_2d.gd" id="3_4rd36"]
+[ext_resource type="Texture2D" uid="uid://q70c17vlloqu" path="res://8.Asset/2D/Character/teture_character.png" id="3_mfd41"]
+[ext_resource type="Script" uid="uid://cnqgcej10tinn" path="res://addons/godot_projectile_engine/core/projectile_spawner/projectile_spawner.gd" id="4_rsovm"]
+[ext_resource type="Script" uid="uid://bc73oiea731jc" path="res://addons/godot_projectile_engine/core/pattern_composer/pattern_composer.gd" id="5_e8h5j"]
+[ext_resource type="Script" uid="uid://drg85m51aqbj7" path="res://addons/godot_projectile_engine/core/projectile_template/projectile_template_node_2d/projectile_template_node_2d.gd" id="5_rsovm"]
+[ext_resource type="Script" uid="uid://co24jiat0y46s" path="res://addons/godot_projectile_engine/core/pattern_composer/component/PCCSingle2D.gd" id="6_mfd41"]
+[ext_resource type="Script" uid="uid://b8nclaklcf4uu" path="res://addons/godot_projectile_engine/core/timing_scheduler/timing_scheduler.gd" id="7_6mdho"]
+[ext_resource type="Script" uid="uid://sjpvs4m6jk71" path="res://addons/godot_projectile_engine/core/timing_scheduler/repeater/tsc_repeater.gd" id="9_e8h5j"]
 
-[sub_resource type="Gradient" id="Gradient_8hdyg"]
-colors = PackedColorArray(0.6715, 0.77265, 0.85, 1, 0.66, 0, 0.1320002, 1)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jout7"]
+size = Vector2(12, 8)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_jout7"]
-gradient = SubResource("Gradient_8hdyg")
-width = 12
-height = 8
+[sub_resource type="Resource" id="Resource_e8h5j"]
+script = ExtResource("5_rsovm")
+projectile_2d_path = &"uid://bwg0p5r7d12xs"
+metadata/_custom_type_script = "uid://drg85m51aqbj7"
 
-[node name="EntityCharacterRafiz" instance=ExtResource("1_jout7")]
+[node name="EntityCharacterRafiz" node_paths=PackedStringArray("weapon") instance=ExtResource("1_jout7")]
+collision_layer = 2
+collision_mask = 32
+motion_mode = 1
+floor_stop_on_slope = false
 script = ExtResource("2_jh22c")
-max_speed = 120.0
-acceleration_ticks = 20.0
-friction_ticks = 45.0
+max_speed = 100.0
+acceleration_ticks = 40.0
+friction_ticks = 60.0
+weapon = NodePath("ProjectileWrapper2D2")
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="2"]
-texture = SubResource("GradientTexture2D_jout7")
+texture_filter = 1
+texture = ExtResource("3_mfd41")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
+visible = false
+shape = SubResource("RectangleShape2D_jout7")
+
+[node name="ProjectileWrapper2D2" type="Node2D" parent="." index="4" node_paths=PackedStringArray("projectile_spawners")]
+script = ExtResource("3_4rd36")
+projectile_spawners = [NodePath("ProjectileSpawner2D")]
+metadata/_custom_type_script = "uid://cgi5wxrd3qs15"
+
+[node name="ProjectileSpawner2D" type="Node2D" parent="ProjectileWrapper2D2" index="0" node_paths=PackedStringArray("timing_scheduler")]
+script = ExtResource("4_rsovm")
+active = false
+projectile_composer_name = "pc_character"
+projectile_template_2d = SubResource("Resource_e8h5j")
+timing_scheduler = NodePath("../TimingScheduler")
+metadata/_custom_type_script = "uid://cnqgcej10tinn"
+
+[node name="PatternComposer2D" type="Node" parent="ProjectileWrapper2D2" index="1"]
+script = ExtResource("5_e8h5j")
+composer_name = "pc_character"
+metadata/_custom_type_script = "uid://bc73oiea731jc"
+
+[node name="PCCSingle2D" type="Node" parent="ProjectileWrapper2D2/PatternComposer2D" index="0"]
+script = ExtResource("6_mfd41")
+direction_type = 3
+metadata/_custom_type_script = "uid://co24jiat0y46s"
+
+[node name="TimingScheduler" type="Node" parent="ProjectileWrapper2D2" index="2"]
+script = ExtResource("7_6mdho")
+metadata/_custom_type_script = "uid://b8nclaklcf4uu"
+
+[node name="TSCRepeater" type="Node" parent="ProjectileWrapper2D2/TimingScheduler" index="0"]
+script = ExtResource("9_e8h5j")
+duration = 0.4
+metadata/_custom_type_script = "uid://sjpvs4m6jk71"

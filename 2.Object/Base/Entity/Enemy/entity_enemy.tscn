@@ -1,21 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://bngbo8gd3xorr"]
+[gd_scene load_steps=6 format=3 uid="uid://bngbo8gd3xorr"]
 
 [ext_resource type="Script" uid="uid://daphnuvw7f6o7" path="res://2.Object/Base/Entity/Enemy/entity_enemy.gd" id="1_1xgql"]
 [ext_resource type="Script" uid="uid://bckvefqr7mex8" path="res://3.System/Component/Hurtbox/hurt_box_2d.gd" id="2_vmawk"]
 [ext_resource type="Script" uid="uid://dapyfhwwqwa1j" path="res://3.System/Component/Health/health.gd" id="3_dwmk4"]
+[ext_resource type="Script" uid="uid://co6iiaejrsqq3" path="res://3.System/Component/Hitbox/hitbox2d.gd" id="4_vmawk"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_1xgql"]
 
 [node name="EntityEnemy2D" type="CharacterBody2D" node_paths=PackedStringArray("nav_agent", "bt_player", "health", "hurt_box")]
 script = ExtResource("1_1xgql")
+nav_agent = NodePath("NavigationAgent2D")
+bt_player = NodePath("BTPlayer")
 max_speed = 60.0
 acceleration_ticks = 20.0
 friction_ticks = 15.0
-nav_agent = NodePath("NavigationAgent2D")
-bt_player = NodePath("BTPlayer")
 health = NodePath("Health")
 hurt_box = NodePath("HurtBox2D")
 metadata/_custom_type_script = "uid://daphnuvw7f6o7"
+metadata/hitbox = Object(Area2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":1,"collision_mask":1,"collision_priority":1.0,"input_pickable":true,"monitoring":true,"monitorable":true,"priority":0,"gravity_space_override":0,"gravity_point":false,"gravity_point_unit_distance":0.0,"gravity_point_center":Vector2(0, 1),"gravity_direction":Vector2(0, 1),"gravity":980.0,"linear_damp_space_override":0,"linear_damp":0.1,"angular_damp_space_override":0,"angular_damp":1.0,"audio_bus_override":false,"audio_bus_name":&"Master","script":ExtResource("4_vmawk"),"value":1.0,"collision_shape":null,"reset_after":-1.0,"active":true,"component":2,"allow_duplicates":false,"reset_timer":null,"metadata/_custom_type_script":"uid://co6iiaejrsqq3")
+
 
 [node name="HurtBox2D" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 collision_layer = 512
@@ -24,14 +27,17 @@ script = ExtResource("2_vmawk")
 health = NodePath("../Health")
 metadata/_custom_type_script = "uid://bckvefqr7mex8"
 
+[node name="HitBox2D" type="Area2D" parent="."]
+script = ExtResource("4_vmawk")
+metadata/_custom_type_script = "uid://co6iiaejrsqq3"
+
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_dwmk4")
 hit_points = 2.0
-max_health = 2
+max_health = 3
 metadata/_custom_type_script = "uid://dapyfhwwqwa1j"
 
 [node name="BTPlayer" type="BTPlayer" parent="."]
 blackboard_plan = SubResource("BlackboardPlan_1xgql")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-debug_enabled = true

@@ -40,8 +40,8 @@ func exit_node() -> void:
 func register_component() -> void:
 	var owner_node: Node = owner
 	if not owner_node:
-		if Debugger:
-			Debugger.log_error("Component %s has no valid node" % ComponentManager.COMPONENT_NAMES[component])
+		# if Debugger:
+			# Debugger.log_error("Component %s has no valid node" % ComponentManager.COMPONENT_NAMES[component])
 		return
 	
 	var components: Dictionary = owner_node.get_meta("components", {})
@@ -66,8 +66,8 @@ func register_component() -> void:
 func unregister_component() -> void:
 	var owner_node: Node = owner
 	if not owner_node:
-		if Debugger:
-			Debugger.log_error("Component %s has no valid node" % ComponentManager.COMPONENT_NAMES[component])
+		# if Debugger:
+			# Debugger.log_error("Component %s has no valid node" % ComponentManager.COMPONENT_NAMES[component])
 		return
 	
 	var components: Dictionary = owner_node.get_meta("components", {})

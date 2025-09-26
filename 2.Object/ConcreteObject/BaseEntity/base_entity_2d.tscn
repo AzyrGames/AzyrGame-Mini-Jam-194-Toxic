@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2m43c842xryf"]
+[gd_scene load_steps=5 format=3 uid="uid://d2m43c842xryf"]
 
 [ext_resource type="Script" uid="uid://bckvefqr7mex8" path="res://3.System/Component/Hurtbox/hurt_box_2d.gd" id="1_8h2nl"]
 [ext_resource type="Script" uid="uid://dsxq5bjgcutn7" path="res://2.Object/Base/Entity/Base/entity_2d.gd" id="1_exkur"]
 [ext_resource type="Script" uid="uid://dapyfhwwqwa1j" path="res://3.System/Component/Health/health.gd" id="2_exkur"]
+[ext_resource type="Script" uid="uid://co6iiaejrsqq3" path="res://3.System/Component/Hitbox/hitbox2d.gd" id="4_bmfyl"]
 
 [node name="BaseEntity2D" type="CharacterBody2D" node_paths=PackedStringArray("health", "hurt_box")]
 script = ExtResource("1_exkur")
@@ -17,3 +18,7 @@ metadata/_custom_type_script = "uid://bckvefqr7mex8"
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_exkur")
 metadata/_custom_type_script = "uid://dapyfhwwqwa1j"
+
+[node name="HitBox2D" type="Area2D" parent="."]
+script = ExtResource("4_bmfyl")
+metadata/_custom_type_script = "uid://co6iiaejrsqq3"

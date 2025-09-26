@@ -9,6 +9,7 @@ class_name EntityCharacterRafiz2D
 func _ready() -> void:
 	super()
 	GameManager.entity_character = self
+	_connect_hurt_box()
 	_update_phyiscs()
 
 var _mouse_pos: Vector2
@@ -29,7 +30,6 @@ func _physics_process(_delta: float) -> void:
 	
 	pass
 
-
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("action_2"):
 		_is_moving = true
@@ -41,3 +41,13 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_released("action_1"):
 		active_projectile_wrapper(false)
 
+
+
+func _connect_hurt_box() -> void:
+	hurt_box.got_hurt.connect(_on_got_hurt)
+	pass
+
+func _on_got_hurt() -> void:
+	EventBus.character_got_hut.emit()
+	print("yeeeeee")
+	pass

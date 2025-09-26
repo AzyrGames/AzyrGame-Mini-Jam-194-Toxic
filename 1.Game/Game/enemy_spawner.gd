@@ -6,18 +6,21 @@ signal enemy_wave_cleared
 enum EnemyType {
 	SQUARE,
 	CIRCLE,
+	TRIANGLE,
 }
 
 
 var enemy_power : Dictionary[EnemyType, float] = {
-	EnemyType.SQUARE: 2,
-	EnemyType.CIRCLE: 5
+	EnemyType.SQUARE: 3,
+	EnemyType.CIRCLE: 5,
+	EnemyType.TRIANGLE: 7,
 }
 
 
 var enemy_random_weight : Dictionary[EnemyType, float] = {
-	EnemyType.SQUARE: 1.0,
-	EnemyType.CIRCLE: 1.0
+	EnemyType.SQUARE: 10,
+	EnemyType.CIRCLE: 8,
+	EnemyType.TRIANGLE: 6,
 }
 
 
@@ -28,6 +31,7 @@ var enemy_array: Array[EntityEnemy2D]
 var enemy_paths: Dictionary[EnemyType, String] = {
 	EnemyType.SQUARE: "uid://dojfpl5mjxea7",
 	EnemyType.CIRCLE: "uid://dcs42iltjwhlg",
+	EnemyType.TRIANGLE: "uid://dtpu2d4ruviai",
 }
 
 
@@ -37,7 +41,7 @@ var enemy_paths: Dictionary[EnemyType, String] = {
 
 func _ready() -> void:
 	connect_event_bus()
-	spawn_enemy_wave()
+	# spawn_enemy_wave()
 
 	pass
 

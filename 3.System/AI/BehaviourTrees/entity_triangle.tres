@@ -1,0 +1,24 @@
+[gd_resource type="BehaviorTree" load_steps=8 format=3 uid="uid://c3nq2wv7xiq7d"]
+
+[ext_resource type="Script" uid="uid://cgkmj4m6x3086" path="res://3.System/AI/Tasks/bt_start_moving.gd" id="2_mpdgd"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_aj8cc"]
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_0wovq"]
+
+[sub_resource type="BTAction" id="BTAction_mpdgd"]
+script = ExtResource("2_mpdgd")
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_a31xt"]
+min_duration = 15.0
+max_duration = 20.0
+
+[sub_resource type="BTSequence" id="BTSequence_grqkq"]
+children = [SubResource("BTRandomWait_0wovq"), SubResource("BTAction_mpdgd"), SubResource("BTRandomWait_a31xt")]
+
+[sub_resource type="BTSequence" id="BTSequence_ww338"]
+children = [SubResource("BTSequence_grqkq")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_aj8cc")
+root_task = SubResource("BTSequence_ww338")

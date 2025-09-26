@@ -44,8 +44,8 @@ var move_direction: Vector2
 var _is_moving: bool = false
 
 
-
 func _ready() -> void:
+	connect_component()
 	pass
 
 
@@ -59,7 +59,6 @@ func _update_phyiscs() -> void:
 	pass
 
 
-
 func calculate_velocity(_delta: float) -> Vector2:
 	_desired_velocity = _target_direction * max_speed
 	if _is_moving and _desired_velocity != Vector2.ZERO:
@@ -69,11 +68,26 @@ func calculate_velocity(_delta: float) -> Vector2:
 	return velocity
 
 
+func connect_component() -> void:
+	_connect_health()
+	pass
+
+
+func _connect_health() -> void:
+	if !health: return
+	health.health_depleted.connect(_on_health_depleted)
+
+	pass
+
+
+func _on_health_depleted() -> void:
+	queue_free()
+	pass
+
 func active_projectile_wrapper(_value: bool) -> void:
 	if !weapon: return
 	weapon.active = _value
 	pass
-
 
 func rotate_texture() -> void:
 	if !is_rotate_sprite: return
@@ -82,3 +96,5 @@ func rotate_texture() -> void:
 	if _is_moving:
 		enemy_sprite.rotate(deg_to_rad(velocity.length() / 5))
 	pass
+
+

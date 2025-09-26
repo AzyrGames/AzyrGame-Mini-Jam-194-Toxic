@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://blfbqbkkgmjan"]
+[gd_scene load_steps=15 format=3 uid="uid://blfbqbkkgmjan"]
 
 [ext_resource type="PackedScene" uid="uid://d2m43c842xryf" path="res://2.Object/ConcreteObject/BaseEntity/base_entity_2d.tscn" id="1_jout7"]
 [ext_resource type="Script" uid="uid://cqa8daniccovi" path="res://2.Object/ConcreteObject/Entity/Character/entity_character_rafiz.gd" id="2_jh22c"]
@@ -6,18 +6,30 @@
 [ext_resource type="Texture2D" uid="uid://q70c17vlloqu" path="res://8.Asset/2D/Character/teture_character.png" id="3_mfd41"]
 [ext_resource type="Script" uid="uid://cnqgcej10tinn" path="res://addons/godot_projectile_engine/core/projectile_spawner/projectile_spawner.gd" id="4_rsovm"]
 [ext_resource type="Script" uid="uid://bc73oiea731jc" path="res://addons/godot_projectile_engine/core/pattern_composer/pattern_composer.gd" id="5_e8h5j"]
-[ext_resource type="Script" uid="uid://drg85m51aqbj7" path="res://addons/godot_projectile_engine/core/projectile_template/projectile_template_node_2d/projectile_template_node_2d.gd" id="5_rsovm"]
+[ext_resource type="Script" uid="uid://dqlixqba72p5f" path="res://addons/godot_projectile_engine/core/projectile_template/projectile_template_simple_2d/projectile_template_simple_2d.gd" id="6_6mdho"]
 [ext_resource type="Script" uid="uid://co24jiat0y46s" path="res://addons/godot_projectile_engine/core/pattern_composer/component/PCCSingle2D.gd" id="6_mfd41"]
 [ext_resource type="Script" uid="uid://b8nclaklcf4uu" path="res://addons/godot_projectile_engine/core/timing_scheduler/timing_scheduler.gd" id="7_6mdho"]
+[ext_resource type="Texture2D" uid="uid://xej5ti53m73n" path="res://addons/godot_projectile_engine/examples/assets/projectile/projectile_circle_1.png" id="7_db6hw"]
 [ext_resource type="Script" uid="uid://sjpvs4m6jk71" path="res://addons/godot_projectile_engine/core/timing_scheduler/repeater/tsc_repeater.gd" id="9_e8h5j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jout7"]
 size = Vector2(12, 8)
 
-[sub_resource type="Resource" id="Resource_e8h5j"]
-script = ExtResource("5_rsovm")
-projectile_2d_path = &"uid://bwg0p5r7d12xs"
-metadata/_custom_type_script = "uid://drg85m51aqbj7"
+[sub_resource type="CircleShape2D" id="CircleShape2D_6mdho"]
+
+[sub_resource type="Resource" id="Resource_xdctc"]
+script = ExtResource("6_6mdho")
+speed = 150.0
+texture = ExtResource("7_db6hw")
+scale = Vector2(0.5, 0.5)
+collision_shape = SubResource("CircleShape2D_6mdho")
+collision_layer = 8
+collision_mask = 544
+texture_rotate_direction = true
+custom_data = [{
+"damage": 1.0
+}]
+metadata/_custom_type_script = "uid://dqlixqba72p5f"
 
 [node name="EntityCharacterRafiz" node_paths=PackedStringArray("weapon") instance=ExtResource("1_jout7")]
 collision_layer = 2
@@ -47,7 +59,7 @@ metadata/_custom_type_script = "uid://cgi5wxrd3qs15"
 script = ExtResource("4_rsovm")
 active = false
 projectile_composer_name = "pc_character"
-projectile_template_2d = SubResource("Resource_e8h5j")
+projectile_template_2d = SubResource("Resource_xdctc")
 timing_scheduler = NodePath("../TimingScheduler")
 metadata/_custom_type_script = "uid://cnqgcej10tinn"
 

@@ -1,0 +1,238 @@
+[gd_scene load_steps=4 format=3 uid="uid://ck38yj3c6805l"]
+
+[ext_resource type="Theme" uid="uid://dj4tk5t1n3arr" path="res://2.Scenes/GUI/Theme/AzyrTheme.tres" id="1_h80o3"]
+[ext_resource type="Script" path="res://2.Scenes/GUI/Setting/setting_gui.gd" id="2_2p8vq"]
+[ext_resource type="StyleBox" uid="uid://crpci47t7tqbd" path="res://2.Scenes/GUI/Theme/panel_plat_black.tres" id="3_vw2fn"]
+
+[node name="SettingMenuGUI" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_h80o3")
+script = ExtResource("2_2p8vq")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_h80o3")
+theme_override_styles/panel = ExtResource("3_vw2fn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_h80o3")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme = ExtResource("1_h80o3")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_h80o3")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+theme = ExtResource("1_h80o3")
+
+[node name="MarginContainer2" type="MarginContainer" parent="Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_h80o3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/HBoxContainer2/MarginContainer2"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_h80o3")
+
+[node name="GridContainer" type="GridContainer" parent="Panel/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_h80o3")
+
+[node name="Resolution" type="HBoxContainer" parent="Panel/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer/ScrollContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_h80o3")
+
+[node name="ResolutionLabel" type="Label" parent="Panel/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer/ScrollContainer/GridContainer/Resolution"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme = ExtResource("1_h80o3")
+theme_override_font_sizes/font_size = 22
+text = "Resolution"
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer/ScrollContainer/GridContainer/Resolution"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_h80o3")
+
+[node name="ResolutionButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer/ScrollContainer/GridContainer/Resolution"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 36)
+layout_mode = 2
+theme = ExtResource("1_h80o3")
+theme_override_font_sizes/font_size = 22
+text = "1920x1080"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_h80o3")
+
+[node name="ScreenShakeLabel" type="Label" parent="Panel/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme = ExtResource("1_h80o3")
+theme_override_font_sizes/font_size = 22
+text = "Screen Shake"
+vertical_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="Panel/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_h80o3")
+
+[node name="ScreenShakeSlicer" type="HSlider" parent="Panel/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(128, 36)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_h80o3")
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Panel/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_h80o3")
+
+[node name="Label2" type="Label" parent="Panel/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer5"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme = ExtResource("1_h80o3")
+theme_override_font_sizes/font_size = 22
+text = "Master Volume"
+vertical_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="Panel/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_h80o3")
+
+[node name="MasterVolumeSlider" type="HSlider" parent="Panel/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer5"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 36)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_h80o3")
+max_value = 1.0
+step = 0.01
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Panel/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_h80o3")
+
+[node name="Label2" type="Label" parent="Panel/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme = ExtResource("1_h80o3")
+theme_override_font_sizes/font_size = 22
+text = "Music Volume
+"
+vertical_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="Panel/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_h80o3")
+
+[node name="MusicVolumeSlider" type="HSlider" parent="Panel/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer3"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 36)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_h80o3")
+max_value = 1.0
+step = 0.01
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Panel/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_h80o3")
+
+[node name="Label2" type="Label" parent="Panel/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme = ExtResource("1_h80o3")
+theme_override_font_sizes/font_size = 22
+text = "SFX Volume
+"
+vertical_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="Panel/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_h80o3")
+
+[node name="SFXVolumeSlider" type="HSlider" parent="Panel/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer4"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 36)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_h80o3")
+max_value = 1.0
+step = 0.01
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Panel/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_h80o3")
+
+[node name="BackButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_h80o3")
+theme_override_font_sizes/font_size = 22
+text = "Back"
+
+[node name="MarginContainer3" type="MarginContainer" parent="Panel/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(128, 48)
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("1_h80o3")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme = ExtResource("1_h80o3")
+
+[connection signal="button_up" from="Panel/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer/ScrollContainer/GridContainer/Resolution/ResolutionButton" to="." method="_on_resolution_button_button_up"]
+[connection signal="value_changed" from="Panel/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer5/MasterVolumeSlider" to="." method="_on_master_volume_slider_value_changed"]
+[connection signal="value_changed" from="Panel/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer3/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
+[connection signal="value_changed" from="Panel/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer4/SFXVolumeSlider" to="." method="_on_sfx_volume_slider_value_changed"]
+[connection signal="button_up" from="Panel/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer/HBoxContainer4/BackButton" to="." method="_on_back_button_button_up"]

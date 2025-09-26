@@ -1,0 +1,126 @@
+[gd_scene load_steps=4 format=3 uid="uid://ndwe8omip53i"]
+
+[ext_resource type="Theme" uid="uid://dj4tk5t1n3arr" path="res://UI/Theme/AzyrTheme.tres" id="1_6e6hy"]
+[ext_resource type="StyleBox" uid="uid://crpci47t7tqbd" path="res://UI/Theme/panel_plat_black.tres" id="2_8dc38"]
+[ext_resource type="Script" uid="uid://c2bescy5r5euv" path="res://UI/GUI/PauseMenu/pause_menu_gui.gd" id="2_8q0p2"]
+
+[node name="PauseMenuGUI" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_6e6hy")
+script = ExtResource("2_8q0p2")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_6e6hy")
+theme_override_styles/panel = ExtResource("2_8dc38")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(128, 86)
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="ResumeButton" type="Button" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/GridContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+text = "Resume"
+alignment = 0
+
+[node name="RetryButton" type="Button" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/GridContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+text = "Retry"
+alignment = 0
+
+[node name="SettingButton" type="Button" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/GridContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+text = "Setting"
+alignment = 0
+
+[node name="GoToStartScreenButton" type="Button" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/GridContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+text = "Go to start screen"
+alignment = 0
+
+[node name="ExitGameButton" type="Button" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/GridContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+text = "Exit Game"
+alignment = 0
+
+[node name="MarginContainer3" type="MarginContainer" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer3"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer3/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 42
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer3/VBoxContainer"]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+size_flags_vertical = 3
+text = "Do you know you can't dodge the bullet now"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(128, 86)
+layout_mode = 2
+
+[connection signal="button_up" from="Panel/VBoxContainer/MarginContainer2/HBoxContainer/GridContainer/ResumeButton" to="." method="_on_resume_button_button_up"]
+[connection signal="button_up" from="Panel/VBoxContainer/MarginContainer2/HBoxContainer/GridContainer/RetryButton" to="." method="_on_retry_button_button_up"]
+[connection signal="button_up" from="Panel/VBoxContainer/MarginContainer2/HBoxContainer/GridContainer/SettingButton" to="." method="_on_setting_button_button_up"]
+[connection signal="button_up" from="Panel/VBoxContainer/MarginContainer2/HBoxContainer/GridContainer/GoToStartScreenButton" to="." method="_on_go_to_start_screen_button_button_up"]
+[connection signal="button_up" from="Panel/VBoxContainer/MarginContainer2/HBoxContainer/GridContainer/ExitGameButton" to="." method="_on_exit_game_button_button_up"]

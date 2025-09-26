@@ -1,25 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0rjmyu6yhxev"]
+[gd_scene load_steps=3 format=3 uid="uid://b0rjmyu6yhxev"]
 
-[ext_resource type="Script" uid="uid://dapyfhwwqwa1j" path="res://3.System/Component/Health/health.gd" id="1_5ctm5"]
 [ext_resource type="Script" uid="uid://ybutnrp1d24r" path="res://1.Game/Main/main.gd" id="1_bhcqt"]
-[ext_resource type="Script" uid="uid://bckvefqr7mex8" path="res://3.System/Component/Hurtbox/hurt_box_2d.gd" id="3_sdq6v"]
-[ext_resource type="Texture2D" uid="uid://8xiomdkmn8y7" path="res://icon.svg" id="4_rv7se"]
+[ext_resource type="PackedScene" uid="uid://crbbmjtqbmfn0" path="res://1.Game/Game/game.tscn" id="2_bhcqt"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_bhcqt")
 
-[node name="Health" type="Node" parent="."]
-script = ExtResource("1_5ctm5")
-allow_duplicates = true
-metadata/_custom_type_script = "uid://dapyfhwwqwa1j"
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="HurtBox2D" type="Area2D" parent="."]
-script = ExtResource("3_sdq6v")
-metadata/_custom_type_script = "uid://bckvefqr7mex8"
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+audio_listener_enable_2d = true
+size = Vector2i(240, 135)
 
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(-4.5, 3)
-scale = Vector2(0.5859375, 0.59375)
-texture = ExtResource("4_rv7se")
-
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Game" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_bhcqt")]

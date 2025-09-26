@@ -23,5 +23,5 @@ static func load_or_create() -> UserSettings:
 
 func increase_screen_resolution_index() -> void:
 	screen_resolution_scaling += 1
-	if screen_resolution_scaling > 4:
+	if screen_resolution_scaling > 5:
 		screen_resolution_scaling = 1

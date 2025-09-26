@@ -34,6 +34,7 @@ var resolution_scaling_list := [
 	GameWindow.game_base_resolution,
 	GameWindow.game_base_resolution * 2,
 	GameWindow.game_base_resolution * 3,
+	GameWindow.game_base_resolution * 4,
 ]
 
 func _ready() -> void:
@@ -97,7 +98,7 @@ func _change_resolution_button_value() -> void:
 func _format_sreen_resolution_value(_screen_resolution_calling: int) -> String:
 	var formated_value := ""
 	match _screen_resolution_calling:
-		4:
+		5:
 			formated_value = "FullScreen"
 		_:
 			formated_value = str(_screen_resolution_calling) + "x"

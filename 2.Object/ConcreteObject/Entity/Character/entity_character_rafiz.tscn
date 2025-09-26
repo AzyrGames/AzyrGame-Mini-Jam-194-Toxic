@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://blfbqbkkgmjan"]
+
+[ext_resource type="PackedScene" uid="uid://d2m43c842xryf" path="res://2.Object/ConcreteObject/BaseEntity/base_entity_2d.tscn" id="1_jout7"]
+[ext_resource type="Script" uid="uid://cqa8daniccovi" path="res://2.Object/ConcreteObject/Entity/Character/entity_character_rafiz.gd" id="2_jh22c"]
+
+[sub_resource type="Gradient" id="Gradient_8hdyg"]
+colors = PackedColorArray(0.6715, 0.77265, 0.85, 1, 0.66, 0, 0.1320002, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jout7"]
+gradient = SubResource("Gradient_8hdyg")
+width = 12
+height = 8
+
+[node name="EntityCharacterRafiz" instance=ExtResource("1_jout7")]
+script = ExtResource("2_jh22c")
+max_speed = 120.0
+acceleration_ticks = 20.0
+friction_ticks = 45.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="2"]
+texture = SubResource("GradientTexture2D_jout7")

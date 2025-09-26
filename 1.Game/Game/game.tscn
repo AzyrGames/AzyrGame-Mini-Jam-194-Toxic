@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://crbbmjtqbmfn0"]
+
+[ext_resource type="PackedScene" uid="uid://blfbqbkkgmjan" path="res://2.Object/ConcreteObject/Entity/Character/entity_character_rafiz.tscn" id="1_qudss"]
+
+[sub_resource type="Gradient" id="Gradient_qudss"]
+offsets = PackedFloat32Array(0.03487265)
+colors = PackedColorArray(0.010180006, 0.0036000002, 0.06, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tpeoa"]
+gradient = SubResource("Gradient_qudss")
+width = 1280
+height = 1280
+
+[sub_resource type="Gradient" id="Gradient_ahp1e"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.026763177, 0.017426677, 0.09433297, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_o2rhd"]
+gradient = SubResource("Gradient_ahp1e")
+width = 128
+height = 128
+
+[node name="Game" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_tpeoa")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_o2rhd")
+
+[node name="EntityCharacterRafiz" parent="." instance=ExtResource("1_qudss")]
+
+[node name="Camera2D" type="Camera2D" parent="."]

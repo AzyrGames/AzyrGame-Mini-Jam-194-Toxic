@@ -28,7 +28,7 @@ var current_fps_mode: FpsMode = FpsMode.FIXED
 var current_monitor: int = DisplayServer.window_get_current_screen()
 var window_scaling: int = 1
 var is_full_screen: bool = false
-var previous_window_size: Vector2i = Vector2i(480, 270)
+var previous_window_size: Vector2i = Vector2i(240, 135)
 
 var user_settings: UserSettings
 
@@ -46,7 +46,7 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	# set_mouse_cursor(MouseCursorMode.AIM)
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	update_current_monitor()
 	_go_full_screen()
 	_mouse_visibility()
@@ -71,14 +71,19 @@ func update_current_monitor() -> void:
 	set_max_fps(current_fps_mode)
 
 func set_window_resolution(_resolution: Vector2) -> void:
+	is_full_screen = false
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	DisplayServer.window_set_size(Vector2i(_resolution))
 
 func set_resolution_scaling(_resolution_scaling: int) -> void:
 	var new_window_resolution := game_base_resolution * _resolution_scaling
 	window_scaling = _resolution_scaling
+	if _resolution_scaling == 5:
+		set_fullscreen()
+		return
 	set_window_resolution(new_window_resolution)
 	set_mouse_cursor(current_mouse_type)
+
 
 func set_max_fps(fps_mode: FpsMode) -> void:
 	current_fps_mode = fps_mode
@@ -96,14 +101,19 @@ func _go_full_screen() -> void:
 		return
 	if not Input.is_action_just_pressed("go_full_screen"):
 		return
+	set_fullscreen()
+
+func set_fullscreen() -> void:
 	if not is_full_screen:
 		is_full_screen = true
 		previous_window_size = DisplayServer.window_get_size()
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
 	else:
 		is_full_screen = false
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 		DisplayServer.window_set_size(previous_window_size)
+	pass
+
 
 func _mouse_visibility() -> void:
 	if Engine.is_editor_hint():

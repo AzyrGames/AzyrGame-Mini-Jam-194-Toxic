@@ -64,6 +64,11 @@ func cleanup_game() -> void:
 func handle_character_death() -> void:
 	pass
 
+
+func resume_game() -> void:
+	set_game_paused(false)
+	pass
+
 # Pause/unpause game
 func set_game_paused(pause: bool) -> void:
 	is_game_paused = pause

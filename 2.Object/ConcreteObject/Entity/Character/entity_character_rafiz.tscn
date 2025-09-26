@@ -56,6 +56,9 @@ health = NodePath("../Health")
 position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_6mdho")
 
+[node name="Health" parent="." index="1"]
+is_damageable = false
+
 [node name="Sprite2D" type="Sprite2D" parent="." index="2"]
 texture_filter = 1
 texture = ExtResource("3_mfd41")

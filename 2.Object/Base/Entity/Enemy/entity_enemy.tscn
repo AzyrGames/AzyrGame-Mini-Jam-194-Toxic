@@ -8,6 +8,9 @@
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_1xgql"]
 
 [node name="EntityEnemy2D" type="CharacterBody2D" node_paths=PackedStringArray("nav_agent", "bt_player", "health", "hurt_box")]
+collision_layer = 256
+collision_mask = 256
+motion_mode = 1
 script = ExtResource("1_1xgql")
 nav_agent = NodePath("NavigationAgent2D")
 bt_player = NodePath("BTPlayer")

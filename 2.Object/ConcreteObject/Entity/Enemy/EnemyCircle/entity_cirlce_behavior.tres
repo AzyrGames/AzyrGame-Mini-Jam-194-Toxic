@@ -30,8 +30,7 @@ children = [SubResource("BTRepeatUntilSuccess_vmawk")]
 script = ExtResource("1_fktmd")
 
 [sub_resource type="BTRandomWait" id="BTRandomWait_26utu"]
-min_duration = 0.8
-max_duration = 1.2
+max_duration = 1.5
 
 [sub_resource type="BTSequence" id="BTSequence_26utu"]
 children = [SubResource("BTAction_26utu"), SubResource("BTRandomWait_dwmk4"), SubResource("BTAction_v5bph"), SubResource("BTTimeLimit_dwmk4"), SubResource("BTAction_df5u0"), SubResource("BTRandomWait_26utu")]

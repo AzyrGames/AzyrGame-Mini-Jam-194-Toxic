@@ -10,10 +10,10 @@
 script = ExtResource("1_axc4o")
 
 [sub_resource type="BTRandomWait" id="BTRandomWait_ea15m"]
-max_duration = 1.5
 
 [sub_resource type="BTAction" id="BTAction_4jcrw"]
 script = ExtResource("2_axc4o")
+random_range = Vector3(20, 30, 0)
 
 [sub_resource type="BTAction" id="BTAction_khlqb"]
 script = ExtResource("3_ymbde")
@@ -29,8 +29,7 @@ children = [SubResource("BTRepeatUntilSuccess_3ggly")]
 script = ExtResource("1_axc4o")
 
 [sub_resource type="BTRandomWait" id="BTRandomWait_56n0o"]
-min_duration = 0.8
-max_duration = 1.2
+max_duration = 1.5
 
 [sub_resource type="BTSequence" id="BTSequence_xtyqk"]
 children = [SubResource("BTAction_lg4wn"), SubResource("BTRandomWait_ea15m"), SubResource("BTAction_4jcrw"), SubResource("BTTimeLimit_5xfhm"), SubResource("BTAction_mxel5"), SubResource("BTRandomWait_56n0o")]

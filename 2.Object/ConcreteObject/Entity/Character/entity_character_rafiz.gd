@@ -51,3 +51,8 @@ func _on_got_hurt() -> void:
 	EventBus.character_got_hut.emit()
 	print("yeeeeee")
 	pass
+
+
+func _on_health_depleted() -> void:
+	
+	pass

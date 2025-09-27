@@ -89,12 +89,12 @@ func active_projectile_wrapper(_value: bool) -> void:
 	weapon.active = _value
 	pass
 
-func rotate_texture() -> void:
-	if !is_rotate_sprite: return
-	if !enemy_sprite: return
-	enemy_sprite.rotate(deg_to_rad(sprite_rotate_speed))
-	if _is_moving:
-		enemy_sprite.rotate(deg_to_rad(velocity.length() / 5))
-	pass
+# func rotate_texture() -> void:
+# 	if !is_rotate_sprite: return
+# 	if !enemy_sprite: return
+# 	enemy_sprite.rotate(deg_to_rad(sprite_rotate_speed))
+# 	if _is_moving:
+# 		enemy_sprite.rotate(deg_to_rad(velocity.length() / 5))
+# 	pass
 
 

@@ -35,5 +35,3 @@ func _on_entity_enemy_detroyed(_enemy: EntityEnemy2D) -> void:
 func _on_bloody_timer_timeout() -> void:
 	print("------------------------------")
 	pass
-
-

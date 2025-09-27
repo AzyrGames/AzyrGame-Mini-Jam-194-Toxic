@@ -1,8 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://dojfpl5mjxea7"]
+[gd_scene load_steps=12 format=3 uid="uid://dojfpl5mjxea7"]
 
 [ext_resource type="PackedScene" uid="uid://bngbo8gd3xorr" path="res://2.Object/Base/Entity/Enemy/entity_enemy.tscn" id="1_tgpij"]
 [ext_resource type="Texture2D" uid="uid://dinbyguk248ru" path="res://8.Asset/2D/Enemy/texture_enemy_square1.png" id="2_13gqh"]
 [ext_resource type="BehaviorTree" uid="uid://dqaojq46pajuu" path="res://3.System/AI/BehaviourTrees/enemy_square_behavior.tres" id="2_hwv7n"]
+[ext_resource type="Script" uid="uid://crtfa1u0tjqc2" path="res://2.Object/ConcreteObject/Entity/Enemy/EnemySquare/enemy_square.gd" id="2_nnh4j"]
+[ext_resource type="Script" uid="uid://cgi5wxrd3qs15" path="res://addons/godot_projectile_engine/core/projectile_wrapper/projectile_wrapper_2d.gd" id="4_nnh4j"]
+[ext_resource type="Script" uid="uid://cnqgcej10tinn" path="res://addons/godot_projectile_engine/core/projectile_spawner/projectile_spawner.gd" id="5_rauma"]
+[ext_resource type="Resource" uid="uid://cqo866cv3l37q" path="res://5.Resouces/GodotProjectile/enemy_bullet.tres" id="6_nywfq"]
+[ext_resource type="Script" uid="uid://b1ha7icvjophi" path="res://addons/godot_projectile_engine/core/timing_scheduler/cooldown/tsc_cooldown.gd" id="9_cga25"]
+[ext_resource type="Script" uid="uid://b8nclaklcf4uu" path="res://addons/godot_projectile_engine/core/timing_scheduler/timing_scheduler.gd" id="10_82xhp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hwv7n"]
 radius = 5.0990195
@@ -10,12 +16,14 @@ radius = 5.0990195
 [sub_resource type="CircleShape2D" id="CircleShape2D_13gqh"]
 radius = 7.0
 
-[node name="EnemySquare" node_paths=PackedStringArray("enemy_sprite") instance=ExtResource("1_tgpij")]
+[node name="EnemySquare" node_paths=PackedStringArray("enemy_sprite", "weapon") instance=ExtResource("1_tgpij")]
 collision_mask = 288
+script = ExtResource("2_nnh4j")
 max_speed = 40.0
 acceleration_ticks = 40.0
 friction_ticks = 20.0
 enemy_sprite = NodePath("Sprite2D")
+weapon = NodePath("ProjectileWrapper2D")
 metadata/hitbox = Object(Area2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":1,"collision_mask":1,"collision_priority":1.0,"input_pickable":true,"monitoring":true,"monitorable":true,"priority":0,"gravity_space_override":0,"gravity_point":false,"gravity_point_unit_distance":0.0,"gravity_point_center":Vector2(0, 1),"gravity_direction":Vector2(0, 1),"gravity":980.0,"linear_damp_space_override":0,"linear_damp":0.1,"angular_damp_space_override":0,"angular_damp":1.0,"audio_bus_override":false,"audio_bus_name":&"Master","script":Resource("res://3.System/Component/Hitbox/hitbox2d.gd"),"value":1.0,"collision_shape":null,"reset_after":-1.0,"active":true,"component":2,"allow_duplicates":false,"reset_timer":null,"metadata/_custom_type_script":"uid://co6iiaejrsqq3")
 
 
@@ -34,3 +42,26 @@ behavior_tree = ExtResource("2_hwv7n")
 [node name="Sprite2D" type="Sprite2D" parent="." index="5"]
 texture_filter = 1
 texture = ExtResource("2_13gqh")
+
+[node name="ProjectileWrapper2D" type="Node2D" parent="." index="7" node_paths=PackedStringArray("projectile_spawner_2d")]
+script = ExtResource("4_nnh4j")
+projectile_spawner_2d = NodePath("ProjectileSpawner2D")
+metadata/_custom_type_script = "uid://cgi5wxrd3qs15"
+
+[node name="ProjectileSpawner2D" type="Node2D" parent="ProjectileWrapper2D" index="0" node_paths=PackedStringArray("timing_scheduler")]
+script = ExtResource("5_rauma")
+active = false
+projectile_composer_name = "pc_square"
+projectile_template_2d = ExtResource("6_nywfq")
+timing_scheduler = NodePath("../TimingScheduler")
+metadata/_custom_type_script = "uid://cnqgcej10tinn"
+
+[node name="TimingScheduler" type="Node" parent="ProjectileWrapper2D" index="1"]
+script = ExtResource("10_82xhp")
+stop_method = 0
+metadata/_custom_type_script = "uid://b8nclaklcf4uu"
+
+[node name="TSCCooldown" type="Node" parent="ProjectileWrapper2D/TimingScheduler" index="0"]
+script = ExtResource("9_cga25")
+cooldown_duration = 0.6
+metadata/_custom_type_script = "uid://b1ha7icvjophi"

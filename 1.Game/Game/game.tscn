@@ -1,16 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://crbbmjtqbmfn0"]
+[gd_scene load_steps=8 format=3 uid="uid://crbbmjtqbmfn0"]
 
 [ext_resource type="PackedScene" uid="uid://blfbqbkkgmjan" path="res://2.Object/ConcreteObject/Entity/Character/entity_character_rafiz.tscn" id="1_qudss"]
 [ext_resource type="PackedScene" uid="uid://6fh8dpo4usfj" path="res://4.Level/PlayArea/play_area.tscn" id="2_ahp1e"]
 [ext_resource type="Script" uid="uid://dn7rm61wq3t3s" path="res://addons/godot_projectile_engine/core/projectile_environment/projectile_environment.gd" id="3_tpeoa"]
 [ext_resource type="Script" uid="uid://eesbgowade3n" path="res://1.Game/Game/enemy_spawner.gd" id="4_o2rhd"]
-[ext_resource type="Script" uid="uid://dniss6so3fh7m" path="res://3.System/BloodyTimer/bloody_timer_label.gd" id="5_ihijm"]
-[ext_resource type="Theme" uid="uid://c55lhrkiw4ysq" path="res://7.UI/Theme/AzyrTheme.tres" id="5_iv6b1"]
-[ext_resource type="PackedScene" uid="uid://dtpu2d4ruviai" path="res://2.Object/ConcreteObject/Entity/Enemy/EnemyTriangle/entity_triangle.tscn" id="7_jwliw"]
-[ext_resource type="PackedScene" uid="uid://cavpoab3f6qnj" path="res://2.Object/ConcreteObject/Entity/Enemy/EnemyRice/enemy_rice.tscn" id="8_fx8dh"]
-[ext_resource type="PackedScene" uid="uid://dal7i1lf0v658" path="res://2.Object/ConcreteObject/Entity/Enemy/EnemyStatic/enemy_static.tscn" id="9_ctu1t"]
-[ext_resource type="PackedScene" uid="uid://dcs42iltjwhlg" path="res://2.Object/ConcreteObject/Entity/Enemy/EnemyCircle/enemy_circle.tscn" id="10_bssge"]
-[ext_resource type="PackedScene" uid="uid://dojfpl5mjxea7" path="res://2.Object/ConcreteObject/Entity/Enemy/EnemySquare/enemy_square.tscn" id="11_kc2qw"]
+[ext_resource type="Script" uid="uid://bc73oiea731jc" path="res://addons/godot_projectile_engine/core/pattern_composer/pattern_composer.gd" id="7_fx8dh"]
+[ext_resource type="Script" uid="uid://co24jiat0y46s" path="res://addons/godot_projectile_engine/core/pattern_composer/component/PCCSingle2D.gd" id="8_ctu1t"]
+[ext_resource type="Script" uid="uid://cm1gi15tdc45s" path="res://addons/godot_projectile_engine/core/pattern_composer/component/PCCPolygon2D.gd" id="9_ctu1t"]
 
 [node name="Game" type="Node2D"]
 
@@ -27,49 +23,58 @@ metadata/hitbox = Object(Area2D,"_import_path":NodePath(""),"unique_name_in_owne
 
 
 [node name="EnemySpawner" type="Node2D" parent="."]
+position = Vector2(-24, 0)
 script = ExtResource("4_o2rhd")
+spawn_size_x = Vector3(-80, 80, 0)
 
-[node name="Label" type="Label" parent="." node_paths=PackedStringArray("bloody_timer")]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 64.0
-offset_top = -64.0
-offset_right = 104.0
-offset_bottom = -41.0
-grow_horizontal = 2
-theme = ExtResource("5_iv6b1")
-text = "text"
-vertical_alignment = 2
-script = ExtResource("5_ihijm")
-bloody_timer = NodePath("../Timer")
+[node name="PatternComposer2D" type="Node" parent="."]
+script = ExtResource("7_fx8dh")
+composer_name = "pc_square"
+metadata/_custom_type_script = "uid://bc73oiea731jc"
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 15.0
-autostart = true
+[node name="PCCSingle2D" type="Node" parent="PatternComposer2D"]
+script = ExtResource("8_ctu1t")
+direction_type = 2
+target_group = "PlayerCharacter"
+metadata/_custom_type_script = "uid://co24jiat0y46s"
 
-[node name="EntityTriangle" parent="." instance=ExtResource("7_jwliw")]
-position = Vector2(32, -24)
-metadata/hitbox = Object(Area2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":1,"collision_mask":1,"collision_priority":1.0,"input_pickable":true,"monitoring":true,"monitorable":true,"priority":0,"gravity_space_override":0,"gravity_point":false,"gravity_point_unit_distance":0.0,"gravity_point_center":Vector2(0, 1),"gravity_direction":Vector2(0, 1),"gravity":980.0,"linear_damp_space_override":0,"linear_damp":0.1,"angular_damp_space_override":0,"angular_damp":1.0,"audio_bus_override":false,"audio_bus_name":&"Master","script":Resource("res://3.System/Component/Hitbox/hitbox2d.gd"),"value":1.0,"collision_shape":null,"reset_after":-1.0,"active":true,"component":2,"allow_duplicates":false,"reset_timer":null,"metadata/_custom_type_script":"uid://co6iiaejrsqq3")
+[node name="PatternComposer2D2" type="Node" parent="."]
+script = ExtResource("7_fx8dh")
+composer_name = "pc_rice"
+metadata/_custom_type_script = "uid://bc73oiea731jc"
 
+[node name="PCCSingle2D" type="Node" parent="PatternComposer2D2"]
+script = ExtResource("8_ctu1t")
+rotation_speed = 163.0
+metadata/_custom_type_script = "uid://co24jiat0y46s"
 
-[node name="EntityEnemy2D" parent="." instance=ExtResource("8_fx8dh")]
-position = Vector2(-24, -32)
-metadata/hitbox = Object(Area2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":1,"collision_mask":1,"collision_priority":1.0,"input_pickable":true,"monitoring":true,"monitorable":true,"priority":0,"gravity_space_override":0,"gravity_point":false,"gravity_point_unit_distance":0.0,"gravity_point_center":Vector2(0, 1),"gravity_direction":Vector2(0, 1),"gravity":980.0,"linear_damp_space_override":0,"linear_damp":0.1,"angular_damp_space_override":0,"angular_damp":1.0,"audio_bus_override":false,"audio_bus_name":&"Master","script":Resource("res://3.System/Component/Hitbox/hitbox2d.gd"),"value":1.0,"collision_shape":null,"reset_after":-1.0,"active":true,"component":2,"allow_duplicates":false,"reset_timer":null,"metadata/_custom_type_script":"uid://co6iiaejrsqq3")
+[node name="PCCPolygon2D" type="Node" parent="PatternComposer2D2"]
+script = ExtResource("9_ctu1t")
+polygon_sides = 2
+metadata/_custom_type_script = "uid://cm1gi15tdc45s"
 
+[node name="PatternComposer2D3" type="Node" parent="."]
+script = ExtResource("7_fx8dh")
+composer_name = "pc_static"
+metadata/_custom_type_script = "uid://bc73oiea731jc"
 
-[node name="EntityEnemy2D2" parent="." instance=ExtResource("9_ctu1t")]
-position = Vector2(-32, 8)
-metadata/hitbox = Object(Area2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":1,"collision_mask":1,"collision_priority":1.0,"input_pickable":true,"monitoring":true,"monitorable":true,"priority":0,"gravity_space_override":0,"gravity_point":false,"gravity_point_unit_distance":0.0,"gravity_point_center":Vector2(0, 1),"gravity_direction":Vector2(0, 1),"gravity":980.0,"linear_damp_space_override":0,"linear_damp":0.1,"angular_damp_space_override":0,"angular_damp":1.0,"audio_bus_override":false,"audio_bus_name":&"Master","script":Resource("res://3.System/Component/Hitbox/hitbox2d.gd"),"value":1.0,"collision_shape":null,"reset_after":-1.0,"active":true,"component":2,"allow_duplicates":false,"reset_timer":null,"metadata/_custom_type_script":"uid://co6iiaejrsqq3")
+[node name="PCCSingle2D" type="Node" parent="PatternComposer2D3"]
+script = ExtResource("8_ctu1t")
+rotation_speed = 57.0
+metadata/_custom_type_script = "uid://co24jiat0y46s"
 
+[node name="PCCPolygon2D" type="Node" parent="PatternComposer2D3"]
+script = ExtResource("9_ctu1t")
+polygon_sides = 4
+metadata/_custom_type_script = "uid://cm1gi15tdc45s"
 
-[node name="EnemyCircle" parent="." instance=ExtResource("10_bssge")]
-position = Vector2(8, -32)
-metadata/hitbox = Object(Area2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":1024,"collision_mask":4,"collision_priority":1.0,"input_pickable":true,"monitoring":true,"monitorable":true,"priority":0,"gravity_space_override":0,"gravity_point":false,"gravity_point_unit_distance":0.0,"gravity_point_center":Vector2(0, 1),"gravity_direction":Vector2(0, 1),"gravity":980.0,"linear_damp_space_override":0,"linear_damp":0.1,"angular_damp_space_override":0,"angular_damp":1.0,"audio_bus_override":false,"audio_bus_name":&"Master","script":Resource("res://3.System/Component/Hitbox/hitbox2d.gd"),"value":1.0,"collision_shape":Object(CollisionShape2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"shape":null,"disabled":false,"one_way_collision":false,"one_way_collision_margin":1.0,"script":null)
-,"reset_after":-1.0,"active":true,"component":2,"allow_duplicates":false,"reset_timer":null,"metadata/_custom_type_script":"uid://co6iiaejrsqq3")
+[node name="PatternComposer2D4" type="Node" parent="."]
+script = ExtResource("7_fx8dh")
+composer_name = "pc_triangle"
+metadata/_custom_type_script = "uid://bc73oiea731jc"
 
-
-[node name="EnemySquare" parent="." instance=ExtResource("11_kc2qw")]
-position = Vector2(32, 24)
-metadata/hitbox = Object(Area2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":1,"collision_mask":1,"collision_priority":1.0,"input_pickable":true,"monitoring":true,"monitorable":true,"priority":0,"gravity_space_override":0,"gravity_point":false,"gravity_point_unit_distance":0.0,"gravity_point_center":Vector2(0, 1),"gravity_direction":Vector2(0, 1),"gravity":980.0,"linear_damp_space_override":0,"linear_damp":0.1,"angular_damp_space_override":0,"angular_damp":1.0,"audio_bus_override":false,"audio_bus_name":&"Master","script":Resource("res://3.System/Component/Hitbox/hitbox2d.gd"),"value":1.0,"collision_shape":null,"reset_after":-1.0,"active":true,"component":2,"allow_duplicates":false,"reset_timer":null,"metadata/_custom_type_script":"uid://co6iiaejrsqq3")
-
+[node name="PCCSingle2D" type="Node" parent="PatternComposer2D4"]
+script = ExtResource("8_ctu1t")
+direction_type = 2
+target_group = "PlayerCharacter"
+metadata/_custom_type_script = "uid://co24jiat0y46s"

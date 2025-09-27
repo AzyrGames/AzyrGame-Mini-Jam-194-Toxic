@@ -1,0 +1,1 @@
+extends EntityEnemy2D

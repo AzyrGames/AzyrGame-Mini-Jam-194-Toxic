@@ -10,5 +10,11 @@ func _physics_process(_delta: float) -> void:
 	last_collision = get_last_slide_collision()
 	if last_collision:
 		move_direction = move_direction.bounce(last_collision.get_normal())
+		if weapon:
+			weapon.active = true
 		velocity = velocity.bounce(last_collision.get_normal())
+	else:
+		if weapon:
+			weapon.active = false
+
 	move_and_slide()

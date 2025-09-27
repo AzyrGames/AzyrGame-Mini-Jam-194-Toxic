@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ProjectileTemplateAdvanced2D" load_steps=4 format=3 uid="uid://b0uagi601autq"]
+
+[ext_resource type="Script" uid="uid://c7uapl8lqnia4" path="res://addons/godot_projectile_engine/core/projectile_template/projectile_template_advanced_2d/projectile_template_advanced_2d.gd" id="1_j20is"]
+[ext_resource type="Texture2D" uid="uid://dohnk7d62jxd2" path="res://addons/limboai/icons/LimboExtractSubtree.svg" id="2_j20is"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_al8bd"]
+radius = 3.0
+
+[resource]
+script = ExtResource("1_j20is")
+speed = 50.0
+projectile_pooling_amount = 100
+texture = ExtResource("2_j20is")
+scale = Vector2(0.6, 0.6)
+texture_modulate = Color(0.84, 0.21, 0.40949994, 1)
+collision_shape = SubResource("CircleShape2D_al8bd")
+collision_layer = 1024
+collision_mask = 36
+speed_acceleration = 10.0
+speed_max = 60.0
+rotation_follow_direction = true
+metadata/_custom_type_script = "uid://c7uapl8lqnia4"

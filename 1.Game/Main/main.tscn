@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b0rjmyu6yhxev"]
+[gd_scene load_steps=5 format=3 uid="uid://b0rjmyu6yhxev"]
 
 [ext_resource type="Script" uid="uid://ybutnrp1d24r" path="res://1.Game/Main/main.gd" id="1_bhcqt"]
 [ext_resource type="PackedScene" uid="uid://crbbmjtqbmfn0" path="res://1.Game/Game/game.tscn" id="2_bhcqt"]
+[ext_resource type="Theme" uid="uid://c55lhrkiw4ysq" path="res://7.UI/Theme/AzyrTheme.tres" id="3_rv7se"]
+[ext_resource type="Script" uid="uid://dniss6so3fh7m" path="res://3.System/BloodyTimer/bloody_timer_label.gd" id="4_siurp"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_bhcqt")
@@ -19,3 +21,21 @@ size = Vector2i(240, 135)
 render_target_update_mode = 4
 
 [node name="Game" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_bhcqt")]
+
+[node name="Label" type="Label" parent="." node_paths=PackedStringArray("bloody_timer")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 204.0
+offset_right = 244.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme = ExtResource("3_rv7se")
+theme_override_font_sizes/font_size = 16
+text = "12.56"
+script = ExtResource("4_siurp")
+bloody_timer = NodePath("../Timer")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true

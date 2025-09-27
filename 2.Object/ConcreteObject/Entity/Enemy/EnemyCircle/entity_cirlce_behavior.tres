@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=15 format=3 uid="uid://dg040iu1aygal"]
+[gd_resource type="BehaviorTree" load_steps=16 format=3 uid="uid://dg040iu1aygal"]
 
 [ext_resource type="Script" uid="uid://dp672c2g2itdf" path="res://3.System/AI/Tasks/bt_stop_moving.gd" id="1_fktmd"]
 [ext_resource type="Script" uid="uid://doidqng8g5tje" path="res://3.System/AI/Tasks/bt_set_near_player.gd" id="2_bt667"]
@@ -14,7 +14,7 @@ max_duration = 1.5
 
 [sub_resource type="BTAction" id="BTAction_v5bph"]
 script = ExtResource("2_bt667")
-random_range = Vector3(10, 30, 0)
+random_range = Vector3(0, 15, 0)
 
 [sub_resource type="BTAction" id="BTAction_ikgau"]
 script = ExtResource("2_olx8b")
@@ -23,17 +23,21 @@ script = ExtResource("2_olx8b")
 children = [SubResource("BTAction_ikgau")]
 
 [sub_resource type="BTTimeLimit" id="BTTimeLimit_dwmk4"]
-time_limit = 1.0
+time_limit = 1.5
 children = [SubResource("BTRepeatUntilSuccess_vmawk")]
+
+[sub_resource type="BTInvert" id="BTInvert_olx8b"]
+children = [SubResource("BTTimeLimit_dwmk4")]
 
 [sub_resource type="BTAction" id="BTAction_df5u0"]
 script = ExtResource("1_fktmd")
 
 [sub_resource type="BTRandomWait" id="BTRandomWait_26utu"]
-max_duration = 1.5
+min_duration = 0.5
+max_duration = 1.0
 
 [sub_resource type="BTSequence" id="BTSequence_26utu"]
-children = [SubResource("BTAction_26utu"), SubResource("BTRandomWait_dwmk4"), SubResource("BTAction_v5bph"), SubResource("BTTimeLimit_dwmk4"), SubResource("BTAction_df5u0"), SubResource("BTRandomWait_26utu")]
+children = [SubResource("BTAction_26utu"), SubResource("BTRandomWait_dwmk4"), SubResource("BTAction_v5bph"), SubResource("BTInvert_olx8b"), SubResource("BTAction_df5u0"), SubResource("BTRandomWait_26utu")]
 
 [sub_resource type="BTSequence" id="BTSequence_5aoes"]
 children = [SubResource("BTSequence_26utu")]

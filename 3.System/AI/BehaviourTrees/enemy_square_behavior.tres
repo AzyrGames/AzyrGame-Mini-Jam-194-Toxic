@@ -1,19 +1,25 @@
-[gd_resource type="BehaviorTree" load_steps=15 format=3 uid="uid://dqaojq46pajuu"]
+[gd_resource type="BehaviorTree" load_steps=21 format=3 uid="uid://dqaojq46pajuu"]
 
 [ext_resource type="Script" uid="uid://dp672c2g2itdf" path="res://3.System/AI/Tasks/bt_stop_moving.gd" id="1_axc4o"]
 [ext_resource type="Script" uid="uid://forphbhaqbkn" path="res://3.System/AI/Tasks/bt_set_valid_pos.gd" id="2_axc4o"]
 [ext_resource type="Script" uid="uid://m78dyhix2pvr" path="res://3.System/AI/Tasks/bt_move_to_target.gd" id="3_ymbde"]
+[ext_resource type="Script" uid="uid://b804q7qlk7r8x" path="res://3.System/AI/Tasks/bt_set_attacking.gd" id="4_4jcrw"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_b41ft"]
 
 [sub_resource type="BTAction" id="BTAction_lg4wn"]
 script = ExtResource("1_axc4o")
 
+[sub_resource type="BTAction" id="BTAction_b41ft"]
+script = ExtResource("4_4jcrw")
+
 [sub_resource type="BTRandomWait" id="BTRandomWait_ea15m"]
+min_duration = 0.5
+max_duration = 1.0
 
 [sub_resource type="BTAction" id="BTAction_4jcrw"]
 script = ExtResource("2_axc4o")
-random_range = Vector3(20, 30, 0)
+random_range = Vector3(30, 50, 0)
 
 [sub_resource type="BTAction" id="BTAction_khlqb"]
 script = ExtResource("3_ymbde")
@@ -22,17 +28,30 @@ script = ExtResource("3_ymbde")
 children = [SubResource("BTAction_khlqb")]
 
 [sub_resource type="BTTimeLimit" id="BTTimeLimit_5xfhm"]
-time_limit = 1.0
+time_limit = 1.5
 children = [SubResource("BTRepeatUntilSuccess_3ggly")]
+
+[sub_resource type="BTInvert" id="BTInvert_4jcrw"]
+children = [SubResource("BTTimeLimit_5xfhm")]
 
 [sub_resource type="BTAction" id="BTAction_mxel5"]
 script = ExtResource("1_axc4o")
 
+[sub_resource type="BTWait" id="BTWait_4jcrw"]
+duration = 0.5
+
+[sub_resource type="BTAction" id="BTAction_ymbde"]
+script = ExtResource("4_4jcrw")
+is_attack = true
+
 [sub_resource type="BTRandomWait" id="BTRandomWait_56n0o"]
-max_duration = 1.5
+min_duration = 1.5
+
+[sub_resource type="BTAction" id="BTAction_ea15m"]
+script = ExtResource("4_4jcrw")
 
 [sub_resource type="BTSequence" id="BTSequence_xtyqk"]
-children = [SubResource("BTAction_lg4wn"), SubResource("BTRandomWait_ea15m"), SubResource("BTAction_4jcrw"), SubResource("BTTimeLimit_5xfhm"), SubResource("BTAction_mxel5"), SubResource("BTRandomWait_56n0o")]
+children = [SubResource("BTAction_lg4wn"), SubResource("BTAction_b41ft"), SubResource("BTRandomWait_ea15m"), SubResource("BTAction_4jcrw"), SubResource("BTInvert_4jcrw"), SubResource("BTAction_mxel5"), SubResource("BTWait_4jcrw"), SubResource("BTAction_ymbde"), SubResource("BTRandomWait_56n0o"), SubResource("BTAction_ea15m")]
 
 [sub_resource type="BTSequence" id="BTSequence_owewp"]
 children = [SubResource("BTSequence_xtyqk")]

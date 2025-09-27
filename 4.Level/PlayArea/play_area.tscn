@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://6fh8dpo4usfj"]
 
-[ext_resource type="Texture2D" uid="uid://cres82rguygcx" path="res://8.Asset/2D/GameLayout/texture_playarea.png" id="1_thra4"]
+[ext_resource type="Texture2D" uid="uid://cr11owmfqbn61" path="res://8.Asset/2D/GameLayout/texture_play_area_2.png" id="2_qopj1"]
 
 [sub_resource type="Gradient" id="Gradient_qudss"]
 offsets = PackedFloat32Array(0.03487265)
@@ -21,12 +21,12 @@ width = 128
 height = 128
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_thra4"]
-size = Vector2(16, 160)
+size = Vector2(16, 240)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_thra4"]
-vertices = PackedVector2Array(54, 54, -54, 54, -54, -54, 54, -54)
+vertices = PackedVector2Array(118, 54, -54, 54, -54, -54, 118, -54)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-64, -64, 128, -64, 128, 64, -64, 64)])
 
 [node name="PlayArea" type="Node2D"]
 
@@ -34,25 +34,28 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-64, -64, 64, -64, 64, 
 texture = SubResource("GradientTexture2D_nqwe6")
 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(-15.999987, 0)
+scale = Vector2(1.4999999, 1)
 texture = SubResource("GradientTexture2D_qu5vv")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D4" type="Sprite2D" parent="."]
 modulate = Color(1, 0, 0, 1)
 texture_filter = 1
-position = Vector2(-64, -64)
-texture = ExtResource("1_thra4")
-centered = false
+position = Vector2(-15.999998, 0)
+scale = Vector2(0.96000004, 1)
+texture = ExtResource("2_qopj1")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-7.9999847, 0)
 collision_layer = 32
-collision_mask = 266
+collision_mask = 1290
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-72, 0)
+position = Vector2(-112, 0)
 shape = SubResource("RectangleShape2D_thra4")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(72, 0)
+position = Vector2(95.99999, 0)
 shape = SubResource("RectangleShape2D_thra4")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
@@ -66,4 +69,5 @@ rotation = 1.5707964
 shape = SubResource("RectangleShape2D_thra4")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(-48, 0)
 navigation_polygon = SubResource("NavigationPolygon_thra4")

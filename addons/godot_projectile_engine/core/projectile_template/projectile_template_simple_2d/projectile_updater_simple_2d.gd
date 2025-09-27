@@ -123,8 +123,12 @@ func update_projectile_instances(delta: float) -> void:
 				continue
 
 		if destroy_on_area_collide:
+
 			if has_overlapping_areas(index):
 				for _overlap_area in get_overlapping_areas(index):
+					if _overlap_area is RID:
+						projectile_remove_index.append(index)
+						continue
 					# if !ProjectileEngine: return
 					_overlap_collision_layer = ProjectileEngine.get_collider_collision_layer(_overlap_area)
 					if not _overlap_collision_layer & projectile_collision_mask:

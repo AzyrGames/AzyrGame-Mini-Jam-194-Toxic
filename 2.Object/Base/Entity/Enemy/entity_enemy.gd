@@ -6,6 +6,7 @@ class_name EntityEnemy2D
 
 @export var bloody_time: float = 2.0
 
+@export var start_timer: Timer
 
 func _physics_process(_delta: float) -> void:
 	super(_delta)

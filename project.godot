@@ -45,6 +45,10 @@ window/stretch/scale_mode="integer"
 
 enabled=PackedStringArray("res://addons/godot_projectile_engine/plugin.cfg")
 
+[global_group]
+
+PlayerCharacter=""
+
 [input]
 
 toggle_developer_console={

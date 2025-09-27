@@ -7,6 +7,9 @@ enum EnemyType {
 	SQUARE,
 	CIRCLE,
 	TRIANGLE,
+	RICE,
+	STATIC,
+
 }
 
 
@@ -14,6 +17,9 @@ var enemy_power : Dictionary[EnemyType, float] = {
 	EnemyType.SQUARE: 3,
 	EnemyType.CIRCLE: 5,
 	EnemyType.TRIANGLE: 7,
+	EnemyType.RICE: 7,
+	EnemyType.STATIC: 7,
+
 }
 
 
@@ -21,6 +27,9 @@ var enemy_random_weight : Dictionary[EnemyType, float] = {
 	EnemyType.SQUARE: 10,
 	EnemyType.CIRCLE: 8,
 	EnemyType.TRIANGLE: 6,
+	EnemyType.RICE: 7,
+	EnemyType.STATIC: 7,
+
 }
 
 
@@ -32,16 +41,21 @@ var enemy_paths: Dictionary[EnemyType, String] = {
 	EnemyType.SQUARE: "uid://dojfpl5mjxea7",
 	EnemyType.CIRCLE: "uid://dcs42iltjwhlg",
 	EnemyType.TRIANGLE: "uid://dtpu2d4ruviai",
+	EnemyType.RICE: "uid://cavpoab3f6qnj",
+	EnemyType.STATIC: "uid://dal7i1lf0v658",
+
 }
 
 
 
-@export var spawn_size: Vector3 = Vector3(-50, 50, 0)
+@export var spawn_size_x: Vector3 = Vector3(-50, 50, 0)
+@export var spawn_size_y: Vector3 = Vector3(-50, 50, 0)
+
 
 
 func _ready() -> void:
 	connect_event_bus()
-	# spawn_enemy_wave()
+	spawn_enemy_wave()
 
 	pass
 
@@ -62,8 +76,8 @@ func get_valid_spawn_position() -> Vector2:
 	var _posible_position: Vector2
 	
 	for i in range(1000):
-		_posible_position.x = Utils.get_random_float_value(spawn_size)
-		_posible_position.y = Utils.get_random_float_value(spawn_size)
+		_posible_position.x = Utils.get_random_float_value(spawn_size_x)
+		_posible_position.y = Utils.get_random_float_value(spawn_size_y)
 
 		if _posible_position.distance_to(GameManager.entity_character.global_position) < 20:
 			continue

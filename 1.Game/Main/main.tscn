@@ -1,12 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0rjmyu6yhxev"]
+[gd_scene load_steps=8 format=3 uid="uid://b0rjmyu6yhxev"]
 
 [ext_resource type="Script" uid="uid://ybutnrp1d24r" path="res://1.Game/Main/main.gd" id="1_bhcqt"]
-[ext_resource type="PackedScene" uid="uid://crbbmjtqbmfn0" path="res://1.Game/Game/game.tscn" id="2_bhcqt"]
 [ext_resource type="Theme" uid="uid://c55lhrkiw4ysq" path="res://7.UI/Theme/AzyrTheme.tres" id="3_rv7se"]
+[ext_resource type="Script" uid="uid://bc73oiea731jc" path="res://addons/godot_projectile_engine/core/pattern_composer/pattern_composer.gd" id="4_bohkq"]
 [ext_resource type="Script" uid="uid://dniss6so3fh7m" path="res://3.System/BloodyTimer/bloody_timer_label.gd" id="4_siurp"]
+[ext_resource type="Script" uid="uid://co24jiat0y46s" path="res://addons/godot_projectile_engine/core/pattern_composer/component/PCCSingle2D.gd" id="5_5lpr8"]
+[ext_resource type="Script" uid="uid://cm1gi15tdc45s" path="res://addons/godot_projectile_engine/core/pattern_composer/component/PCCPolygon2D.gd" id="6_4vo1p"]
+[ext_resource type="Script" uid="uid://c13euoskuvfdk" path="res://3.System/UpgradeLabels/upgrade_labels.gd" id="7_5lpr8"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("sub_viewport", "bloody_timer", "game_timer", "upgrade_label")]
 script = ExtResource("1_bhcqt")
+sub_viewport = NodePath("SubViewportContainer/SubViewport")
+bloody_timer = NodePath("Label")
+game_timer = NodePath("GameTimer")
+upgrade_label = NodePath("UpgradeLabels")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_right = 40.0
@@ -20,9 +27,8 @@ audio_listener_enable_2d = true
 size = Vector2i(240, 135)
 render_target_update_mode = 4
 
-[node name="Game" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_bhcqt")]
-
 [node name="Label" type="Label" parent="." node_paths=PackedStringArray("bloody_timer")]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -34,8 +40,183 @@ theme = ExtResource("3_rv7se")
 theme_override_font_sizes/font_size = 16
 text = "12.56"
 script = ExtResource("4_siurp")
-bloody_timer = NodePath("../Timer")
+bloody_timer = NodePath("Timer")
+metadata/_custom_type_script = "uid://dniss6so3fh7m"
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="Label"]
 wait_time = 15.0
 autostart = true
+
+[node name="PatternComposers" type="Node2D" parent="."]
+
+[node name="PatternComposer2D" type="Node" parent="PatternComposers"]
+script = ExtResource("4_bohkq")
+composer_name = "pc_square"
+metadata/_custom_type_script = "uid://bc73oiea731jc"
+
+[node name="PCCSingle2D" type="Node" parent="PatternComposers/PatternComposer2D"]
+script = ExtResource("5_5lpr8")
+direction_type = 2
+target_group = "PlayerCharacter"
+metadata/_custom_type_script = "uid://co24jiat0y46s"
+
+[node name="PatternComposer2D2" type="Node" parent="PatternComposers"]
+script = ExtResource("4_bohkq")
+composer_name = "pc_rice"
+metadata/_custom_type_script = "uid://bc73oiea731jc"
+
+[node name="PCCSingle2D" type="Node" parent="PatternComposers/PatternComposer2D2"]
+script = ExtResource("5_5lpr8")
+rotation_speed = 163.0
+metadata/_custom_type_script = "uid://co24jiat0y46s"
+
+[node name="PCCPolygon2D" type="Node" parent="PatternComposers/PatternComposer2D2"]
+script = ExtResource("6_4vo1p")
+polygon_sides = 2
+metadata/_custom_type_script = "uid://cm1gi15tdc45s"
+
+[node name="PatternComposer2D3" type="Node" parent="PatternComposers"]
+script = ExtResource("4_bohkq")
+composer_name = "pc_static"
+metadata/_custom_type_script = "uid://bc73oiea731jc"
+
+[node name="PCCSingle2D" type="Node" parent="PatternComposers/PatternComposer2D3"]
+script = ExtResource("5_5lpr8")
+rotation_speed = 57.0
+metadata/_custom_type_script = "uid://co24jiat0y46s"
+
+[node name="PCCPolygon2D" type="Node" parent="PatternComposers/PatternComposer2D3"]
+script = ExtResource("6_4vo1p")
+polygon_sides = 4
+metadata/_custom_type_script = "uid://cm1gi15tdc45s"
+
+[node name="PatternComposer2D4" type="Node" parent="PatternComposers"]
+script = ExtResource("4_bohkq")
+composer_name = "pc_triangle"
+metadata/_custom_type_script = "uid://bc73oiea731jc"
+
+[node name="PCCSingle2D" type="Node" parent="PatternComposers/PatternComposer2D4"]
+script = ExtResource("5_5lpr8")
+direction_type = 2
+target_group = "PlayerCharacter"
+metadata/_custom_type_script = "uid://co24jiat0y46s"
+
+[node name="GameTimer" type="Timer" parent="."]
+
+[node name="UpgradeLabels" type="Control" parent="." node_paths=PackedStringArray("upgrade_label_1", "upgrade_label_2", "upgrade_label_3", "upgrade_label_4", "upgrade_label_5", "upgrade_label_6")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 120.0
+offset_top = 67.0
+offset_right = 160.0
+offset_bottom = 107.0
+mouse_filter = 2
+script = ExtResource("7_5lpr8")
+upgrade_label_1 = NodePath("Label")
+upgrade_label_2 = NodePath("Label2")
+upgrade_label_3 = NodePath("Label3")
+upgrade_label_4 = NodePath("Label4")
+upgrade_label_5 = NodePath("Label5")
+upgrade_label_6 = NodePath("Label6")
+metadata/_custom_type_script = "uid://c13euoskuvfdk"
+
+[node name="Label" type="Label" parent="UpgradeLabels"]
+custom_minimum_size = Vector2(-80, -40)
+layout_mode = 0
+offset_left = -110.0
+offset_top = -61.0
+offset_right = -51.0
+offset_bottom = -19.0
+theme = ExtResource("3_rv7se")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UpgradeLabels"]
+custom_minimum_size = Vector2(60, 42)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -66.0
+offset_top = -81.0
+offset_right = -6.0
+offset_bottom = -39.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_rv7se")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="UpgradeLabels"]
+custom_minimum_size = Vector2(60, 42)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -81.0
+offset_right = 58.0
+offset_bottom = -39.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_rv7se")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="UpgradeLabels"]
+custom_minimum_size = Vector2(60, 42)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -130.0
+offset_top = -1.0
+offset_right = -70.0
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_rv7se")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label5" type="Label" parent="UpgradeLabels"]
+custom_minimum_size = Vector2(60, 42)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -66.0
+offset_top = -1.0
+offset_right = -6.0
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_rv7se")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label6" type="Label" parent="UpgradeLabels"]
+custom_minimum_size = Vector2(60, 42)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -1.0
+offset_right = 58.0
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_rv7se")
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -21,6 +21,7 @@ func _on_setting_button_button_up() -> void:
 	pass
 
 func _on_exit_game_button_button_up() -> void:
+	GameManager.stop_game()
 	get_tree().quit()
 
 

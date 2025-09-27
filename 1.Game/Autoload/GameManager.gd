@@ -8,16 +8,17 @@ signal game_state_loaded()
 signal frame_frozen(time_scale: float, duration: float)
 signal frame_unfrozen()
 
+var main_2d: Main2D
 
-## Character Varaible
 var entity_character: EntityCharacter2D
-
-
 
 # Game state variables
 var is_game_active: bool = false
 var is_game_paused: bool = false
 var current_game_state: Dictionary = {}
+
+
+
 
 # Configuration variables
 @export var default_time_scale: float = 1.0
@@ -37,9 +38,16 @@ func configure_game_settings() -> void:
 	pass
 
 # Start a new game session
-func start_new_game() -> void:
+func start_game() -> void:
 	is_game_active = true
 	game_started.emit()
+	main_2d.start_game()
+	pass
+
+
+func stop_game() -> void:
+	main_2d.clear_game()
+	cleanup_game()
 	pass
 
 # Load saved game state
@@ -50,19 +58,17 @@ func load_game_state() -> bool:
 # Save current game state
 func save_game_state() -> void:
 	pass
-# Update game manager (called every frame if needed)
-func _process(_delta: float) -> void:
-	pass
 
-# Handle input events
-func _input(_event: InputEvent) -> void:
-	pass
+
 # Reset game to initial state
 func reset_game() -> void:
 	pass
 
+
+
 # Clean up game resources
 func cleanup_game() -> void:
+
 	game_ended.emit()
 	pass
 
@@ -118,4 +124,3 @@ func trigger_game_over() -> void:
 # Restart current game
 func restart_game() -> void:
 	pass
-

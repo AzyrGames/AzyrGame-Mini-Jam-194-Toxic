@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://b27hu6r2fc8k2"]
+[gd_scene load_steps=4 format=3 uid="uid://dxqqschunersa"]
 
-[ext_resource type="Theme" uid="uid://c55lhrkiw4ysq" path="res://7.UI/Theme/AzyrTheme.tres" id="1_1iq2j"]
-[ext_resource type="Script" uid="uid://db03b4h5dnh" path="res://7.UI/GUI/VictoryScreen/victory_screen.gd" id="2_ncy4b"]
-[ext_resource type="StyleBox" uid="uid://crpci47t7tqbd" path="res://7.UI/Theme/panel_plat_black.tres" id="3_ckb2w"]
+[ext_resource type="Theme" uid="uid://c55lhrkiw4ysq" path="res://7.UI/Theme/AzyrTheme.tres" id="1_dwdxi"]
+[ext_resource type="Script" uid="uid://bllbwsdmkga0b" path="res://7.UI/GUI/EndScreen/end_screen.gd" id="2_u4jqt"]
+[ext_resource type="StyleBox" uid="uid://crpci47t7tqbd" path="res://7.UI/Theme/panel_plat_black.tres" id="3_3qtxd"]
 
 [node name="VictoryScreen" type="Control"]
 layout_mode = 3
@@ -11,8 +11,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_1iq2j")
-script = ExtResource("2_ncy4b")
+theme = ExtResource("1_dwdxi")
+script = ExtResource("2_u4jqt")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -21,8 +21,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_1iq2j")
-theme_override_styles/panel = ExtResource("3_ckb2w")
+theme = ExtResource("1_dwdxi")
+theme_override_styles/panel = ExtResource("3_3qtxd")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 1
@@ -58,7 +58,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Victory"
+text = "YOu DIE!"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
@@ -66,13 +66,13 @@ uppercase = true
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 
-[node name="TimeLabel" type="Label" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer"]
+[node name="WaveLabel" type="Label" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Finish Time: .............."
 
-[node name="ContinueLabel" type="Label" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer"]
+[node name="SurviveTime" type="Label" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4

@@ -6,6 +6,7 @@ enum GUIPanel {
 	PAUSE_MENU,
 	SETTING_MENU,
 	CREDIT_SCREEN,
+	END_SCREEN,
 	DEBUG_SCREEN,
 	CLOSED,
 }
@@ -16,6 +17,8 @@ var gui_panel_path: Dictionary[GUIPanel, String] = {
 	GUIPanel.SETTING_MENU: "uid://ck38yj3c6805l",
 	GUIPanel.DEBUG_SCREEN: "uid://f0c7c8miocvv",
 	GUIPanel.CREDIT_SCREEN: "uid://ch7lb2nydwvvv",
+	GUIPanel.END_SCREEN: "uid://dxqqschunersa",
+
 }
 
 var active_gui_panel: Dictionary[GUIPanel, Control]

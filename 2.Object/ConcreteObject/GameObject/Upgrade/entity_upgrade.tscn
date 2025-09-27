@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://dhpk36pmphn4r"]
+
+[ext_resource type="Script" uid="uid://33u77fqpyr80" path="res://2.Object/ConcreteObject/GameObject/Upgrade/entity_upgrade.gd" id="1_3ftlc"]
+[ext_resource type="Script" uid="uid://bckvefqr7mex8" path="res://3.System/Component/Hurtbox/hurt_box_2d.gd" id="3_vnpc8"]
+[ext_resource type="Script" uid="uid://dapyfhwwqwa1j" path="res://3.System/Component/Health/health.gd" id="4_xsuu7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ftlc"]
+size = Vector2(60, 42)
+
+[node name="Upgrade" type="CharacterBody2D" node_paths=PackedStringArray("health", "hurt_box")]
+script = ExtResource("1_3ftlc")
+move_speed = 0.0
+max_speed = 0.0
+acceleration_ticks = 0.0
+friction_ticks = 0.0
+health = NodePath("Health")
+hurt_box = NodePath("HurtBox2D")
+metadata/_custom_type_script = "uid://33u77fqpyr80"
+
+[node name="HurtBox2D" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 512
+collision_mask = 8
+script = ExtResource("3_vnpc8")
+health = NodePath("../Health")
+metadata/_custom_type_script = "uid://bckvefqr7mex8"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox2D"]
+shape = SubResource("RectangleShape2D_3ftlc")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("4_xsuu7")
+max_health = 4
+metadata/_custom_type_script = "uid://dapyfhwwqwa1j"
+
+[node name="TriggerArea" type="Area2D" parent="."]
+collision_layer = 4096
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea"]
+shape = SubResource("RectangleShape2D_3ftlc")
+
+[connection signal="body_entered" from="TriggerArea" to="." method="_on_trigger_area_body_entered"]

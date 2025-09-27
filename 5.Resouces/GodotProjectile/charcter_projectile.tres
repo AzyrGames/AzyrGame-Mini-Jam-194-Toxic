@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ProjectileTemplateSimple2D" load_steps=4 format=3 uid="uid://cpjxk4s5a86kg"]
+
+[ext_resource type="Script" uid="uid://dqlixqba72p5f" path="res://addons/godot_projectile_engine/core/projectile_template/projectile_template_simple_2d/projectile_template_simple_2d.gd" id="1_pndm2"]
+[ext_resource type="Texture2D" uid="uid://xej5ti53m73n" path="res://addons/godot_projectile_engine/examples/assets/projectile/projectile_circle_1.png" id="2_51fsr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6mdho"]
+
+[resource]
+script = ExtResource("1_pndm2")
+speed = 150.0
+texture = ExtResource("2_51fsr")
+scale = Vector2(0.5, 0.5)
+collision_shape = SubResource("CircleShape2D_6mdho")
+collision_layer = 8
+collision_mask = 1568
+texture_rotate_direction = true
+custom_data = [{
+"damage": 5.0,
+"push_back": 30.0
+}]
+metadata/_custom_type_script = "uid://dqlixqba72p5f"

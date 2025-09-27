@@ -11,8 +11,10 @@ signal component_disabled(component_name: String)
 
 signal entity_enemy_destroyed(_enemy: EntityEnemy2D)
 
-
+# signal enemy_wave_started(_wave: int)
 signal enemy_wave_cleared(_wave: int)
+signal start_new_wave()
 
+signal upgrade_destroyed(_entity_upgrade: EntityUpgrade2D)
 
 signal character_got_hut

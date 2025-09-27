@@ -37,7 +37,7 @@ metadata/_custom_type_script = "uid://co6iiaejrsqq3"
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_dwmk4")
 hit_points = 2.0
-max_health = 3
+max_health = 15
 metadata/_custom_type_script = "uid://dapyfhwwqwa1j"
 
 [node name="BTPlayer" type="BTPlayer" parent="."]

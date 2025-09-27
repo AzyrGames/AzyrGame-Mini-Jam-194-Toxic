@@ -75,11 +75,12 @@ func spawn_enemy_wave() -> void:
 func get_valid_spawn_position() -> Vector2:
 	var _posible_position: Vector2
 	
-	for i in range(1000):
+	for i in range(5000):
 		_posible_position.x = Utils.get_random_float_value(spawn_size_x)
 		_posible_position.y = Utils.get_random_float_value(spawn_size_y)
 
-		if _posible_position.distance_to(GameManager.entity_character.global_position) < 20:
+		if _posible_position.distance_to(GameManager.entity_character.global_position) < 30:
+			print("Baddy: ", _posible_position)
 			continue
 
 		return _posible_position
@@ -147,6 +148,7 @@ func select_enemies(target_power: float, threshold: float) -> Array[EnemyType]:
 func connect_event_bus() -> void:
 	EventBus.entity_enemy_destroyed.connect(_on_entity_enemy_detroyed)
 	EventBus.enemy_wave_cleared.connect(_on_enemy_wave_cleared)
+	EventBus.start_new_wave.connect(_on_start_new_wave)
 
 
 
@@ -162,5 +164,10 @@ func _on_entity_enemy_detroyed(_enemy: EntityEnemy2D) -> void:
 
 
 func _on_enemy_wave_cleared(_wave:int) -> void:
+	# spawn_enemy_wave()
+	pass
+
+
+func _on_start_new_wave() -> void:
 	spawn_enemy_wave()
 	pass

@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://6fh8dpo4usfj"]
+[gd_scene load_steps=10 format=3 uid="uid://6fh8dpo4usfj"]
 
+[ext_resource type="Script" uid="uid://co6iiaejrsqq3" path="res://3.System/Component/Hitbox/hitbox2d.gd" id="2_nqwe6"]
 [ext_resource type="Texture2D" uid="uid://cr11owmfqbn61" path="res://8.Asset/2D/GameLayout/texture_play_area_2.png" id="2_qopj1"]
 
 [sub_resource type="Gradient" id="Gradient_qudss"]
@@ -28,7 +29,12 @@ vertices = PackedVector2Array(118, 54, -54, 54, -54, -54, 118, -54)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-64, -64, 128, -64, 128, 64, -64, 64)])
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qopj1"]
+size = Vector2(24, 216)
+
 [node name="PlayArea" type="Node2D"]
+metadata/hitbox = Object(Area2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":2048,"collision_mask":16,"collision_priority":1.0,"input_pickable":true,"monitoring":true,"monitorable":true,"priority":0,"gravity_space_override":0,"gravity_point":false,"gravity_point_unit_distance":0.0,"gravity_point_center":Vector2(0, 1),"gravity_direction":Vector2(0, 1),"gravity":980.0,"linear_damp_space_override":0,"linear_damp":0.1,"angular_damp_space_override":0,"angular_damp":1.0,"audio_bus_override":false,"audio_bus_name":&"Master","script":ExtResource("2_nqwe6"),"value":1.0,"collision_shape":null,"reset_after":0.5,"active":true,"component":2,"allow_duplicates":false,"reset_timer":null,"metadata/_custom_type_script":"uid://co6iiaejrsqq3")
+
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 texture = SubResource("GradientTexture2D_nqwe6")
@@ -71,3 +77,28 @@ shape = SubResource("RectangleShape2D_thra4")
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(-48, 0)
 navigation_polygon = SubResource("NavigationPolygon_thra4")
+
+[node name="HitBox2D" type="Area2D" parent="."]
+collision_layer = 2048
+collision_mask = 16
+script = ExtResource("2_nqwe6")
+reset_after = 0.5
+metadata/_custom_type_script = "uid://co6iiaejrsqq3"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox2D"]
+position = Vector2(-116, 0)
+shape = SubResource("RectangleShape2D_qopj1")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HitBox2D"]
+position = Vector2(84, 0)
+shape = SubResource("RectangleShape2D_qopj1")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="HitBox2D"]
+position = Vector2(-16, -68)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_qopj1")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="HitBox2D"]
+position = Vector2(-8, 68)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_qopj1")

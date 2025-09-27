@@ -29,14 +29,12 @@ position = Vector2(-24, 0)
 script = ExtResource("4_o2rhd")
 spawn_size_x = Vector3(-80, 80, 0)
 
-[node name="UpgradeSpawner" type="Node2D" parent="." node_paths=PackedStringArray("spawn_marker_1", "spawn_marker_2", "spawn_marker_3", "spawn_marker_4", "spawn_marker_5", "spawn_marker_6")]
+[node name="UpgradeSpawner" type="Node2D" parent="." node_paths=PackedStringArray("spawn_marker_1", "spawn_marker_2", "spawn_marker_3", "spawn_marker_4")]
 script = ExtResource("7_jwliw")
 spawn_marker_1 = NodePath("Marker2D")
 spawn_marker_2 = NodePath("Marker2D2")
 spawn_marker_3 = NodePath("Marker2D3")
 spawn_marker_4 = NodePath("Marker2D4")
-spawn_marker_5 = NodePath("Marker2D5")
-spawn_marker_6 = NodePath("Marker2D6")
 upgrade_scene = ExtResource("6_iv6b1")
 metadata/_custom_type_script = "uid://coj7jaf8titwf"
 
@@ -44,13 +42,13 @@ metadata/_custom_type_script = "uid://coj7jaf8titwf"
 position = Vector2(-80, -40)
 
 [node name="Marker2D2" type="Marker2D" parent="UpgradeSpawner"]
-position = Vector2(-16, -40)
-
-[node name="Marker2D3" type="Marker2D" parent="UpgradeSpawner"]
 position = Vector2(48, -40)
 
-[node name="Marker2D4" type="Marker2D" parent="UpgradeSpawner"]
+[node name="Marker2D3" type="Marker2D" parent="UpgradeSpawner"]
 position = Vector2(-80, 40)
+
+[node name="Marker2D4" type="Marker2D" parent="UpgradeSpawner"]
+position = Vector2(48, 40)
 
 [node name="Marker2D5" type="Marker2D" parent="UpgradeSpawner"]
 position = Vector2(-16, 40)

@@ -1,13 +1,13 @@
 extends Control
 class_name UpgradeLabel
 
-@export var upgrade_label_1: Label
-@export var upgrade_label_2: Label
-@export var upgrade_label_3: Label
-@export var upgrade_label_4: Label
-@export var upgrade_label_5: Label
-@export var upgrade_label_6: Label
-var labels: Array[Label]
+@export var upgrade_label_1: RichTextLabel
+@export var upgrade_label_2: RichTextLabel
+@export var upgrade_label_3: RichTextLabel
+@export var upgrade_label_4: RichTextLabel
+# @export var upgrade_label_5: RichTextLabel
+# @export var upgrade_label_6: RichTextLabel
+var labels: Array[RichTextLabel]
 
 
 # Called when the node enters the scene tree for the first time.
@@ -17,8 +17,6 @@ func _ready() -> void:
 		upgrade_label_2,
 		upgrade_label_3,
 		upgrade_label_4,
-		upgrade_label_5,
-		upgrade_label_6
 	]
 
 	pass # Replace with function body.

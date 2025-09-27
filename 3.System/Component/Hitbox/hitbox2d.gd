@@ -13,6 +13,9 @@ signal hitbox_hit
 		active = value
 		if collision_shape:
 			collision_shape.disabled = !value
+		for child in get_children():
+			if child is CollisionShape2D:
+				child.disabled = !value
 
 @export var component: ComponentManager.Components = ComponentManager.Components.HIT_BOX
 @export var allow_duplicates: bool = false
@@ -71,7 +74,6 @@ func get_component(_component: ComponentManager.Components) -> Node:
 	return null
 
 
-
 func _enter_tree() -> void:
 	if owner:
 		owner.set_meta("hitbox", self)
@@ -89,6 +91,7 @@ func update_hitbox() -> void:
 	if !active: return
 	if reset_timer:
 		reset_timer.start()
+
 	hitbox_hit.emit()
 	pass
 
@@ -120,4 +123,5 @@ func create_reset_timer() -> void:
 
 func _on_reset_timer_timeout() -> void:
 	reset_hitbox()
+	print("resettt!!!!!!!!")
 	pass

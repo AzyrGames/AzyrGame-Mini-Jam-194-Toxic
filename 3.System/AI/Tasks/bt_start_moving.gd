@@ -17,7 +17,6 @@ func _enter() -> void:
 	agent = agent as EntityEnemy2D
 	agent._is_moving = true
 	agent.move_direction = Utils.rand_direction_cirle().normalized()
-	print("wa")
 	pass
 
 # Called when the task is exited.

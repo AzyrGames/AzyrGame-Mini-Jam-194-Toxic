@@ -12,7 +12,6 @@ enum EnemyType {
 
 }
 
-
 var enemy_power : Dictionary[EnemyType, float] = {
 	EnemyType.SQUARE: 3,
 	EnemyType.CIRCLE: 5,
@@ -36,7 +35,6 @@ var enemy_random_weight : Dictionary[EnemyType, float] = {
 var enemy_array: Array[EntityEnemy2D]
 
 
-
 var enemy_paths: Dictionary[EnemyType, String] = {
 	EnemyType.SQUARE: "uid://dojfpl5mjxea7",
 	EnemyType.CIRCLE: "uid://dcs42iltjwhlg",
@@ -53,20 +51,27 @@ var enemy_paths: Dictionary[EnemyType, String] = {
 
 
 
+@export var enemy_hp_scale: float =  1.0
+@export var enemy_speed_scale: float =  1.0
+
+@export var enemy_power_scale : float = 5
+
+var current_wave : int = 0
+
+
+
 func _ready() -> void:
+	GameManager.enemy_spawner = self
 	connect_event_bus()
 	spawn_enemy_wave()
 
 	pass
 
 
-var current_wave : int = 0
-var weight_scale : float = 5
-
-
 func spawn_enemy_wave() -> void:
 	current_wave += 1
-	var _enemy_array : Array[EnemyType] = select_enemies(current_wave * weight_scale, 10)
+	enemy_hp_scale += current_wave / 2.5
+	var _enemy_array : Array[EnemyType] = select_enemies(current_wave * enemy_power_scale, 5 + current_wave)
 	for _type : EnemyType in _enemy_array:
 		spawn_enemy(_type, get_valid_spawn_position())
 	pass
@@ -78,25 +83,39 @@ func get_valid_spawn_position() -> Vector2:
 	for i in range(5000):
 		_posible_position.x = Utils.get_random_float_value(spawn_size_x)
 		_posible_position.y = Utils.get_random_float_value(spawn_size_y)
-
-		if _posible_position.distance_to(GameManager.entity_character.global_position) < 30:
-			print("Baddy: ", _posible_position)
+		if _posible_position.distance_to(GameManager.entity_character.global_position) < 40:
 			continue
 
-		return _posible_position
-	return Vector2.ZERO
+		break
+	return _posible_position
+	# return Vector2.ZERO
 
 func spawn_enemy(_enemy: EnemyType, _position: Vector2) -> void:
 	var _enemy_path := enemy_paths[_enemy]
 	var _node := Utils.instance_node(_enemy_path)
 	if !_node is EntityEnemy2D: return
+	_node = _node as EntityEnemy2D
 	enemy_array.append(_node)
+	_node.max_speed *= enemy_speed_scale
 	_node.global_position = _position
+	_node.health.max_health *= enemy_hp_scale
 	add_child(_node)
 	_node.owner = owner
 	pass
 
 
+
+func add_enemy_hp_scale(_value: float) -> void:
+	enemy_hp_scale += _value
+	pass
+
+func add_enemy_speed_scale(_value: float) -> void:
+	enemy_speed_scale += _value
+	pass
+
+func add_enemy_power_scale(_value: float) -> void:
+	enemy_power_scale += _value
+	pass
 
 func select_enemies(target_power: float, threshold: float) -> Array[EnemyType]:
 	var selected_enemies: Array[EnemyType] = []

@@ -130,6 +130,8 @@ func update_projectile_instances(delta: float) -> void:
 						projectile_remove_index.append(index)
 						continue
 					# if !ProjectileEngine: return
+					if !_overlap_area:
+						continue
 					_overlap_collision_layer = ProjectileEngine.get_collider_collision_layer(_overlap_area)
 					if not _overlap_collision_layer & projectile_collision_mask:
 						continue

@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://dapyfhwwqwa1j" path="res://3.System/Component/Health/health.gd" id="4_xsuu7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ftlc"]
-size = Vector2(60, 42)
+size = Vector2(88, 32)
 
 [node name="Upgrade" type="CharacterBody2D" node_paths=PackedStringArray("health", "hurt_box")]
 script = ExtResource("1_3ftlc")
@@ -29,7 +29,7 @@ shape = SubResource("RectangleShape2D_3ftlc")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_xsuu7")
-max_health = 4
+max_health = 15
 metadata/_custom_type_script = "uid://dapyfhwwqwa1j"
 
 [node name="TriggerArea" type="Area2D" parent="."]

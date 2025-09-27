@@ -11,7 +11,7 @@ signal frame_unfrozen()
 var main_2d: Main2D
 
 var entity_character: EntityCharacter2D
-
+var enemy_spawner: EnemySpawner
 # Game state variables
 var is_game_active: bool = false
 var is_game_paused: bool = false
@@ -62,8 +62,8 @@ func save_game_state() -> void:
 
 # Reset game to initial state
 func reset_game() -> void:
+	main_2d.bloody_timer.character_bloody_time = main_2d.bloody_timer.CHARCTER_BLOODY_TIME
 	pass
-
 
 
 # Clean up game resources

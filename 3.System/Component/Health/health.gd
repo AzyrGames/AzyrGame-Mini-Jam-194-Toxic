@@ -60,6 +60,7 @@ func _exit_tree() -> void:
 	exit_node()
 
 func _ready() -> void:
+	current_health = max_health
 	# _temp_is_damageable = is_damageable
 	pass
 

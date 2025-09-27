@@ -40,7 +40,6 @@ func _tick(_delta: float) -> Status:
 		_rand_direction = Utils.rand_direction_cirle()
 		_rand_length = Utils.get_random_float_value(random_range)
 		_target_position = _rand_direction * _rand_length
-		print(_target_position)
 		agent.nav_agent.target_position = GameManager.entity_character.global_position + _target_position
 		if agent.nav_agent.is_target_reachable():
 			break

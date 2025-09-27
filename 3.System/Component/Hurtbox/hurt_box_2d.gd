@@ -104,36 +104,34 @@ func set_active() -> void:
 func connect_signal() -> void:
 	if !area_shape_entered.is_connected(_on_area_shape_entered):
 		area_shape_entered.connect(_on_area_shape_entered)
+	if !area_shape_exited.is_connected(_on_area_shape_exited):
+		area_shape_exited.connect(_on_area_shape_exited)
 
 func disconnect_signal() -> void:
 	if area_shape_entered.is_connected(_on_area_shape_entered):
 		area_shape_entered.disconnect(_on_area_shape_entered)
+	if area_shape_exited.is_connected(_on_area_shape_exited):
+		area_shape_exited.disconnect(_on_area_shape_exited)
 
 # Collision handling
 func _on_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
-	print("Hurt box enter")
 	if !is_vulnerable:
 		return
 	var _damage_value: float = 0
 	var _hit_direction: Vector2
 	var _hit_position: Vector2
-	print("area: ", area)
-	print(ProjectileEngine.projectile_updater_2d_nodes)
-	print(ProjectileEngine.projectile_node_manager_2d_nodes)
 	if area is HitBox2D:
-		print("Hitbox")
 		if health:
 			_damage_value = area.value
-		
 		_hit_direction = Vector2(randf_range(-1, 0), randf_range(-1, 0)).normalized()
 		_hit_position = area.global_position
 		got_hurt.emit()
 		area.update_hitbox()
+
 	elif ProjectileEngine.projectile_updater_2d_nodes.has(area_rid):
 		var _custom_data: Array = ProjectileEngine.projectile_updater_2d_nodes.get(area_rid).custom_data
 		_hit_direction = ProjectileEngine.projectile_updater_2d_nodes.get(area_rid).projectile_instance_array[area_shape_index].direction
 		_hit_position = ProjectileEngine.projectile_updater_2d_nodes.get(area_rid).projectile_instance_array[area_shape_index].global_position
-		print("_custom_data: ", _custom_data)
 		if _custom_data.size() > 0:
 			if _custom_data[0] is Dictionary:
 				if _custom_data[0].has("damage"):
@@ -141,11 +139,16 @@ func _on_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, 
 		got_hurt.emit()
 	
 	if health:
-		print(_damage_value)
 		health.call_deferred("take_damage", _damage_value)
 
 	if owner is EntityCharacter2D:
+
 		return
+
+func _on_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+	# if area is HitBox2D:
+		# area.has_hurtbox = false
+	pass
 
 
 

@@ -5,6 +5,11 @@ class_name EntityCharacterRafiz2D
 ## Turn speed
 # @export var turn_speed: float = 5.0
 
+const WEAPON_DAMAGE: float = 5.0
+const WEAPON_SHOOT_SPEED: = 0.4
+
+# const CHARACTER_MAX_SPEED:
+
 
 func _ready() -> void:
 	super ()
@@ -16,7 +21,6 @@ func _ready() -> void:
 var _mouse_pos: Vector2
 
 var last_collision: KinematicCollision2D
-
 func _physics_process(_delta: float) -> void:
 	super (_delta)
 	if _target_direction:
@@ -44,6 +48,48 @@ func _input(event: InputEvent) -> void:
 		active_projectile_wrapper(false)
 
 
+func reset_character() -> void:
+	if weapon:
+		weapon.projectile_spawner_2d.projectile_template_2d.custom_data[0]["damage"] = WEAPON_DAMAGE
+		%TSCRepeater.duration = WEAPON_SHOOT_SPEED
+	pass
+
+
+func add_weapon_damage(_value: int) -> void:
+	weapon.projectile_spawner_2d.projectile_template_2d.scale += Vector2(_value * 0.1, _value * 0.1)
+	weapon.projectile_spawner_2d.projectile_template_2d.custom_data[0]["damage"] += _value
+	pass
+
+
+func add_weapon_accuracy(_value: int) -> void:
+	%PCCSingle2D.rotation_random.y -= _value
+	if %PCCSingle2D.rotation_random.y < 0:
+		%PCCSingle2D.rotation_random.y = 0 
+	pass
+
+
+
+
+func add_weapon_shoot_speed(_value: float) -> void:
+	%TSCRepeater.duration -= _value
+	pass
+
+
+func add_mobility() -> void:
+	max_speed += 5
+	acceleration_ticks -= 5
+	friction_ticks -= 10
+	pass
+
+
+
+
+func add_weapon_knock_back(_value: int) -> void:
+	if weapon.projectile_spawner_2d.projectile_template_2d.custom_data[0]["push_back"] + _value >= 0:
+		weapon.projectile_spawner_2d.projectile_template_2d.custom_data[0]["push_back"] += _value
+	pass
+
+
 func connect_weapon() -> void:
 	weapon.projectile_spawner_2d.projectile_spawned.connect(_on_weapon_fired)
 	pass
@@ -54,7 +100,6 @@ func _connect_hurt_box() -> void:
 
 func _on_got_hurt() -> void:
 	EventBus.character_got_hut.emit()
-	print("yeeeeee")
 	pass
 
 
@@ -65,12 +110,8 @@ func _on_health_depleted() -> void:
 func _on_weapon_fired(_projectile_template: ProjectileTemplate2D) -> void:
 	if _projectile_template.custom_data.size() <= 0: return
 	if !_projectile_template.custom_data[0] is Dictionary: return
-	print(_projectile_template.custom_data[0].get("push_back"))
 	if !_projectile_template.custom_data[0].get("push_back"):
 		return
-	print("Push velocity: ", (- global_position.direction_to(get_global_mouse_position()) *
-		_projectile_template.custom_data[0].get("push_back")
-		))
 	velocity += (- global_position.direction_to(get_global_mouse_position()) *
 		_projectile_template.custom_data[0].get("push_back")
 		)

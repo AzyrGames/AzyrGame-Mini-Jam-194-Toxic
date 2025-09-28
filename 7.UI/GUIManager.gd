@@ -15,7 +15,7 @@ var gui_panel_path: Dictionary[GUIPanel, String] = {
 	GUIPanel.START_SCREEN: "uid://bgjhgbgk5lff8",
 	GUIPanel.PAUSE_MENU: "uid://ndwe8omip53i",
 	GUIPanel.SETTING_MENU: "uid://ck38yj3c6805l",
-	GUIPanel.DEBUG_SCREEN: "uid://f0c7c8miocvv",
+	# GUIPanel.DEBUG_SCREEN: "uid://f0c7c8miocvv",
 	GUIPanel.CREDIT_SCREEN: "uid://ch7lb2nydwvvv",
 	GUIPanel.END_SCREEN: "uid://dxqqschunersa",
 
@@ -69,8 +69,8 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.is_action_pressed("ui_cancel"):
 			handle_ui_cancel()
-		if event.is_action_pressed("ui_debug_menu"):
-			handle_debug_menu()
+		# if event.is_action_pressed("ui_debug_menu"):
+			# handle_debug_menu()
 	elif event is InputEventJoypadButton:
 		if event.is_action_pressed("ui_cancel"):
 			handle_ui_cancel()

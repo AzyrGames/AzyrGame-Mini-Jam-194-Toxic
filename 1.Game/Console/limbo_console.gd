@@ -151,17 +151,18 @@ func _handle_history_input(p_event: InputEvent) -> void:
 
 
 func _input(p_event: InputEvent) -> void:
-	if p_event.is_action_pressed("toggle_developer_console"):
-		toggle_console()
-		get_viewport().set_input_as_handled()
-	# Check to see if the history gui should open
-	elif _control.visible and p_event.is_action_pressed("developer_console_search_history"):
-		toggle_history()
-		get_viewport().set_input_as_handled()
-	elif _history_gui.visible and p_event is InputEventKey:
-		_handle_history_input(p_event)
-	elif _control.visible and p_event is InputEventKey and p_event.is_pressed():
-		_handle_command_input(p_event)
+	# if p_event.is_action_pressed("toggle_developer_console"):
+	# 	toggle_console()
+	# 	get_viewport().set_input_as_handled()
+	# # Check to see if the history gui should open
+	# elif _control.visible and p_event.is_action_pressed("developer_console_search_history"):
+	# 	toggle_history()
+	# 	get_viewport().set_input_as_handled()
+	# elif _history_gui.visible and p_event is InputEventKey:
+	# 	_handle_history_input(p_event)
+	# elif _control.visible and p_event is InputEventKey and p_event.is_pressed():
+	# 	_handle_command_input(p_event)
+	pass
 
 
 func _process(delta: float) -> void:

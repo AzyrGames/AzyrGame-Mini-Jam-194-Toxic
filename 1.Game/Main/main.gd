@@ -11,6 +11,8 @@ const GAME_TIME_LIMIT: float = 60*60
 @export var background: Control
 @export var asp_music: AudioStreamPlayer
 
+@export var cross_hair : Sprite2D
+
 # @export var time_label_stuff
 
 var game_2d: Game2D

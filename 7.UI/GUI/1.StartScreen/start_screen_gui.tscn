@@ -76,6 +76,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 focus_neighbor_top = NodePath("../ExitGameButton")
+focus_neighbor_bottom = NodePath("../SettingButton")
 theme = ExtResource("1_fmof0")
 text = "Play
 "
@@ -84,6 +85,8 @@ text = "Play
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
+focus_neighbor_top = NodePath("../StartButton")
+focus_neighbor_bottom = NodePath("../CreaditButton")
 theme = ExtResource("1_fmof0")
 text = "Setting
 "
@@ -92,6 +95,8 @@ text = "Setting
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
+focus_neighbor_top = NodePath("../SettingButton")
+focus_neighbor_bottom = NodePath("../ExitGameButton")
 theme = ExtResource("1_fmof0")
 text = "Credit
 "
@@ -100,6 +105,7 @@ text = "Credit
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
+focus_neighbor_top = NodePath("../CreaditButton")
 focus_neighbor_bottom = NodePath("../StartButton")
 theme = ExtResource("1_fmof0")
 text = "Exit Game"

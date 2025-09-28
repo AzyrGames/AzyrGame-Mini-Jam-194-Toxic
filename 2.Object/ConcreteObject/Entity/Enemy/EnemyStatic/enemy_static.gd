@@ -23,6 +23,6 @@ func _physics_process(_delta: float) -> void:
 	calculate_velocity(_delta)
 	last_collision = get_last_slide_collision()
 	rotate(deg_to_rad(57) * _delta)
-	print(velocity)
+	# print(velocity)
 	move_and_slide()
 	pass

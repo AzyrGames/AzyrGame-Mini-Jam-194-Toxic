@@ -26,8 +26,6 @@ func _physics_process(_delta: float) -> void:
 	super (_delta)
 	if _target_direction:
 		rotation = _target_direction.angle()
-	_mouse_pos = get_global_mouse_position()
-	_target_direction = (_mouse_pos - global_position).normalized()
 	calculate_velocity(_delta)
 	last_collision = get_last_slide_collision()
 	if last_collision:
@@ -44,11 +42,40 @@ func _physics_process(_delta: float) -> void:
 	
 	pass
 
+var _last_direction : Vector2
+var _aim_direction: Vector2
 func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("action_2"):
+	if event is InputEventJoypadMotion:
+		GameManager.main_2d.cross_hair.visible = true
+		_aim_direction = Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down").normalized()
+
+		var _aim_position : Vector2 = global_position + _aim_direction * 32
+		GameManager.main_2d.cross_hair.global_position = _aim_position + (GameWindow.game_base_resolution / 2.0)
+
+		_target_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
 		_is_moving = true
-	if Input.is_action_just_released("action_2"):
-		_is_moving = false
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
+	if event is InputEventMouseMotion:
+		_mouse_pos = get_global_mouse_position()
+		_target_direction = (_mouse_pos - global_position).normalized()
+		_aim_direction = _target_direction
+		GameManager.main_2d.cross_hair.visible = false
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+
+
+	if _aim_direction != Vector2.ZERO:
+		%PCCSingle2D.fixed_direction = _aim_direction
+	else:
+		GameManager.main_2d.cross_hair.visible = false
+
+	if event is InputEventMouseButton:
+		if Input.is_action_just_pressed("action_2"):
+			_is_moving = true
+		if Input.is_action_just_released("action_2"):
+			_is_moving = false
+
 
 	if Input.is_action_just_pressed("action_1"):
 		active_projectile_wrapper(true)

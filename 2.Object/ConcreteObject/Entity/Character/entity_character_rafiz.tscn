@@ -126,6 +126,18 @@ alpha_curve = SubResource("CurveTexture_ny46h")
 
 [sub_resource type="Animation" id="Animation_xdctc"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D2:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_db6hw"]
 resource_name = "hurt_flash"
@@ -142,6 +154,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(0.19071998, 0.14080001, 0.64, 1), Color(0.19071998, 0.14080001, 0.64, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.016666668, 0.16666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xdctc"]
@@ -220,10 +244,14 @@ invincible_duration = 10
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="3"]
 texture_filter = 1
+texture = ExtResource("3_mfd41")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." index="4"]
+texture_filter = 1
 material = SubResource("ShaderMaterial_db6hw")
 texture = ExtResource("3_mfd41")
 
-[node name="ProjectileWrapper2D2" type="Node2D" parent="." index="4" node_paths=PackedStringArray("projectile_spawner_2d", "projectile_spawners")]
+[node name="ProjectileWrapper2D2" type="Node2D" parent="." index="5" node_paths=PackedStringArray("projectile_spawner_2d", "projectile_spawners")]
 position = Vector2(5, 0)
 script = ExtResource("3_4rd36")
 projectile_spawner_2d = NodePath("ProjectileSpawner2D")
@@ -249,7 +277,7 @@ metadata/_custom_type_script = "uid://bc73oiea731jc"
 [node name="PCCSingle2D" type="Node" parent="ProjectileWrapper2D2/PatternComposer2D" index="0"]
 unique_name_in_owner = true
 script = ExtResource("6_mfd41")
-direction_type = 3
+direction_type = 1
 rotation_random = Vector3(0, 15, 1)
 metadata/_custom_type_script = "uid://co24jiat0y46s"
 
@@ -272,19 +300,19 @@ one_shot = true
 explosiveness = 0.98
 process_material = SubResource("ParticleProcessMaterial_db6hw")
 
-[node name="HurtFlash" type="Node2D" parent="." index="6" node_paths=PackedStringArray("animation_player", "health", "hurt_sound_2d")]
+[node name="HurtFlash" type="Node2D" parent="." index="7" node_paths=PackedStringArray("animation_player", "health", "hurt_sound_2d")]
 script = ExtResource("12_db6hw")
 animation_player = NodePath("../AnimationPlayer")
 health = NodePath("../Health")
 hurt_sound_2d = NodePath("../AudioStreamPlayer2D3")
 metadata/_custom_type_script = "uid://cxd4b10ln1ddc"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 libraries = {
 &"": SubResource("AnimationLibrary_xdctc")
 }
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="8"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="9"]
 z_index = -1
 position = Vector2(-4, 0)
 amount = 4
@@ -293,16 +321,16 @@ lifetime = 0.63
 explosiveness = 0.05
 process_material = SubResource("ParticleProcessMaterial_ny46h")
 
-[node name="AudioListener2D" type="AudioListener2D" parent="." index="9"]
+[node name="AudioListener2D" type="AudioListener2D" parent="." index="10"]
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="10"]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="11"]
 stream = ExtResource("13_xdctc")
 bus = &"SFX"
 
-[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="." index="11"]
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="." index="12"]
 stream = SubResource("AudioStreamRandomizer_cpnbo")
 bus = &"SFX"
 
-[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="." index="12"]
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="." index="13"]
 stream = ExtResource("15_cpnbo")
 bus = &"SFX"

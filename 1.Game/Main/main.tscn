@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b0rjmyu6yhxev"]
+[gd_scene load_steps=16 format=3 uid="uid://b0rjmyu6yhxev"]
 
 [ext_resource type="Script" uid="uid://ybutnrp1d24r" path="res://1.Game/Main/main.gd" id="1_bhcqt"]
 [ext_resource type="Theme" uid="uid://c55lhrkiw4ysq" path="res://7.UI/Theme/AzyrTheme.tres" id="3_rv7se"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://bj0tbojo1n3hj" path="res://8.Asset/Audio/Music/OVERKILL.ogg" id="9_jlupc"]
 [ext_resource type="LabelSettings" uid="uid://cj2iwenqtuosq" path="res://5.Resouces/Labels/blue_outline.tres" id="9_y0agr"]
 [ext_resource type="AudioStream" uid="uid://c5isrjasnmm4i" path="res://8.Asset/Audio/Music/MINI JAM.ogg" id="10_schb6"]
+[ext_resource type="Texture2D" uid="uid://cpjsq3g8ur06i" path="res://8.Asset/2D/Mouse/cross_hair.png" id="14_yoyl3"]
 
 [sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_jlupc"]
 clip_count = 2
@@ -23,7 +24,7 @@ clip_1/name = &"MiniJam"
 clip_1/stream = ExtResource("10_schb6")
 clip_1/auto_advance = 0
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("sub_viewport", "bloody_timer", "game_timer", "upgrade_label", "background", "asp_music")]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("sub_viewport", "bloody_timer", "game_timer", "upgrade_label", "background", "asp_music", "cross_hair")]
 script = ExtResource("1_bhcqt")
 sub_viewport = NodePath("SubViewportContainer/SubViewport")
 bloody_timer = NodePath("Control2/MarginContainer/VBoxContainer/Label")
@@ -31,6 +32,7 @@ game_timer = NodePath("GameTimer")
 upgrade_label = NodePath("UpgradeLabels")
 background = NodePath("Control")
 asp_music = NodePath("AudioStreamPlayer")
+cross_hair = NodePath("Cursor")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_right = 40.0
@@ -163,7 +165,6 @@ label_settings = ExtResource("9_y0agr")
 vertical_alignment = 1
 
 [node name="Control" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -311,5 +312,9 @@ vertical_alignment = 1
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = SubResource("AudioStreamInteractive_jlupc")
-volume_db = -10.0
 bus = &"Music"
+
+[node name="Cursor" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("14_yoyl3")

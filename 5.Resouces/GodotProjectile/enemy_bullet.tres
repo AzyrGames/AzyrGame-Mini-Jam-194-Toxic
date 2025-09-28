@@ -9,6 +9,7 @@ radius = 3.0
 [resource]
 script = ExtResource("1_k6sls")
 speed = 80.0
+projectile_pooling_amount = 100
 texture = ExtResource("2_wumwb")
 scale = Vector2(0.6, 0.6)
 texture_z_index = 2

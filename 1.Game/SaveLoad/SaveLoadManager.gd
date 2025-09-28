@@ -314,14 +314,15 @@ func update_save_state(_save_state: SaveState) -> void:
 
 ## Input handling
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("quick_save"):
-		quick_save()
+	pass
+	# if event.is_action_pressed("quick_save"):
+	# 	quick_save()
 	
-	if event.is_action_pressed("quick_load"):
-		quick_load()
+	# if event.is_action_pressed("quick_load"):
+	# 	quick_load()
 	
-	if event.is_action_pressed("reset_save_data"):
-		reset_save_data()
+	# if event.is_action_pressed("reset_save_data"):
+	# 	reset_save_data()
 	
 	# # Additional slot-based shortcuts (optional)
 	# for i in range(min(10, max_save_slots)):

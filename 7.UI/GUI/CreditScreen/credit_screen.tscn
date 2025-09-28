@@ -47,8 +47,8 @@ uppercase = true
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("1_2nfb7")
-text = "A game made by AzyrGames,
-joelmakesmusic and ________
+text = "A game made for Mini Jam 194 by
+ AzyrGames and joelmakesmusic
 Made in Godot Engine"
 horizontal_alignment = 1
 

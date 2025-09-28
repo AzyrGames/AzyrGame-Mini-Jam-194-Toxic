@@ -144,3 +144,6 @@ bus = &"SFX"
 [node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="." index="14"]
 stream = SubResource("AudioStreamRandomizer_5oqwk")
 bus = &"SFX"
+
+[node name="EnemySprite" parent="." index="15"]
+texture = ExtResource("2_ubqy1")

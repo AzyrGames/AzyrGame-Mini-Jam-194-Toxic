@@ -9,6 +9,8 @@ const GAME_TIME_LIMIT: float = 60*60
 @export var game_timer: Timer
 @export var upgrade_label: UpgradeLabel
 @export var background: Control
+@export var asp_music: AudioStreamPlayer
+
 # @export var time_label_stuff
 
 var game_2d: Game2D
@@ -18,16 +20,19 @@ func _ready() -> void:
 	GameManager.main_2d = self
 	GuiManager.switch_gui_panel(GuiManager.GUIPanel.START_SCREEN)
 	EventBus.enemy_wave_cleared.connect(_on_wave_cleared)
+	if asp_music:
+		asp_music.playing = true
+		asp_music.set("parameters/switch_to_clip", "Overkill")
 	pass # Replace with function body.
 
 
 
 func start_game() -> void:
 	clear_game()
-	
+	asp_music.set("parameters/switch_to_clip", "MiniJam")
+
 	await get_tree().create_timer(0.1667).timeout
 	background.visible = false
-	
 	if !sub_viewport: return
 	var _game_node : Node = Utils.instance_node(GAME_PATH)
 	if !_game_node is Game2D: return
@@ -45,6 +50,8 @@ func start_game() -> void:
 func clear_game() -> void:
 	if game_2d:
 		game_2d.queue_free()
+	asp_music.set("parameters/switch_to_clip", "Overkill")
+	
 	for child in upgrade_label.get_children():
 		if child is RichTextLabel:
 			child.visible = false

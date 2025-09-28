@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c5isrjasnmm4i"
+path="res://.godot/imported/MINI JAM.ogg-ece8575caccbb2d09aa63d6ccda6194e.oggvorbisstr"
+
+[deps]
+
+source_file="res://8.Asset/Audio/Music/MINI JAM.ogg"
+dest_files=["res://.godot/imported/MINI JAM.ogg-ece8575caccbb2d09aa63d6ccda6194e.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0rjmyu6yhxev"]
+[gd_scene load_steps=12 format=3 uid="uid://b0rjmyu6yhxev"]
 
 [ext_resource type="Script" uid="uid://ybutnrp1d24r" path="res://1.Game/Main/main.gd" id="1_bhcqt"]
 [ext_resource type="Theme" uid="uid://c55lhrkiw4ysq" path="res://7.UI/Theme/AzyrTheme.tres" id="3_rv7se"]
@@ -8,14 +8,26 @@
 [ext_resource type="Script" uid="uid://co24jiat0y46s" path="res://addons/godot_projectile_engine/core/pattern_composer/component/PCCSingle2D.gd" id="5_5lpr8"]
 [ext_resource type="Script" uid="uid://cm1gi15tdc45s" path="res://addons/godot_projectile_engine/core/pattern_composer/component/PCCPolygon2D.gd" id="6_4vo1p"]
 [ext_resource type="Script" uid="uid://c13euoskuvfdk" path="res://3.System/UpgradeLabels/upgrade_labels.gd" id="7_5lpr8"]
+[ext_resource type="AudioStream" uid="uid://bj0tbojo1n3hj" path="res://8.Asset/Audio/Music/OVERKILL.ogg" id="9_jlupc"]
+[ext_resource type="AudioStream" uid="uid://c5isrjasnmm4i" path="res://8.Asset/Audio/Music/MINI JAM.ogg" id="10_schb6"]
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("sub_viewport", "bloody_timer", "game_timer", "upgrade_label", "background")]
+[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_jlupc"]
+clip_count = 2
+clip_0/name = &"Overkill"
+clip_0/stream = ExtResource("9_jlupc")
+clip_0/auto_advance = 0
+clip_1/name = &"MiniJam"
+clip_1/stream = ExtResource("10_schb6")
+clip_1/auto_advance = 0
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("sub_viewport", "bloody_timer", "game_timer", "upgrade_label", "background", "asp_music")]
 script = ExtResource("1_bhcqt")
 sub_viewport = NodePath("SubViewportContainer/SubViewport")
 bloody_timer = NodePath("Control2/MarginContainer/VBoxContainer/Label")
 game_timer = NodePath("GameTimer")
 upgrade_label = NodePath("UpgradeLabels")
 background = NodePath("Control")
+asp_music = NodePath("AudioStreamPlayer")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_right = 40.0
@@ -131,7 +143,6 @@ metadata/_custom_type_script = "uid://dniss6so3fh7m"
 
 [node name="Timer" type="Timer" parent="Control2/MarginContainer/VBoxContainer/Label"]
 wait_time = 15.0
-autostart = true
 
 [node name="Label2" type="Label" parent="Control2/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -289,3 +300,8 @@ grow_vertical = 2
 theme = ExtResource("3_rv7se")
 text = "Testing"
 vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = SubResource("AudioStreamInteractive_jlupc")
+bus = &"Music"

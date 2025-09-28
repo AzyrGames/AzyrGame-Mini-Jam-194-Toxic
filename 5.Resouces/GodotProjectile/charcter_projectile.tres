@@ -18,6 +18,6 @@ collision_mask = 1568
 texture_rotate_direction = true
 custom_data = [{
 "damage": 5.0,
-"push_back": 30.0
+"push_back": 25.0
 }]
 metadata/_custom_type_script = "uid://dqlixqba72p5f"

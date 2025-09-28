@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2y5pqf7gqh06"]
+
+[sub_resource type="Gradient" id="Gradient_db6hw"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.60561675, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5pvta"]
+gradient = SubResource("Gradient_db6hw")
+width = 7
+height = 7
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+metadata/_snap_enabled = true
+
+[sub_resource type="Curve" id="Curve_nnh4j"]
+_data = [Vector2(0.62820816, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_joy0x"]
+curve = SubResource("Curve_nnh4j")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rauma"]
+particle_flag_disable_z = true
+gravity = Vector3(0, -20, 0)
+scale_min = 0.79999995
+scale_max = 1.1999999
+color = Color(0.71, 0.10649998, 0.10649998, 0.7254902)
+alpha_curve = SubResource("CurveTexture_joy0x")
+hue_variation_min = -0.050000023
+hue_variation_max = 0.049999975
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+z_index = -1
+amount = 3
+texture = SubResource("GradientTexture2D_5pvta")
+lifetime = 0.63
+explosiveness = 0.05
+process_material = SubResource("ParticleProcessMaterial_rauma")

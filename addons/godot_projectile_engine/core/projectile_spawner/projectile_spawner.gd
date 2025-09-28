@@ -18,6 +18,8 @@ signal projectile_spawned(_projectile_template: ProjectileTemplate2D)
 @export var projectile_template_2d : ProjectileTemplate2D
 @export var timing_scheduler : TimingScheduler
 @export var use_spawn_markers : bool = false
+
+@export var particle_2d: GPUParticles2D
 @export var audio_stream: AudioStreamPlayer
 @export var audio_stream_2d: AudioStreamPlayer2D
 
@@ -47,6 +49,7 @@ func _ready() -> void:
 
 func activate_projectile_spawner() -> void:
 	setup_projectile_spawner()
+	connect_particle()
 	connect_audio()
 	connect_timing_scheduler()
 	pass
@@ -281,6 +284,42 @@ func disconnect_timing_scheduler() -> void:
 	pass
 
 
+
+
+func connect_particle() -> void:
+	projectile_spawned.connect(start_particle)
+	pass
+
+func start_particle(_projectile_template: ProjectileTemplate2D) -> void:
+	if !particle_2d: return
+	particle_2d.emitting = true
+	pass
+
+
+
+
+func connect_audio() -> void:
+	if audio_stream_2d:
+		projectile_spawned.connect(play_audio)
+	
+	if !audio_stream: return
+	if !timing_scheduler.scheduler_timed.is_connected(play_audio):
+		timing_scheduler.scheduler_timed.connect(play_audio)
+	if !audio_stream_2d: return
+	if !timing_scheduler.scheduler_timed.is_connected(play_audio):
+		timing_scheduler.scheduler_timed.connect(play_audio)
+	pass
+
+func disconnect_audio() -> void:
+	if !audio_stream: return
+	if timing_scheduler.scheduler_timed.is_connected(play_audio):
+		timing_scheduler.scheduler_timed.disconnect(play_audio)
+	if !audio_stream_2d: return
+	if !timing_scheduler.scheduler_timed.is_connected(play_audio):
+		timing_scheduler.scheduler_timed.disconnect(play_audio)
+	pass
+
+
 func play_audio() -> void:
 	# audio_stream.playing = true
 	if audio_stream_2d:
@@ -288,28 +327,6 @@ func play_audio() -> void:
 		audio_stream_2d.playing = true
 	pass
 
-
-func connect_audio() -> void:
-	# if audio_stream_2d:
-	# 	projectile_spawned.connect(play_audio)
-	# if !timing_scheduler.scheduler_timed.is_connected(play_audio):
-	
-	# if !audio_stream: return
-	# if !timing_scheduler.scheduler_timed.is_connected(play_audio):
-	# 	timing_scheduler.scheduler_timed.connect(play_audio)
-	# if !audio_stream_2d: return
-	# if !timing_scheduler.scheduler_timed.is_connected(play_audio):
-	# 	timing_scheduler.scheduler_timed.connect(play_audio)
-	pass
-
-func disconnect_audio() -> void:
-	# if !audio_stream: return
-	# if timing_scheduler.scheduler_timed.is_connected(play_audio):
-	# 	timing_scheduler.scheduler_timed.disconnect(play_audio)
-	# if !audio_stream_2d: return
-	# if !timing_scheduler.scheduler_timed.is_connected(play_audio):
-	# 	timing_scheduler.scheduler_timed.disconnect(play_audio)
-	pass
 
 
 func _instance_node(_file_path: String) -> Node:

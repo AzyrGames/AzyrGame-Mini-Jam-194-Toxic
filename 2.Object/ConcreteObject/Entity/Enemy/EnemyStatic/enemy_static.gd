@@ -22,9 +22,7 @@ func _on_timer_timeout() -> void:
 func _physics_process(_delta: float) -> void:
 	calculate_velocity(_delta)
 	last_collision = get_last_slide_collision()
-	# rotate_texture()
 	rotate(deg_to_rad(57) * _delta)
-	if last_collision:
-		velocity = last_collision.get_normal() * 50
+	print(velocity)
 	move_and_slide()
 	pass

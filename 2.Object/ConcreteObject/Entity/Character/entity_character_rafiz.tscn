@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://blfbqbkkgmjan"]
+[gd_scene load_steps=30 format=3 uid="uid://blfbqbkkgmjan"]
 
 [ext_resource type="PackedScene" uid="uid://d2m43c842xryf" path="res://2.Object/ConcreteObject/BaseEntity/base_entity_2d.tscn" id="1_jout7"]
 [ext_resource type="Script" uid="uid://cqa8daniccovi" path="res://2.Object/ConcreteObject/Entity/Character/entity_character_rafiz.gd" id="2_jh22c"]
@@ -18,6 +18,108 @@ radius = 2.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xdctc"]
 radius = 4.0
+
+[sub_resource type="Shader" id="Shader_0q8vx"]
+code = "shader_type canvas_item;
+
+uniform vec4 color : source_color = vec4(1.0);
+uniform float width : hint_range(0, 10) = 1.0;
+uniform int pattern : hint_range(0, 2) = 0; // diamond, circle, square
+uniform bool inside = false;
+uniform bool add_margins = true; // only useful when inside is false
+
+void vertex() {
+	if (add_margins) {
+		VERTEX += (UV * 2.0 - 1.0) * width;
+	}
+}
+
+bool hasContraryNeighbour(vec2 uv, vec2 texture_pixel_size, sampler2D texture) {
+	for (float i = -ceil(width); i <= ceil(width); i++) {
+		float x = abs(i) > width ? width * sign(i) : i;
+		float offset;
+		
+		if (pattern == 0) {
+			offset = width - abs(x);
+		} else if (pattern == 1) {
+			offset = floor(sqrt(pow(width + 0.5, 2) - x * x));
+		} else if (pattern == 2) {
+			offset = width;
+		}
+		
+		for (float j = -ceil(offset); j <= ceil(offset); j++) {
+			float y = abs(j) > offset ? offset * sign(j) : j;
+			vec2 xy = uv + texture_pixel_size * vec2(x, y);
+			
+			if ((xy != clamp(xy, vec2(0.0), vec2(1.0)) || texture(texture, xy).a <= 0.0) == inside) {
+				return true;
+			}
+		}
+	}
+	
+	return false;
+}
+
+void fragment() {
+	vec2 uv = UV;
+	
+	if (add_margins) {
+		vec2 texture_pixel_size = vec2(1.0) / (vec2(1.0) / TEXTURE_PIXEL_SIZE + vec2(width * 2.0));
+		
+		uv = (uv - texture_pixel_size * width) * TEXTURE_PIXEL_SIZE / texture_pixel_size;
+		
+		if (uv != clamp(uv, vec2(0.0), vec2(1.0))) {
+			COLOR.a = 0.0;
+		} else {
+			COLOR = texture(TEXTURE, uv);
+		}
+	} else {
+		COLOR = texture(TEXTURE, uv);
+	}
+	
+	if ((COLOR.a > 0.0) == inside && hasContraryNeighbour(uv, TEXTURE_PIXEL_SIZE, TEXTURE)) {
+		COLOR.rgb = inside ? mix(COLOR.rgb, color.rgb, color.a) : color.rgb;
+		COLOR.a += (1.0 - COLOR.a) * color.a;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_db6hw"]
+shader = SubResource("Shader_0q8vx")
+shader_parameter/color = Color(0.23122677, 0.1044, 0.58, 0.9019608)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="Gradient" id="Gradient_xdctc"]
+offsets = PackedFloat32Array(0, 0.5, 0.8)
+colors = PackedColorArray(0.74, 0.27873334, 0.11099999, 0.77254903, 0.87, 0.52548, 0.1044, 1, 0.86, 0.27305, 0.07739998, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ny46h"]
+gradient = SubResource("Gradient_xdctc")
+width = 1
+height = 10
+fill_from = Vector2(0.6137446, 0)
+fill_to = Vector2(0.6137446, 1)
+
+[sub_resource type="Curve" id="Curve_xdctc"]
+_data = [Vector2(0.7496564, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ny46h"]
+curve = SubResource("Curve_xdctc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_db6hw"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+spread = 20.0
+initial_velocity_min = 60.0
+initial_velocity_max = 120.0
+gravity = Vector3(0, 0, 0)
+damping_min = 32.278
+damping_max = 50.843002
+alpha_curve = SubResource("CurveTexture_ny46h")
 
 [sub_resource type="Animation" id="Animation_xdctc"]
 length = 0.001
@@ -44,6 +146,36 @@ _data = {
 &"RESET": SubResource("Animation_xdctc"),
 &"hurt_flash": SubResource("Animation_db6hw")
 }
+
+[sub_resource type="Gradient" id="Gradient_db6hw"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.60561675, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5pvta"]
+gradient = SubResource("Gradient_db6hw")
+width = 7
+height = 7
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+metadata/_snap_enabled = true
+
+[sub_resource type="Curve" id="Curve_db6hw"]
+_data = [Vector2(0.62820816, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xdctc"]
+curve = SubResource("Curve_db6hw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ny46h"]
+particle_flag_disable_z = true
+gravity = Vector3(0, -20, 0)
+scale_min = 0.79999995
+scale_max = 1.1999999
+color = Color(0.29602677, 0.15640001, 0.68, 0.7882353)
+alpha_curve = SubResource("CurveTexture_xdctc")
+hue_variation_min = -0.050000023
+hue_variation_max = 0.049999975
 
 [node name="EntityCharacterRafiz" node_paths=PackedStringArray("weapon") groups=["PlayerCharacter"] instance=ExtResource("1_jout7")]
 z_index = 5
@@ -78,6 +210,7 @@ invincible_duration = 10
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="3"]
 texture_filter = 1
+material = SubResource("ShaderMaterial_db6hw")
 texture = ExtResource("3_mfd41")
 
 [node name="ProjectileWrapper2D2" type="Node2D" parent="." index="4" node_paths=PackedStringArray("projectile_spawner_2d", "projectile_spawners")]
@@ -87,13 +220,14 @@ projectile_spawner_2d = NodePath("ProjectileSpawner2D")
 projectile_spawners = [NodePath("ProjectileSpawner2D")]
 metadata/_custom_type_script = "uid://cgi5wxrd3qs15"
 
-[node name="ProjectileSpawner2D" type="Node2D" parent="ProjectileWrapper2D2" index="0" node_paths=PackedStringArray("timing_scheduler")]
+[node name="ProjectileSpawner2D" type="Node2D" parent="ProjectileWrapper2D2" index="0" node_paths=PackedStringArray("timing_scheduler", "particle_2d")]
 z_index = 4
 script = ExtResource("4_rsovm")
 active = false
 projectile_composer_name = "pc_character"
 projectile_template_2d = ExtResource("6_6mdho")
 timing_scheduler = NodePath("../TimingScheduler")
+particle_2d = NodePath("../GPUParticles2D")
 metadata/_custom_type_script = "uid://cnqgcej10tinn"
 
 [node name="PatternComposer2D" type="Node" parent="ProjectileWrapper2D2" index="1"]
@@ -118,6 +252,14 @@ script = ExtResource("9_e8h5j")
 duration = 0.4
 metadata/_custom_type_script = "uid://sjpvs4m6jk71"
 
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ProjectileWrapper2D2" index="3"]
+emitting = false
+texture = SubResource("GradientTexture2D_ny46h")
+lifetime = 0.08
+one_shot = true
+explosiveness = 0.98
+process_material = SubResource("ParticleProcessMaterial_db6hw")
+
 [node name="HurtFlash" type="Node2D" parent="." index="6" node_paths=PackedStringArray("animation_player", "health")]
 script = ExtResource("12_db6hw")
 animation_player = NodePath("../AnimationPlayer")
@@ -128,3 +270,11 @@ metadata/_custom_type_script = "uid://cxd4b10ln1ddc"
 libraries = {
 &"": SubResource("AnimationLibrary_xdctc")
 }
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="8"]
+z_index = -1
+amount = 3
+texture = SubResource("GradientTexture2D_5pvta")
+lifetime = 0.63
+explosiveness = 0.05
+process_material = SubResource("ParticleProcessMaterial_ny46h")

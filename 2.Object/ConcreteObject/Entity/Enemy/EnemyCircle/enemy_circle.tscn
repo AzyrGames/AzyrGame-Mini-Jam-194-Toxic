@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dcs42iltjwhlg"]
+[gd_scene load_steps=14 format=3 uid="uid://dcs42iltjwhlg"]
 
 [ext_resource type="PackedScene" uid="uid://bngbo8gd3xorr" path="res://2.Object/Base/Entity/Enemy/entity_enemy.tscn" id="1_1q5ky"]
 [ext_resource type="Texture2D" uid="uid://bfrt3h07eauvu" path="res://8.Asset/2D/Enemy/texture_enemy_square2.png" id="2_2v87m"]
 [ext_resource type="BehaviorTree" uid="uid://dg040iu1aygal" path="res://2.Object/ConcreteObject/Entity/Enemy/EnemyCircle/entity_cirlce_behavior.tres" id="2_law2o"]
+[ext_resource type="Material" uid="uid://dg6axspf06a8p" path="res://5.Resouces/Shader/Outline/shader_material_outline_enemy.tres" id="3_37e2a"]
+[ext_resource type="PackedScene" uid="uid://b2y5pqf7gqh06" path="res://5.Resouces/VFX/Particle/Trailing/vfx_trailing.tscn" id="5_a75ry"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_37e2a"]
 radius = 5.0
@@ -13,9 +15,39 @@ radius = 8.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_law2o"]
 radius = 6.0827627
 
+[sub_resource type="Gradient" id="Gradient_37e2a"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.60561675, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_a75ry"]
+gradient = SubResource("Gradient_37e2a")
+width = 7
+height = 7
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+metadata/_snap_enabled = true
+
+[sub_resource type="Curve" id="Curve_11g1g"]
+_data = [Vector2(0.62820816, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_dpbcv"]
+curve = SubResource("Curve_11g1g")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cryn3"]
+particle_flag_disable_z = true
+gravity = Vector3(0, -20, 0)
+scale_min = 0.79999995
+scale_max = 1.1999999
+color = Color(0.92, 0.25759998, 0.40112, 0.64705884)
+alpha_curve = SubResource("CurveTexture_dpbcv")
+hue_variation_min = -0.050000023
+hue_variation_max = -0.050000023
+
 [node name="EnemyCircle" node_paths=PackedStringArray("enemy_sprite") instance=ExtResource("1_1q5ky")]
 collision_mask = 288
-bloody_time = 4.0
+bloody_time = 3.0
 max_speed = 70.0
 enemy_sprite = NodePath("Sprite2D")
 metadata/hitbox = Object(Area2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":1024,"collision_mask":4,"collision_priority":1.0,"input_pickable":true,"monitoring":true,"monitorable":true,"priority":0,"gravity_space_override":0,"gravity_point":false,"gravity_point_unit_distance":0.0,"gravity_point_center":Vector2(0, 1),"gravity_direction":Vector2(0, 1),"gravity":980.0,"linear_damp_space_override":0,"linear_damp":0.1,"angular_damp_space_override":0,"angular_damp":1.0,"audio_bus_override":false,"audio_bus_name":&"Master","script":Resource("res://3.System/Component/Hitbox/hitbox2d.gd"),"value":1.0,"collision_shape":Object(CollisionShape2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"shape":SubResource("CircleShape2D_law2o"),"disabled":false,"one_way_collision":false,"one_way_collision_margin":1.0,"script":null)
@@ -37,11 +69,22 @@ shape = SubResource("CircleShape2D_law2o")
 
 [node name="Health" parent="." index="3"]
 hit_points = 25.0
-max_health = 25
+max_health = 20
 
 [node name="BTPlayer" parent="." index="4"]
 behavior_tree = ExtResource("2_law2o")
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="5"]
 texture_filter = 1
+material = ExtResource("3_37e2a")
 texture = ExtResource("2_2v87m")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="9"]
+z_index = -1
+amount = 5
+texture = SubResource("GradientTexture2D_a75ry")
+lifetime = 0.5
+explosiveness = 0.05
+process_material = SubResource("ParticleProcessMaterial_cryn3")
+
+[node name="GPUParticles2D2" parent="." index="10" instance=ExtResource("5_a75ry")]

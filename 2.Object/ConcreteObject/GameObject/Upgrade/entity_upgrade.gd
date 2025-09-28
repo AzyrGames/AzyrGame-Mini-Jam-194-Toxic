@@ -31,7 +31,7 @@ func process_ability(_pos_up: UpgradeSpawner.PositiveUpgrade, _neg_up: UpgradeSp
 			pass
 		# Accuarcy Up
 		UpgradeSpawner.PositiveUpgrade.POS_5:
-			GameManager.entity_character.add_weapon_accuracy(-3)
+			GameManager.entity_character.add_weapon_accuracy(-4)
 			pass
 		# Mobility
 		UpgradeSpawner.PositiveUpgrade.POS_6:

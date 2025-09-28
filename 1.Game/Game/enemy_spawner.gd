@@ -55,7 +55,7 @@ var enemy_paths: Dictionary[EnemyType, String] = {
 @export var enemy_speed_scale: float =  1.0
 @export var enemy_power_scale : float = 5
 
-@export var enemy_wave_hp_scale: float = 0.04
+@export var enemy_wave_hp_scale: float = 0.03
 
 @export var character_bloody_time_bonus: float = 0.02
 

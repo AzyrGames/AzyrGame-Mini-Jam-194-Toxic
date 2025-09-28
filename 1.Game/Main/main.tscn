@@ -129,7 +129,6 @@ mouse_filter = 2
 theme = ExtResource("3_rv7se")
 bbcode_enabled = true
 text = "Testing"
-horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label2" type="RichTextLabel" parent="UpgradeLabels"]
@@ -150,7 +149,6 @@ mouse_filter = 2
 theme = ExtResource("3_rv7se")
 bbcode_enabled = true
 text = "Testing"
-horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label3" type="RichTextLabel" parent="UpgradeLabels"]
@@ -171,7 +169,6 @@ mouse_filter = 2
 theme = ExtResource("3_rv7se")
 bbcode_enabled = true
 text = "Testing"
-horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label4" type="RichTextLabel" parent="UpgradeLabels"]
@@ -192,7 +189,6 @@ mouse_filter = 2
 theme = ExtResource("3_rv7se")
 bbcode_enabled = true
 text = "Testing"
-horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label5" type="Label" parent="UpgradeLabels"]

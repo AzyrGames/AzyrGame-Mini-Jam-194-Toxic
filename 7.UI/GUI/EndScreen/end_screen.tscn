@@ -85,8 +85,8 @@ text = "Finish Time: .............."
 modulate = Color(0.42084, 0.63, 0.10710001, 1)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Thanks for playing
-What now?"
+text = "Thanks for playing!
+Remember to rate the game <3"
 horizontal_alignment = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/VBoxContainer"]

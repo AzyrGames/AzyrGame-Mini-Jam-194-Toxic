@@ -4,15 +4,15 @@
 [ext_resource type="Theme" uid="uid://c55lhrkiw4ysq" path="res://7.UI/Theme/AzyrTheme.tres" id="3_rv7se"]
 [ext_resource type="Script" uid="uid://bc73oiea731jc" path="res://addons/godot_projectile_engine/core/pattern_composer/pattern_composer.gd" id="4_bohkq"]
 [ext_resource type="Script" uid="uid://dniss6so3fh7m" path="res://3.System/BloodyTimer/bloody_timer_label.gd" id="4_siurp"]
+[ext_resource type="Texture2D" uid="uid://lq18405fh0n4" path="res://8.Asset/2D/MetaData/background_2.png" id="5_4vo1p"]
 [ext_resource type="Script" uid="uid://co24jiat0y46s" path="res://addons/godot_projectile_engine/core/pattern_composer/component/PCCSingle2D.gd" id="5_5lpr8"]
 [ext_resource type="Script" uid="uid://cm1gi15tdc45s" path="res://addons/godot_projectile_engine/core/pattern_composer/component/PCCPolygon2D.gd" id="6_4vo1p"]
 [ext_resource type="Script" uid="uid://c13euoskuvfdk" path="res://3.System/UpgradeLabels/upgrade_labels.gd" id="7_5lpr8"]
-[ext_resource type="Texture2D" uid="uid://duf1ua7esuy4y" path="res://8.Asset/2D/MetaData/background.png" id="8_4vo1p"]
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("sub_viewport", "bloody_timer", "game_timer", "upgrade_label", "background")]
 script = ExtResource("1_bhcqt")
 sub_viewport = NodePath("SubViewportContainer/SubViewport")
-bloody_timer = NodePath("Label")
+bloody_timer = NodePath("Control2/MarginContainer/VBoxContainer/Label")
 game_timer = NodePath("GameTimer")
 upgrade_label = NodePath("UpgradeLabels")
 background = NodePath("Control")
@@ -28,26 +28,6 @@ canvas_item_default_texture_repeat = 1
 audio_listener_enable_2d = true
 size = Vector2i(240, 135)
 render_target_update_mode = 4
-
-[node name="Label" type="Label" parent="." node_paths=PackedStringArray("bloody_timer")]
-visible = false
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 204.0
-offset_right = 244.0
-offset_bottom = 23.0
-grow_horizontal = 2
-theme = ExtResource("3_rv7se")
-theme_override_font_sizes/font_size = 16
-text = "12.56"
-script = ExtResource("4_siurp")
-bloody_timer = NodePath("Timer")
-metadata/_custom_type_script = "uid://dniss6so3fh7m"
-
-[node name="Timer" type="Timer" parent="Label"]
-wait_time = 15.0
-autostart = true
 
 [node name="PatternComposers" type="Node2D" parent="."]
 
@@ -105,6 +85,66 @@ metadata/_custom_type_script = "uid://co24jiat0y46s"
 
 [node name="GameTimer" type="Timer" parent="."]
 
+[node name="Control2" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 200.0
+offset_right = 240.0
+offset_bottom = 40.0
+size_flags_vertical = 3
+theme = ExtResource("3_rv7se")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control2"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control2/MarginContainer"]
+layout_mode = 2
+
+[node name="w" type="Label" parent="Control2/MarginContainer/VBoxContainer"]
+modulate = Color(0.30588236, 0.43137255, 0.11764706, 1)
+layout_mode = 2
+theme = ExtResource("3_rv7se")
+text = "Wave: 
+12"
+horizontal_alignment = 1
+
+[node name="text" type="Label" parent="Control2/MarginContainer/VBoxContainer"]
+modulate = Color(0.6431373, 0.02745098, 0.21960784, 1)
+layout_mode = 2
+text = "BLOODY
+TIMER"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Control2/MarginContainer/VBoxContainer" node_paths=PackedStringArray("bloody_timer", "wave_label", "survive_time_label")]
+layout_mode = 2
+theme = ExtResource("3_rv7se")
+theme_override_colors/font_color = Color(0.6431373, 0.02745098, 0.21960784, 1)
+theme_override_font_sizes/font_size = 16
+text = "12.56"
+script = ExtResource("4_siurp")
+bloody_timer = NodePath("Timer")
+wave_label = NodePath("../w")
+survive_time_label = NodePath("../text2")
+metadata/_custom_type_script = "uid://dniss6so3fh7m"
+
+[node name="Timer" type="Timer" parent="Control2/MarginContainer/VBoxContainer/Label"]
+wait_time = 15.0
+autostart = true
+
+[node name="Label2" type="Label" parent="Control2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.22745098, 0.105882354, 0.5764706, 1)
+text = "TOTAL"
+horizontal_alignment = 1
+
+[node name="text2" type="Label" parent="Control2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.22745098, 0.105882354, 0.5764706, 1)
+text = "12.12.42"
+vertical_alignment = 1
+
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -118,7 +158,7 @@ mouse_filter = 2
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("8_4vo1p")
+texture = ExtResource("5_4vo1p")
 
 [node name="UpgradeLabels" type="Control" parent="." node_paths=PackedStringArray("upgrade_label_1", "upgrade_label_2", "upgrade_label_3", "upgrade_label_4")]
 layout_mode = 3

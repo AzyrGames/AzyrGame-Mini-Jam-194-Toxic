@@ -67,6 +67,9 @@ metadata/hitbox = Object(Area2D,"_import_path":NodePath(""),"unique_name_in_owne
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CircleShape2D_ujfex")
 
+[node name="HurtBox2D" parent="." index="1" node_paths=PackedStringArray("collision_shape")]
+collision_shape = NodePath("CollisionShape2D2")
+
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtBox2D" index="0"]
 shape = SubResource("CircleShape2D_6d463")
 

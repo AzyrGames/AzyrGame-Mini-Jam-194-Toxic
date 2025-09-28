@@ -9,7 +9,7 @@ class_name HurtBox2D
 @export var health: Health
 
 # Onready variables
-@onready var collision_shape: CollisionShape2D = $CollisionShape2D
+@export var collision_shape: CollisionShape2D
 
 # Regular variables
 var is_debug_color_updated: bool = false

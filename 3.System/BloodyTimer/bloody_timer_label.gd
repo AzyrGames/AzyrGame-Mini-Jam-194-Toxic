@@ -8,8 +8,6 @@ const CHARACTER_BLOODY_TIME_BONUS: float = 1.0
 const BLODDY_TIME_CAP: float = 30.0
 
 
-
-
 @export var character_bloody_time: float = 0.5
 
 @export var bloody_timer: Timer
@@ -26,7 +24,8 @@ const BLODDY_TIME_CAP: float = 30.0
 
 @export var enemy_bloody_time_bonus: float = 1.0
 @export var character_bloody_time_bonus: float = 1.0
-
+@export var wave_label: Label
+@export var survive_time_label: Label
 
 
 
@@ -35,8 +34,22 @@ func _ready() -> void:
 	connect_timer()
 
 func _physics_process(delta: float) -> void:
-	text = str(snappedf(bloody_timer.time_left, 0.001))
+	var time_left := snappedf(bloody_timer.time_left, 0.001)
+	text = format_time(time_left)
+	var _survival_time := GameManager.main_2d.GAME_TIME_LIMIT - GameManager.main_2d.game_timer.time_left
+	# var _format_survival_time: String = Utils.format_seconds(_survival_time, true)
+
+	if survive_time_label:
+		survive_time_label.text = format_time(_survival_time)
 	pass
+
+
+
+func format_time(time_left: float) -> String:
+	var minutes := int(time_left / 60)
+	var seconds := int(time_left) % 60
+	var milliseconds := int((time_left - int(time_left)) * 100)
+	return "%02d:%02d.%02d" % [minutes, seconds, milliseconds]
 
 
 func start_bloody_timer() -> void:
@@ -93,7 +106,10 @@ func _on_entity_enemy_detroyed(_enemy: EntityEnemy2D) -> void:
 
 func _on_bloody_timer_timeout() -> void:
 	GameManager.toggle_pause()
+	# GameManager.stop_game()
 	GuiManager.switch_gui_panel(GuiManager.GUIPanel.END_SCREEN)
+	GameManager.main_2d.clear_game()
+
 	# print("------------------------------")
 	pass
 

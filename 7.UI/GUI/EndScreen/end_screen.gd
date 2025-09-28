@@ -31,7 +31,6 @@ func update_screen() -> void:
 	var _format_survival_time: String = Utils.format_seconds(_survival_time, true)
 	var _format_high_time: String = Utils.format_seconds(high_time, true)
 
-	# var _high_time: = 
 	survive_time.text = "Survival Time: " + _format_survival_time + " - " + "High: " + _format_high_time
 	wave_label.text = "Last wave: " + str(current_wave) + " - " + "Highest Wave: " + str(high_wave)
 

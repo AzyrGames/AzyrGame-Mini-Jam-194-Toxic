@@ -8,8 +8,8 @@ const GAME_TIME_LIMIT: float = 60*60
 @export var bloody_timer: BloodyTimer
 @export var game_timer: Timer
 @export var upgrade_label: UpgradeLabel
-
 @export var background: Control
+# @export var time_label_stuff
 
 var game_2d: Game2D
 
@@ -17,12 +17,14 @@ var game_2d: Game2D
 func _ready() -> void:
 	GameManager.main_2d = self
 	GuiManager.switch_gui_panel(GuiManager.GUIPanel.START_SCREEN)
+	EventBus.enemy_wave_cleared.connect(_on_wave_cleared)
 	pass # Replace with function body.
 
 
 
 func start_game() -> void:
 	clear_game()
+	
 	await get_tree().create_timer(0.1667).timeout
 	background.visible = false
 	
@@ -34,7 +36,10 @@ func start_game() -> void:
 	bloody_timer.visible = true
 	bloody_timer.start_bloody_timer()
 	game_timer.start(GAME_TIME_LIMIT)
+	bloody_timer.wave_label.text = "WAVE\n0"
+
 	pass
+
 
 
 func clear_game() -> void:
@@ -45,6 +50,11 @@ func clear_game() -> void:
 			child.visible = false
 	bloody_timer.visible = false
 	bloody_timer.bloody_timer.stop()
-	game_timer.stop()
 	background.visible = true
+	pass
+
+
+
+func _on_wave_cleared(_wave: int) -> void:
+	bloody_timer.wave_label.text = "WAVE\n" + str(_wave)
 	pass

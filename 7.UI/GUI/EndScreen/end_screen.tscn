@@ -58,7 +58,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "YOu DIE!"
+text = "BLOODY TIME OVER"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
@@ -81,8 +81,8 @@ text = "Finish Time: .............."
 [node name="Thank" type="Label" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Thank you for playing the game.
-Please don't forget to rate on itch.io"
+text = "Thanks for playing
+What's next?"
 horizontal_alignment = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/VBoxContainer"]

@@ -27,7 +27,7 @@ class_name Entity2D
 var _acceleration_value: float = 1500.0
 var _friction_value: float = 1000.0
 var _target_direction: Vector2 = Vector2.ZERO
-var _calculated_velocity: Vector2 = Vector2.ZERO
+# var _calculated_velocity: Vector2 = Vector2.ZERO
 var _desired_velocity: Vector2 = Vector2.ZERO
 
 var speed_modifier: float = 1.0
@@ -81,7 +81,7 @@ func _connect_health() -> void:
 
 
 func _on_health_depleted() -> void:
-	queue_free()
+	free()
 	pass
 
 func active_projectile_wrapper(_value: bool) -> void:

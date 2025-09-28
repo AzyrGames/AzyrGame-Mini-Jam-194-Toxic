@@ -47,7 +47,8 @@ uppercase = true
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("1_2nfb7")
-text = "A game make by AzyrGames and
+text = "A game made by AzyrGames,
+joelmakesmusic and ________
 Made in Godot Engine"
 horizontal_alignment = 1
 
@@ -55,8 +56,7 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("1_2nfb7")
-text = "And You for playing the game
-azyrgames.itch.io"
+text = "And You for playing the game"
 horizontal_alignment = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="AspectRatioContainer/VBoxContainer"]

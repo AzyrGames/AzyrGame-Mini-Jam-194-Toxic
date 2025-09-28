@@ -23,7 +23,7 @@ func process_ability(_pos_up: UpgradeSpawner.PositiveUpgrade, _neg_up: UpgradeSp
 			pass
 		# Time Gain
 		UpgradeSpawner.PositiveUpgrade.POS_3:
-			GameManager.main_2d.bloody_timer.add_enemy_bloody_time_bonus(0.2)
+			GameManager.main_2d.bloody_timer.add_enemy_bloody_time_bonus(0.15)
 			pass
 		# Time Cap
 		UpgradeSpawner.PositiveUpgrade.POS_4:
@@ -53,12 +53,13 @@ func process_ability(_pos_up: UpgradeSpawner.PositiveUpgrade, _neg_up: UpgradeSp
 			GameManager.enemy_spawner.add_enemy_power_scale(0.5)
 			pass
 		UpgradeSpawner.NegativeUpgrade.NEG_4:
-			GameManager.main_2d.bloody_timer.add_enemy_bloody_time_bonus(-0.15)
+			GameManager.main_2d.bloody_timer.add_enemy_bloody_time_bonus(-0.1)
 			pass
 		UpgradeSpawner.NegativeUpgrade.NEG_5:
 			GameManager.entity_character.add_weapon_knock_back(5)
+
 		UpgradeSpawner.NegativeUpgrade.NEG_6:
-			GameManager.main_2d.bloody_timer.add_bloody_timer_time(-(5 + GameManager.enemy_spawner.current_wave / 2.0))
+			GameManager.main_2d.bloody_timer.add_bloody_timer_time(-(6))
 			pass
 		UpgradeSpawner.NegativeUpgrade.NEG_7:
 			GameManager.enemy_spawner.add_enemy_speed_scale(0.1)

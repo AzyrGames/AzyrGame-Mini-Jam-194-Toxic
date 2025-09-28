@@ -53,7 +53,7 @@ func init_all_gui_panel() -> void:
 	add_child(canvas_layer, true)
 	for gui_panel: GUIPanel in gui_panel_path.keys():
 		var _panel_node: Node = Utils.instance_node(gui_panel_path.get(gui_panel))
-		print(_panel_node)
+		# print(_panel_node)
 		if !_panel_node:
 			continue
 		if _panel_node is Control:

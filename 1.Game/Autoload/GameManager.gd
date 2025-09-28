@@ -68,7 +68,6 @@ func reset_game() -> void:
 
 # Clean up game resources
 func cleanup_game() -> void:
-
 	game_ended.emit()
 	pass
 

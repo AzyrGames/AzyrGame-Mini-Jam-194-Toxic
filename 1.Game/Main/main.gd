@@ -39,6 +39,9 @@ func start_game() -> void:
 func clear_game() -> void:
 	if game_2d:
 		game_2d.queue_free()
+	for child in upgrade_label.get_children():
+		if child is RichTextLabel:
+			child.visible = false
 	bloody_timer.visible = false
 	bloody_timer.bloody_timer.stop()
 	game_timer.stop()

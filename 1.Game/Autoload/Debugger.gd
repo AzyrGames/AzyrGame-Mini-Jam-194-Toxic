@@ -15,7 +15,7 @@ func _ready() -> void:
 func log_debug(message: String) -> void:
 	var timestamp: String = Time.get_datetime_string_from_system(true, true)
 	var log_line: String = "[%s] [DEBUG] %s" % [timestamp, message]
-	print(log_line)
+	# print(log_line)
 	if log_file:
 		log_file.store_line(log_line)
 

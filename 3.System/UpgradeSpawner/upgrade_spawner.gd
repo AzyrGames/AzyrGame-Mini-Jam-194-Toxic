@@ -57,7 +57,7 @@ var negative_upgrades: Array[NegativeUpgrade] = [
 var positive_upgrade_name: Dictionary[PositiveUpgrade, String] = {
 	PositiveUpgrade.POS_1: "Damage Up +1",
 	PositiveUpgrade.POS_2: "Shoot cooldown -0.05",
-	PositiveUpgrade.POS_3: "Time Gain +20%",
+	PositiveUpgrade.POS_3: "Time Gain +15%",
 	PositiveUpgrade.POS_4: "Time cap +5s",
 	PositiveUpgrade.POS_5: "Accuracy Up",
 	PositiveUpgrade.POS_6: "Mobility Up",
@@ -69,9 +69,9 @@ var negative_upgrade_name: Dictionary[NegativeUpgrade, String] = {
 	NegativeUpgrade.NEG_1: "Lose time -0.1s",
 	NegativeUpgrade.NEG_2: "Enemy HP +10%",
 	NegativeUpgrade.NEG_3: "Enemy Power +1",
-	NegativeUpgrade.NEG_4: "Time Gain -0.15%",
+	NegativeUpgrade.NEG_4: "Time Gain -0.10%",
 	NegativeUpgrade.NEG_5: "Knockback +5",
-	NegativeUpgrade.NEG_6: "Lose 10s",
+	NegativeUpgrade.NEG_6: "Lose 6s",
 	NegativeUpgrade.NEG_7: "Enemy 10% faster"
 }
 
@@ -85,8 +85,6 @@ func setup_spawner() -> void:
 		spawn_marker_2,
 		spawn_marker_3,
 		spawn_marker_4,
-		# spawn_marker_5,
-		# spawn_marker_6
 	]
 	markers = markers.filter(func(marker: Marker2D) -> bool: return marker != null)
 	upgrade_label = GameManager.main_2d.upgrade_label
@@ -95,8 +93,6 @@ func setup_spawner() -> void:
 		upgrade_label.upgrade_label_2,
 		upgrade_label.upgrade_label_3,
 		upgrade_label.upgrade_label_4,
-		# upgrade_label.upgrade_label_5,
-		# upgrade_label.upgrade_label_6
 	]
 
 func connect_event_bus() -> void:
@@ -126,6 +122,8 @@ func spawn_upgrades() -> void:
 
 	# Get the 3 farthest markers with their original indices
 	var farthest_marker_data: Array[Dictionary] = marker_data.slice(0, 3)
+	var _pos_upgrades := positive_upgrades.duplicate_deep()
+	var _nev_upgrades := negative_upgrades.duplicate_deep()
 	for data: Dictionary in farthest_marker_data:
 		var marker: Marker2D = data.marker
 		var marker_index: int = data.index
@@ -138,8 +136,10 @@ func spawn_upgrades() -> void:
 
 		upgrade.global_position = marker.global_position
 		upgrade.index = marker_index
-		upgrade.positive_upgrade = positive_upgrades[randi() % positive_upgrades.size()]
-		upgrade.negative_upgrade = negative_upgrades[randi() % negative_upgrades.size()]
+		upgrade.positive_upgrade = _pos_upgrades[randi() % _pos_upgrades.size()]
+		upgrade.negative_upgrade = _nev_upgrades[randi() % _nev_upgrades.size()]
+		_pos_upgrades.erase(upgrade.positive_upgrade)
+		_nev_upgrades.erase(upgrade.negative_upgrade)
 
 		upgrade.health.health_depleted.connect(_on_upgrade_health_depleted.bind(upgrade))
 		active_upgrade_nodes.append(upgrade)
@@ -158,8 +158,6 @@ func get_positive_upgrade_text(upgrade: PositiveUpgrade) -> String:
 	return "Unknown"
 
 func get_negative_upgrade_text(upgrade: NegativeUpgrade) -> String:
-	if upgrade == NegativeUpgrade.NEG_6:
-		return "lose" + str(5 + GameManager.enemy_spawner.current_wave / 2.0) +"s"
 	if negative_upgrade_name.has(upgrade):
 		return negative_upgrade_name.get(upgrade)
 	return "Unknown"
@@ -183,7 +181,6 @@ func _on_upgrade_health_depleted(upgrade: EntityUpgrade2D) -> void:
 			label.visible = false
 			active_upgrade_labels.erase(label)
 	EventBus.upgrade_destroyed.emit(upgrade)
-
 
 
 func _upgrade_destroyed(_entity_upgrade: EntityUpgrade2D) -> void:

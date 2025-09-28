@@ -37,7 +37,7 @@ func _ready() -> void:
 		ProjectSettings.get_setting("display/window/size/viewport_width"),
 			ProjectSettings.get_setting("display/window/size/viewport_height")
 			)
-	print(game_base_resolution)
+	# print(game_base_resolution)
 	setup_window_resolution_options()
 	user_settings = UserSettings.load_or_create()
 	window_scaling = user_settings.screen_resolution_scaling
@@ -53,12 +53,13 @@ func _physics_process(_delta: float) -> void:
 
 
 func setup_window_resolution_options() -> void:
-	var screen_rect := DisplayServer.screen_get_usable_rect(current_monitor)
-	var max_screen_size := Vector2i(screen_rect.size.x, screen_rect.size.y)
+	# var screen_rect := DisplayServer.screen_get_usable_rect(current_monitor)
+	# var max_screen_size := Vector2i(screen_rect.size.x, screen_rect.size.y)
 
-	print(game_base_resolution)
-	print(max_screen_size)
-	print(max_screen_size.x / game_base_resolution.x)
+	# print(game_base_resolution)
+	# print(max_screen_size)
+	# print(max_screen_size.x / game_base_resolution.x)
+	pass
 
 
 func _check_current_monitor() -> bool:

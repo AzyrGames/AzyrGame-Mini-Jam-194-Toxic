@@ -21,7 +21,7 @@ func stop_tsc() -> void:
 
 ## Starts the next timing value (first repetition)
 func start_next_timing_value() -> void:
-	print("duration: ", duration)
+	# print("duration: ", duration)
 	tsc_timed.emit()
 	
 	# If repeat_count is 0 complete immediately

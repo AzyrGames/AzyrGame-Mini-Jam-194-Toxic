@@ -14,7 +14,7 @@ max_duration = 1.5
 
 [sub_resource type="BTAction" id="BTAction_v5bph"]
 script = ExtResource("2_bt667")
-random_range = Vector3(0, 15, 0)
+random_range = Vector3(0, 10, 0)
 
 [sub_resource type="BTAction" id="BTAction_ikgau"]
 script = ExtResource("2_olx8b")

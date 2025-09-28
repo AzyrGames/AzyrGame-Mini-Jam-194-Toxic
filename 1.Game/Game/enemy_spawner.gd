@@ -16,8 +16,8 @@ var enemy_power : Dictionary[EnemyType, float] = {
 	EnemyType.SQUARE: 3,
 	EnemyType.CIRCLE: 5,
 	EnemyType.TRIANGLE: 7,
-	EnemyType.RICE: 7,
-	EnemyType.STATIC: 7,
+	EnemyType.RICE: 9,
+	EnemyType.STATIC: 11,
 
 }
 
@@ -53,8 +53,12 @@ var enemy_paths: Dictionary[EnemyType, String] = {
 
 @export var enemy_hp_scale: float =  1.0
 @export var enemy_speed_scale: float =  1.0
-
 @export var enemy_power_scale : float = 5
+
+@export var enemy_wave_hp_scale: float = 0.04
+
+@export var character_bloody_time_bonus: float = 0.02
+
 
 var current_wave : int = 0
 
@@ -69,11 +73,16 @@ func _ready() -> void:
 
 
 func spawn_enemy_wave() -> void:
+	# print(enemy_speed_scale)
 	current_wave += 1
-	enemy_hp_scale += current_wave / 2.5
-	var _enemy_array : Array[EnemyType] = select_enemies(current_wave * enemy_power_scale, 5 + current_wave)
+	enemy_hp_scale += enemy_wave_hp_scale
+	GameManager.main_2d.bloody_timer.add_character_bloody_time_bonus(character_bloody_time_bonus)
+	# print("enemy_hp_scale:", enemy_hp_scale)
+	var _enemy_array : Array[EnemyType] = select_enemies(current_wave * enemy_power_scale, 4 + current_wave)
 	for _type : EnemyType in _enemy_array:
-		spawn_enemy(_type, get_valid_spawn_position())
+		# spawn_enemy(_type, get_valid_spawn_position())
+		call_deferred("spawn_enemy", _type, get_valid_spawn_position())
+
 	pass
 
 

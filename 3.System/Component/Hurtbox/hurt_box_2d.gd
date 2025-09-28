@@ -61,7 +61,7 @@ func register_component() -> void:
 	ComponentManager.register_component(owner_node, component)
 	if EventBus:
 		EventBus.emit_signal("trait_added", ComponentManager.COMPONENT_NAMES[component], owner_node)
-	print("Register component success")
+	# print("Register component success")
 
 func unregister_component() -> void:
 	var owner_node: Node = owner

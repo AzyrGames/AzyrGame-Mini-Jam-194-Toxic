@@ -64,7 +64,7 @@ func _ready() -> void:
 	# _temp_is_damageable = is_damageable
 	pass
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	atempt_setup()
 
 # Component management
@@ -100,7 +100,7 @@ func register_component() -> void:
 	if EventBus:
 		EventBus.emit_signal("trait_added", ComponentManager.COMPONENT_NAMES[component], owner_node)
 
-	print("Register component success")
+	# print("Register component success")
 
 func unregister_component() -> void:
 	var owner_node: Node = owner
@@ -182,7 +182,7 @@ func connect_event_bus() -> void:
 func update_max_health() -> void:
 	if owner:
 		current_health = max_health
-		print(max_health, " : ", current_health)
+		# print(max_health, " : ", current_health)
 
 func setup_invicible_timer() -> void:
 	if invincible_duration <= 0: return

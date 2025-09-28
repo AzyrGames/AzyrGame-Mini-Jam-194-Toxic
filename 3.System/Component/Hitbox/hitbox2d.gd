@@ -123,5 +123,5 @@ func create_reset_timer() -> void:
 
 func _on_reset_timer_timeout() -> void:
 	reset_hitbox()
-	print("resettt!!!!!!!!")
+	# print("resettt!!!!!!!!")
 	pass

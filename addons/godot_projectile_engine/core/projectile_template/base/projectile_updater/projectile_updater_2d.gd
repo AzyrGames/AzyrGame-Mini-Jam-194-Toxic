@@ -126,7 +126,7 @@ func _area_monitor_callback(status: int, area_rid : RID, instance_id: int, area_
 				return
 			var _instance_node : Area2D = instance_from_id(instance_id)
 			if !is_instance_valid(_instance_node):
-				print(_instance_node)
+				# print(_instance_node)
 				return
 			ProjectileEngine.projectile_instance_area_shape_entered.emit(
 				projectile_instance_array[self_shape_idx],
@@ -153,7 +153,7 @@ func _area_monitor_callback(status: int, area_rid : RID, instance_id: int, area_
 					return
 			var _instance_node : Area2D = instance_from_id(instance_id)
 			if !is_instance_valid(_instance_node):
-				print(_instance_node)
+				# print(_instance_node)
 				return
 			ProjectileEngine.projectile_instance_area_shape_exited.emit(
 				projectile_instance_array[self_shape_idx],

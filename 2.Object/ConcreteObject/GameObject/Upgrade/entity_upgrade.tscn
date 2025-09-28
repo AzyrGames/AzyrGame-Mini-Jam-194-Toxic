@@ -1,10 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://dhpk36pmphn4r"]
+[gd_scene load_steps=16 format=3 uid="uid://dhpk36pmphn4r"]
 
 [ext_resource type="Script" uid="uid://33u77fqpyr80" path="res://2.Object/ConcreteObject/GameObject/Upgrade/entity_upgrade.gd" id="1_3ftlc"]
 [ext_resource type="PackedScene" uid="uid://bruevheh702r4" path="res://5.Resouces/VFX/Particle/vfx_blood_splatter_upgrade.tscn" id="2_7sbyk"]
+[ext_resource type="PackedScene" uid="uid://tyfm383f8dgl" path="res://5.Resouces/Audio/asp_upgrade_dealth.tscn" id="2_xsuu7"]
+[ext_resource type="PackedScene" uid="uid://bmovp0ypbregd" path="res://5.Resouces/Audio/asp_entity_upgrade.tscn" id="3_fxy8w"]
 [ext_resource type="Script" uid="uid://bckvefqr7mex8" path="res://3.System/Component/Hurtbox/hurt_box_2d.gd" id="3_vnpc8"]
 [ext_resource type="Script" uid="uid://dapyfhwwqwa1j" path="res://3.System/Component/Health/health.gd" id="4_xsuu7"]
 [ext_resource type="Script" uid="uid://cxd4b10ln1ddc" path="res://3.System/Component/Hitflash/hit_flash.gd" id="5_7sbyk"]
+[ext_resource type="AudioStream" uid="uid://b1l56eyaownnn" path="res://8.Asset/Audio/SFX/sfx_hurt_upgrade.ogg" id="6_vnpc8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ftlc"]
 size = Vector2(113, 36)
@@ -54,8 +57,16 @@ colors = PackedColorArray(0.1887, 0.51, 0.22082998, 0.5294118)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_vnpc8"]
 gradient = SubResource("Gradient_7sbyk")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xsuu7"]
+random_pitch = 1.1
+random_volume_offset_db = 1.0
+streams_count = 1
+stream_0/stream = ExtResource("6_vnpc8")
+
 [node name="Upgrade" type="CharacterBody2D" node_paths=PackedStringArray("health", "hurt_box")]
 script = ExtResource("1_3ftlc")
+asp_entity_death = ExtResource("2_xsuu7")
+asp_entity_upgrade = ExtResource("3_fxy8w")
 move_speed = 0.0
 max_speed = 0.0
 acceleration_ticks = 0.0
@@ -90,10 +101,11 @@ collision_mask = 2
 position = Vector2(6.5, 0)
 shape = SubResource("RectangleShape2D_3ftlc")
 
-[node name="HurtFlash" type="Node2D" parent="." node_paths=PackedStringArray("animation_player", "health")]
+[node name="HurtFlash" type="Node2D" parent="." node_paths=PackedStringArray("animation_player", "health", "hurt_sound_2d")]
 script = ExtResource("5_7sbyk")
 animation_player = NodePath("../AnimationPlayer")
 health = NodePath("../Health")
+hurt_sound_2d = NodePath("../AudioStreamPlayer2D")
 metadata/_custom_type_script = "uid://cxd4b10ln1ddc"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -106,5 +118,8 @@ z_index = 1
 position = Vector2(6.499998, 5.364418e-07)
 scale = Vector2(1.765625, 0.5625)
 texture = SubResource("GradientTexture2D_vnpc8")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_xsuu7")
 
 [connection signal="body_entered" from="TriggerArea" to="." method="_on_trigger_area_body_entered"]

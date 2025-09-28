@@ -35,8 +35,6 @@ func update_screen() -> void:
 	wave_label.text = "Last wave: " + str(current_wave) + " - " + "Highest Wave: " + str(high_wave)
 
 
-
-
 func _on_wave_cleared(_wave: int) -> void:
 	current_wave = _wave
 	if high_wave < _wave:

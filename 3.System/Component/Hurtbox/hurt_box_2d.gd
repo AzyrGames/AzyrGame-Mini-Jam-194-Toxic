@@ -123,8 +123,8 @@ func _on_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, 
 	if area is HitBox2D:
 		if health:
 			_damage_value = area.value
-		_hit_direction = Vector2(randf_range(-1, 0), randf_range(-1, 0)).normalized()
-		_hit_position = area.global_position
+		# _hit_direction = Vector2(randf_range(-1, 0), randf_range(-1, 0)).normalized()
+		# _hit_position = area.global_position
 		got_hurt.emit()
 		area.update_hitbox()
 
@@ -136,22 +136,28 @@ func _on_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, 
 			if _custom_data[0] is Dictionary:
 				if _custom_data[0].has("damage"):
 					_damage_value = _custom_data[0]["damage"]
-		# print("_hit_direction: ", _hit_direction)
-		spawn_particle(_hit_position, _hit_direction)
+		else:
+			_damage_value = 1
+		
 		got_hurt.emit()
 	
 	if health:
-		# print("healthhhh")
+		# print("Take Damage")
 		health.call_deferred("take_damage", _damage_value)
 
-	if owner is EntityCharacter2D:
-		spawn_particle(owner.global_position, Utils.rand_direction_cirle())
 
+	if owner is EntityCharacter2D:
+		if _hit_direction != Vector2.ZERO:
+			spawn_particle(_hit_position, _hit_direction)
+		else:
+			spawn_particle(owner.global_position, Utils.rand_direction_cirle())
 		EventBus.character_got_hut.emit()
 
 	elif owner is EntityEnemy2D:
+		spawn_particle(_hit_position, _hit_direction)
 		EventBus.enemy_got_hut.emit()
 	elif owner is EntityUpgrade2D:
+		spawn_particle(_hit_position, _hit_direction)
 		EventBus.upgrade_got_hut.emit()
 
 	return

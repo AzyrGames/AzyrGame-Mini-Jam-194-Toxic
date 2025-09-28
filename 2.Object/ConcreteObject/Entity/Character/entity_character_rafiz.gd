@@ -10,6 +10,7 @@ const WEAPON_SHOOT_SPEED: = 0.4
 
 # const CHARACTER_MAX_SPEED:
 
+@export var asp_moving: AudioStreamPlayer2D
 
 func _ready() -> void:
 	super ()
@@ -33,6 +34,13 @@ func _physics_process(_delta: float) -> void:
 		if !last_collision.get_collider() is EntityEnemy2D:
 			velocity = velocity.reflect(last_collision.get_normal()) / 1.5 * -1.0
 	move_and_slide()
+	if velocity != Vector2.ZERO:
+		if !asp_moving.playing:
+			asp_moving.playing = true
+		asp_moving.volume_db = (1.0 - (velocity.length() / max_speed)) * -15 - 5.0
+		# print(1.0 - (velocity.length() / 80.0) * 10)
+	else:
+		asp_moving.playing = false
 	
 	pass
 

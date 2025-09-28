@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cuaonnd1may7g"]
+
+[ext_resource type="AudioStream" uid="uid://qclk14yclfyj" path="res://8.Asset/Audio/SFX/sfx_enemy_death.ogg" id="1_v4acr"]
+[ext_resource type="Script" uid="uid://ofyn2mt6cgox" path="res://5.Resouces/Audio/asp_enemy_death.gd" id="2_gt581"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_gt581"]
+random_pitch = 1.1
+random_volume_offset_db = 1.0
+streams_count = 1
+stream_0/stream = ExtResource("1_v4acr")
+
+[node name="ASPEnemyDeath" type="AudioStreamPlayer2D"]
+stream = SubResource("AudioStreamRandomizer_gt581")
+bus = &"SFX"
+script = ExtResource("2_gt581")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

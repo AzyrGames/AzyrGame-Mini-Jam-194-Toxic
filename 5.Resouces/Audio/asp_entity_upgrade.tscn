@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmovp0ypbregd"]
+
+[ext_resource type="AudioStream" uid="uid://b6omy6ydyufh4" path="res://8.Asset/Audio/SFX/sfx_ability.ogg" id="1_ewjd7"]
+[ext_resource type="Script" uid="uid://ofyn2mt6cgox" path="res://5.Resouces/Audio/asp_enemy_death.gd" id="2_r2a0q"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_r2a0q"]
+random_pitch = 1.1
+random_volume_offset_db = 1.0
+streams_count = 1
+stream_0/stream = ExtResource("1_ewjd7")
+
+[node name="asp_entity_upgrade" type="AudioStreamPlayer2D"]
+stream = SubResource("AudioStreamRandomizer_r2a0q")
+script = ExtResource("2_r2a0q")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

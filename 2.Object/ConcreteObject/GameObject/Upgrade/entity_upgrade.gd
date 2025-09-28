@@ -11,6 +11,9 @@ class_name EntityUpgrade2D
 
 @export var bloody_time: float = 5
 
+@export var asp_entity_death: PackedScene
+@export var asp_entity_upgrade: PackedScene
+
 
 
 func process_ability(_pos_up: UpgradeSpawner.PositiveUpgrade, _neg_up: UpgradeSpawner.NegativeUpgrade) -> void:
@@ -68,10 +71,24 @@ func process_ability(_pos_up: UpgradeSpawner.PositiveUpgrade, _neg_up: UpgradeSp
 
 func _on_trigger_area_body_entered(body: Node2D) -> void:
 	process_ability(positive_upgrade, negative_upgrade)
+	var _ase_entity_upgrade : Node = asp_entity_upgrade.instantiate()
+	if _ase_entity_upgrade is AudioStreamPlayer2D:
+		_ase_entity_upgrade.global_position = global_position
+		print("_ase_entity_upgrade")
+		ProjectileEngine.projectile_environment.add_child(_ase_entity_upgrade)
+		_ase_entity_upgrade.playing = true
 	EventBus.start_new_wave.emit()
 	pass # Replace with function body.
 
 
 func _on_health_depleted() -> void:
+	var _asp_enity_death : Node = asp_entity_death.instantiate()
+	if _asp_enity_death is AudioStreamPlayer2D:
+		_asp_enity_death.global_position = global_position
+		# print("_asp_enity_death")
+		ProjectileEngine.projectile_environment.add_child(_asp_enity_death)
+		_asp_enity_death.playing = true
+	# EventBus.entity_enemy_destroyed.emit(self)
 	queue_free()
+
 	pass

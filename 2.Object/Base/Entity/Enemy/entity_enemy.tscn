@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://bngbo8gd3xorr"]
+[gd_scene load_steps=12 format=3 uid="uid://bngbo8gd3xorr"]
 
 [ext_resource type="Script" uid="uid://daphnuvw7f6o7" path="res://2.Object/Base/Entity/Enemy/entity_enemy.gd" id="1_1xgql"]
+[ext_resource type="PackedScene" uid="uid://cuaonnd1may7g" path="res://5.Resouces/Audio/asp_enemy_death.tscn" id="2_5aoes"]
 [ext_resource type="PackedScene" uid="uid://cgdtcpvc17s13" path="res://5.Resouces/VFX/Particle/vfx_blood_splatter.tscn" id="2_dwmk4"]
 [ext_resource type="Script" uid="uid://bckvefqr7mex8" path="res://3.System/Component/Hurtbox/hurt_box_2d.gd" id="2_vmawk"]
 [ext_resource type="Script" uid="uid://dapyfhwwqwa1j" path="res://3.System/Component/Health/health.gd" id="3_dwmk4"]
@@ -55,6 +56,7 @@ motion_mode = 1
 script = ExtResource("1_1xgql")
 nav_agent = NodePath("NavigationAgent2D")
 bt_player = NodePath("BTPlayer")
+asp_entity_death = ExtResource("2_5aoes")
 max_speed = 60.0
 acceleration_ticks = 20.0
 friction_ticks = 15.0

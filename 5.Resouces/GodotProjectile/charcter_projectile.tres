@@ -7,7 +7,8 @@
 
 [resource]
 script = ExtResource("1_pndm2")
-speed = 150.0
+speed = 170.0
+projectile_pooling_amount = 100
 texture = ExtResource("2_51fsr")
 scale = Vector2(0.7, 0.4)
 texture_z_index = 5

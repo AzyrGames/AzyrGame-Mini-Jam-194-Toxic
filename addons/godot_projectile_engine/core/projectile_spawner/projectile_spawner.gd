@@ -284,8 +284,6 @@ func disconnect_timing_scheduler() -> void:
 	pass
 
 
-
-
 func connect_particle() -> void:
 	if !projectile_spawned.is_connected(start_particle):
 		projectile_spawned.connect(start_particle)
@@ -300,10 +298,11 @@ func start_particle(_projectile_template: ProjectileTemplate2D) -> void:
 
 
 func connect_audio() -> void:
-	if audio_stream_2d:
-		projectile_spawned.connect(play_audio)
+	# if audio_stream_2d:
+		# projectile_spawned.connect(play_audio)
 	
 	if !audio_stream: return
+
 	if !timing_scheduler.scheduler_timed.is_connected(play_audio):
 		timing_scheduler.scheduler_timed.connect(play_audio)
 	if !audio_stream_2d: return

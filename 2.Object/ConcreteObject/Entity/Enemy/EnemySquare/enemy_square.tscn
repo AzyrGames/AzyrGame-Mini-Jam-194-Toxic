@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dojfpl5mjxea7"]
+[gd_scene load_steps=19 format=3 uid="uid://dojfpl5mjxea7"]
 
 [ext_resource type="PackedScene" uid="uid://bngbo8gd3xorr" path="res://2.Object/Base/Entity/Enemy/entity_enemy.tscn" id="1_tgpij"]
 [ext_resource type="Texture2D" uid="uid://dinbyguk248ru" path="res://8.Asset/2D/Enemy/texture_enemy_square1.png" id="2_13gqh"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" uid="uid://b1ha7icvjophi" path="res://addons/godot_projectile_engine/core/timing_scheduler/cooldown/tsc_cooldown.gd" id="9_cga25"]
 [ext_resource type="Script" uid="uid://b8nclaklcf4uu" path="res://addons/godot_projectile_engine/core/timing_scheduler/timing_scheduler.gd" id="10_82xhp"]
 [ext_resource type="PackedScene" uid="uid://b2y5pqf7gqh06" path="res://5.Resouces/VFX/Particle/Trailing/vfx_trailing.tscn" id="11_nnh4j"]
+[ext_resource type="AudioStream" uid="uid://dyuiruwkofot7" path="res://8.Asset/Audio/SFX/sfx_shoot_enemy.ogg" id="12_rauma"]
+[ext_resource type="AudioStream" uid="uid://dev2lgi30glra" path="res://8.Asset/Audio/SFX/sfx_hurt_enemy.ogg" id="13_nywfq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cga25"]
 radius = 4.0
@@ -20,6 +22,17 @@ radius = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nnh4j"]
 radius = 5.0990195
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_rauma"]
+random_pitch = 1.1
+random_volume_offset_db = 1.0
+streams_count = 1
+stream_0/stream = ExtResource("12_rauma")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ibepw"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("13_nywfq")
 
 [node name="EnemySquare" node_paths=PackedStringArray("enemy_sprite", "weapon") instance=ExtResource("1_tgpij")]
 collision_mask = 288
@@ -61,12 +74,13 @@ script = ExtResource("4_nnh4j")
 projectile_spawner_2d = NodePath("ProjectileSpawner2D")
 metadata/_custom_type_script = "uid://cgi5wxrd3qs15"
 
-[node name="ProjectileSpawner2D" type="Node2D" parent="ProjectileWrapper2D" index="0" node_paths=PackedStringArray("timing_scheduler")]
+[node name="ProjectileSpawner2D" type="Node2D" parent="ProjectileWrapper2D" index="0" node_paths=PackedStringArray("timing_scheduler", "audio_stream_2d")]
 script = ExtResource("5_rauma")
 active = false
 projectile_composer_name = "pc_square"
 projectile_template_2d = ExtResource("6_nywfq")
 timing_scheduler = NodePath("../TimingScheduler")
+audio_stream_2d = NodePath("../../AudioStreamPlayer2D")
 metadata/_custom_type_script = "uid://cnqgcej10tinn"
 
 [node name="TimingScheduler" type="Node" parent="ProjectileWrapper2D" index="1"]
@@ -79,4 +93,15 @@ script = ExtResource("9_cga25")
 cooldown_duration = 0.6
 metadata/_custom_type_script = "uid://b1ha7icvjophi"
 
+[node name="HurtFlash" parent="." index="8" node_paths=PackedStringArray("hurt_sound_2d")]
+hurt_sound_2d = NodePath("../AudioStreamPlayer2D2")
+
 [node name="GPUParticles2D" parent="." index="10" instance=ExtResource("11_nnh4j")]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="11"]
+stream = SubResource("AudioStreamRandomizer_rauma")
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="." index="12"]
+stream = SubResource("AudioStreamRandomizer_ibepw")
+bus = &"SFX"

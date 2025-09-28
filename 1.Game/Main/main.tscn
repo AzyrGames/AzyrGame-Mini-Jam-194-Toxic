@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b0rjmyu6yhxev"]
+[gd_scene load_steps=15 format=3 uid="uid://b0rjmyu6yhxev"]
 
 [ext_resource type="Script" uid="uid://ybutnrp1d24r" path="res://1.Game/Main/main.gd" id="1_bhcqt"]
 [ext_resource type="Theme" uid="uid://c55lhrkiw4ysq" path="res://7.UI/Theme/AzyrTheme.tres" id="3_rv7se"]
@@ -7,8 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://lq18405fh0n4" path="res://8.Asset/2D/MetaData/background_2.png" id="5_4vo1p"]
 [ext_resource type="Script" uid="uid://co24jiat0y46s" path="res://addons/godot_projectile_engine/core/pattern_composer/component/PCCSingle2D.gd" id="5_5lpr8"]
 [ext_resource type="Script" uid="uid://cm1gi15tdc45s" path="res://addons/godot_projectile_engine/core/pattern_composer/component/PCCPolygon2D.gd" id="6_4vo1p"]
+[ext_resource type="LabelSettings" uid="uid://dfxr7vltg4fsc" path="res://5.Resouces/Labels/green_outline.tres" id="6_pf4yf"]
 [ext_resource type="Script" uid="uid://c13euoskuvfdk" path="res://3.System/UpgradeLabels/upgrade_labels.gd" id="7_5lpr8"]
+[ext_resource type="LabelSettings" uid="uid://bjax7nu5btlft" path="res://5.Resouces/Labels/red_outline.tres" id="7_y0agr"]
 [ext_resource type="AudioStream" uid="uid://bj0tbojo1n3hj" path="res://8.Asset/Audio/Music/OVERKILL.ogg" id="9_jlupc"]
+[ext_resource type="LabelSettings" uid="uid://cj2iwenqtuosq" path="res://5.Resouces/Labels/blue_outline.tres" id="9_y0agr"]
 [ext_resource type="AudioStream" uid="uid://c5isrjasnmm4i" path="res://8.Asset/Audio/Music/MINI JAM.ogg" id="10_schb6"]
 
 [sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_jlupc"]
@@ -120,13 +123,14 @@ layout_mode = 2
 theme = ExtResource("3_rv7se")
 text = "Wave: 
 12"
+label_settings = ExtResource("6_pf4yf")
 horizontal_alignment = 1
 
 [node name="text" type="Label" parent="Control2/MarginContainer/VBoxContainer"]
-modulate = Color(0.6431373, 0.02745098, 0.21960784, 1)
 layout_mode = 2
 text = "BLOODY
 TIMER"
+label_settings = ExtResource("7_y0agr")
 horizontal_alignment = 1
 
 [node name="Label" type="Label" parent="Control2/MarginContainer/VBoxContainer" node_paths=PackedStringArray("bloody_timer", "wave_label", "survive_time_label")]
@@ -135,6 +139,7 @@ theme = ExtResource("3_rv7se")
 theme_override_colors/font_color = Color(0.6431373, 0.02745098, 0.21960784, 1)
 theme_override_font_sizes/font_size = 16
 text = "12.56"
+label_settings = ExtResource("7_y0agr")
 script = ExtResource("4_siurp")
 bloody_timer = NodePath("Timer")
 wave_label = NodePath("../w")
@@ -148,12 +153,14 @@ wait_time = 15.0
 layout_mode = 2
 theme_override_colors/font_color = Color(0.22745098, 0.105882354, 0.5764706, 1)
 text = "TOTAL"
+label_settings = ExtResource("9_y0agr")
 horizontal_alignment = 1
 
 [node name="text2" type="Label" parent="Control2/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.22745098, 0.105882354, 0.5764706, 1)
 text = "12.12.42"
+label_settings = ExtResource("9_y0agr")
 vertical_alignment = 1
 
 [node name="Control" type="Control" parent="."]
@@ -304,4 +311,5 @@ vertical_alignment = 1
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = SubResource("AudioStreamInteractive_jlupc")
+volume_db = -10.0
 bus = &"Music"

@@ -46,6 +46,7 @@ func _ready() -> void:
 	music_volume_slider.value = user_settings.music_volume
 	sfx_volume_slider.value = user_settings.sfx_volume
 	setup_setting_gui()
+	_load_user_settings()
 
 func setup_setting_gui() -> void:
 	resolution_button.focus_entered.connect(
@@ -86,6 +87,9 @@ func _init_resolution_scalling_list() -> Array:
 	return []
 
 func _load_user_settings() -> void:
+	_on_master_volume_slider_value_changed(user_settings.master_volume)
+	_on_music_volume_slider_value_changed(user_settings.music_volume) 
+	_on_sfx_volume_slider_value_changed(user_settings.sfx_volume) 
 	pass
 
 func _change_resolution_button_value() -> void:

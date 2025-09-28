@@ -12,14 +12,14 @@ const BLODDY_TIME_CAP: float = 30.0
 
 @export var bloody_timer: Timer
 @export var bloody_time_cap: float = 30.0
-@export var bloody_time_time: float = 15.0:
+@export var bloody_time_time: float = 30.0:
 	set(value):
 		if value > bloody_time_cap:
 			bloody_time_time = bloody_time_cap
 		else:
 			bloody_time_time = value
 
-@export var init_time: float = 15
+@export var init_time: float = 30.0
 
 
 @export var enemy_bloody_time_bonus: float = 1.0

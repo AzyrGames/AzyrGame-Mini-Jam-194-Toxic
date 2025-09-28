@@ -47,6 +47,7 @@ func start_game() -> void:
 
 func stop_game() -> void:
 	main_2d.clear_game()
+	is_game_active = false
 	cleanup_game()
 	pass
 

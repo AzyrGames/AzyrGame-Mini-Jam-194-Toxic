@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://tyfm383f8dgl"]
+
+[ext_resource type="AudioStream" uid="uid://l330kiueby0y" path="res://8.Asset/Audio/SFX/sfx_upgrade_dealth.ogg" id="1_tinw8"]
+[ext_resource type="Script" uid="uid://ofyn2mt6cgox" path="res://5.Resouces/Audio/asp_enemy_death.gd" id="2_2cbgi"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5i32p"]
+random_pitch = 1.1
+random_volume_offset_db = 1.0
+streams_count = 1
+stream_0/stream = ExtResource("1_tinw8")
+
+[node name="asp_upgrade_dealth" type="AudioStreamPlayer2D"]
+stream = SubResource("AudioStreamRandomizer_5i32p")
+script = ExtResource("2_2cbgi")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

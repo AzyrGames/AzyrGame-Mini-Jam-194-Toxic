@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://dcs42iltjwhlg"]
+[gd_scene load_steps=16 format=3 uid="uid://dcs42iltjwhlg"]
 
 [ext_resource type="PackedScene" uid="uid://bngbo8gd3xorr" path="res://2.Object/Base/Entity/Enemy/entity_enemy.tscn" id="1_1q5ky"]
 [ext_resource type="Texture2D" uid="uid://bfrt3h07eauvu" path="res://8.Asset/2D/Enemy/texture_enemy_square2.png" id="2_2v87m"]
 [ext_resource type="BehaviorTree" uid="uid://dg040iu1aygal" path="res://2.Object/ConcreteObject/Entity/Enemy/EnemyCircle/entity_cirlce_behavior.tres" id="2_law2o"]
 [ext_resource type="Material" uid="uid://dg6axspf06a8p" path="res://5.Resouces/Shader/Outline/shader_material_outline_enemy.tres" id="3_37e2a"]
 [ext_resource type="PackedScene" uid="uid://b2y5pqf7gqh06" path="res://5.Resouces/VFX/Particle/Trailing/vfx_trailing.tscn" id="5_a75ry"]
+[ext_resource type="AudioStream" uid="uid://dev2lgi30glra" path="res://8.Asset/Audio/SFX/sfx_hurt_enemy.ogg" id="6_11g1g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_37e2a"]
 radius = 5.0
@@ -45,6 +46,11 @@ alpha_curve = SubResource("CurveTexture_dpbcv")
 hue_variation_min = -0.050000023
 hue_variation_max = -0.050000023
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_dpbcv"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("6_11g1g")
+
 [node name="EnemyCircle" node_paths=PackedStringArray("enemy_sprite") instance=ExtResource("1_1q5ky")]
 collision_mask = 288
 bloody_time = 3.0
@@ -83,6 +89,9 @@ texture_filter = 1
 material = ExtResource("3_37e2a")
 texture = ExtResource("2_2v87m")
 
+[node name="HurtFlash" parent="." index="7" node_paths=PackedStringArray("hurt_sound_2d")]
+hurt_sound_2d = NodePath("../AudioStreamPlayer2D2")
+
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." index="9"]
 z_index = -1
 amount = 5
@@ -92,3 +101,7 @@ explosiveness = 0.05
 process_material = SubResource("ParticleProcessMaterial_cryn3")
 
 [node name="GPUParticles2D2" parent="." index="10" instance=ExtResource("5_a75ry")]
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="." index="11"]
+stream = SubResource("AudioStreamRandomizer_dpbcv")
+bus = &"SFX"

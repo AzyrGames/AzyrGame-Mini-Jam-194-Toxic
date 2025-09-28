@@ -1,11 +1,58 @@
-[gd_scene load_steps=5 format=3 uid="uid://dhpk36pmphn4r"]
+[gd_scene load_steps=12 format=3 uid="uid://dhpk36pmphn4r"]
 
 [ext_resource type="Script" uid="uid://33u77fqpyr80" path="res://2.Object/ConcreteObject/GameObject/Upgrade/entity_upgrade.gd" id="1_3ftlc"]
+[ext_resource type="PackedScene" uid="uid://bruevheh702r4" path="res://5.Resouces/VFX/Particle/vfx_blood_splatter_upgrade.tscn" id="2_7sbyk"]
 [ext_resource type="Script" uid="uid://bckvefqr7mex8" path="res://3.System/Component/Hurtbox/hurt_box_2d.gd" id="3_vnpc8"]
 [ext_resource type="Script" uid="uid://dapyfhwwqwa1j" path="res://3.System/Component/Health/health.gd" id="4_xsuu7"]
+[ext_resource type="Script" uid="uid://cxd4b10ln1ddc" path="res://3.System/Component/Hitflash/hit_flash.gd" id="5_7sbyk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ftlc"]
-size = Vector2(88, 32)
+size = Vector2(113, 36)
+
+[sub_resource type="Animation" id="Animation_5aoes"]
+resource_name = "hurt_flash"
+length = 0.16666834
+step = 0.016666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.083333336, 0.16666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.30588236, 0.43137255, 0.11764706, 1), Color(0.30588236, 0.43137255, 0.11764706, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ikgau"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_df5u0"]
+_data = {
+&"RESET": SubResource("Animation_ikgau"),
+&"hurt_flash": SubResource("Animation_5aoes")
+}
+
+[sub_resource type="Gradient" id="Gradient_7sbyk"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.23650001, 0.37194997, 0.43, 0.8039216)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vnpc8"]
+gradient = SubResource("Gradient_7sbyk")
 
 [node name="Upgrade" type="CharacterBody2D" node_paths=PackedStringArray("health", "hurt_box")]
 script = ExtResource("1_3ftlc")
@@ -13,11 +60,13 @@ move_speed = 0.0
 max_speed = 0.0
 acceleration_ticks = 0.0
 friction_ticks = 0.0
+vfx_blood_splatter = ExtResource("2_7sbyk")
 health = NodePath("Health")
 hurt_box = NodePath("HurtBox2D")
 metadata/_custom_type_script = "uid://33u77fqpyr80"
 
 [node name="HurtBox2D" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+visible = false
 collision_layer = 512
 collision_mask = 8
 script = ExtResource("3_vnpc8")
@@ -25,6 +74,7 @@ health = NodePath("../Health")
 metadata/_custom_type_script = "uid://bckvefqr7mex8"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox2D"]
+visible = false
 shape = SubResource("RectangleShape2D_3ftlc")
 
 [node name="Health" type="Node" parent="."]
@@ -37,6 +87,24 @@ collision_layer = 4096
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea"]
+position = Vector2(6.5, 0)
 shape = SubResource("RectangleShape2D_3ftlc")
+
+[node name="HurtFlash" type="Node2D" parent="." node_paths=PackedStringArray("animation_player", "health")]
+script = ExtResource("5_7sbyk")
+animation_player = NodePath("../AnimationPlayer")
+health = NodePath("../Health")
+metadata/_custom_type_script = "uid://cxd4b10ln1ddc"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_df5u0")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(6.499998, 5.364418e-07)
+scale = Vector2(1.765625, 0.5625)
+texture = SubResource("GradientTexture2D_vnpc8")
 
 [connection signal="body_entered" from="TriggerArea" to="." method="_on_trigger_area_body_entered"]

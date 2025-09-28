@@ -12,11 +12,16 @@ var destroy_on_area_collide: bool
 
 var projectile_texture_rotate_direction: bool
 
+func _ready() -> void:
+	super()
+	update_projectile_instances(get_physics_process_delta_time())
+	pass
+
+
 func init_updater_variable() -> void:
 	projectile_speed = projectile_template_2d.speed
 	destroy_on_body_collide = projectile_template_2d.destroy_on_body_collide
 	destroy_on_area_collide = projectile_template_2d.destroy_on_area_collide
-
 	_new_projectile_instance = Callable(ProjectileInstanceSimple2D, "new")
 
 #region Spawn Projectile

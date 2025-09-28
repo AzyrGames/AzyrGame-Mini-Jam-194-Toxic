@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bg2m552n0u47n"]
+
+[ext_resource type="PackedScene" uid="uid://cgdtcpvc17s13" path="res://5.Resouces/VFX/Particle/vfx_blood_splatter.tscn" id="1_dif0o"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="GPUParticles2D" parent="." instance=ExtResource("1_dif0o")]

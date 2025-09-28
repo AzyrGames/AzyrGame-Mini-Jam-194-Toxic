@@ -55,10 +55,10 @@ var negative_upgrades: Array[NegativeUpgrade] = [
 	NegativeUpgrade.NEG_7,
 ]
 var positive_upgrade_name: Dictionary[PositiveUpgrade, String] = {
-	PositiveUpgrade.POS_1: "Damage Up +1",
-	PositiveUpgrade.POS_2: "Shoot cooldown -0.05",
-	PositiveUpgrade.POS_3: "Time Gain +15%",
-	PositiveUpgrade.POS_4: "Time cap +5s",
+	PositiveUpgrade.POS_1: "Damage +1",
+	PositiveUpgrade.POS_2: "Atkspeed Up",
+	PositiveUpgrade.POS_3: "TimeGain 15%",
+	PositiveUpgrade.POS_4: "TimeCap 5s",
 	PositiveUpgrade.POS_5: "Accuracy Up",
 	PositiveUpgrade.POS_6: "Mobility Up",
 	PositiveUpgrade.POS_7: "Knockback -8",
@@ -66,13 +66,13 @@ var positive_upgrade_name: Dictionary[PositiveUpgrade, String] = {
 
 }
 var negative_upgrade_name: Dictionary[NegativeUpgrade, String] = {
-	NegativeUpgrade.NEG_1: "Lose time -0.1s",
-	NegativeUpgrade.NEG_2: "Enemy HP +10%",
-	NegativeUpgrade.NEG_3: "Enemy Power +1",
-	NegativeUpgrade.NEG_4: "Time Gain -0.10%",
+	NegativeUpgrade.NEG_1: "TimeLose -0.1s",
+	NegativeUpgrade.NEG_2: "EnemyHP 10%",
+	NegativeUpgrade.NEG_3: "EnemyPower +1",
+	NegativeUpgrade.NEG_4: "TimeGain -10%",
 	NegativeUpgrade.NEG_5: "Knockback +5",
 	NegativeUpgrade.NEG_6: "Lose 6s",
-	NegativeUpgrade.NEG_7: "Enemy 10% faster"
+	NegativeUpgrade.NEG_7: "EnemySpeed 10%"
 }
 
 func _ready() -> void:
@@ -146,8 +146,8 @@ func spawn_upgrades() -> void:
 		add_child(upgrade)
 
 		if label:
-			var pos_text: String = "[color=40b072]" + get_positive_upgrade_text(upgrade.positive_upgrade) + ".[/color]"
-			var neg_text: String = "[color=de7371]" + get_negative_upgrade_text(upgrade.negative_upgrade) + ".[/color]"
+			var pos_text: String = "[color=40b072]" + get_positive_upgrade_text(upgrade.positive_upgrade) + "[/color]"
+			var neg_text: String = "[color=de7371]" + get_negative_upgrade_text(upgrade.negative_upgrade) + "[/color]"
 			label.text = "%s\n%s" % [pos_text, neg_text]
 			label.visible = true
 			active_upgrade_labels.append(label)

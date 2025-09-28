@@ -17,4 +17,8 @@ signal start_new_wave()
 
 signal upgrade_destroyed(_entity_upgrade: EntityUpgrade2D)
 
+
+signal enemy_got_hut
 signal character_got_hut
+signal upgrade_got_hut
+

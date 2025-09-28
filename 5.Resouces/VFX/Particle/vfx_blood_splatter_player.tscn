@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://dpfhs6upk26ww"]
+
+[sub_resource type="Gradient" id="Gradient_wesm5"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.7157489)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dif0o"]
+gradient = SubResource("Gradient_wesm5")
+width = 10
+height = 8
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.8)
+metadata/_snap_enabled = true
+
+[sub_resource type="Curve" id="Curve_wesm5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.25698906, 1), 0.0, 0.0, 0, 0, Vector2(0.8527728, 0.76794875), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_dif0o"]
+curve = SubResource("Curve_wesm5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_u6k8j"]
+particle_flag_disable_z = true
+angle_min = -29.99999
+angle_max = 30.000011
+initial_velocity_min = 20.0
+initial_velocity_max = 120.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -100.0
+linear_accel_max = -50.0
+damping_min = 68.987
+damping_max = 78.270004
+scale_min = 0.59999996
+color = Color(0.22745098, 0.105882354, 0.5764706, 1)
+alpha_curve = SubResource("CurveTexture_dif0o")
+hue_variation_min = -0.050000023
+hue_variation_max = 0.049999975
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+emitting = false
+amount = 20
+texture = SubResource("GradientTexture2D_dif0o")
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+randomness = 0.1
+fixed_fps = 24
+process_material = SubResource("ParticleProcessMaterial_u6k8j")

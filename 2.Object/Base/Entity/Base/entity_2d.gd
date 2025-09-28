@@ -23,6 +23,8 @@ class_name Entity2D
 @export var is_rotate_sprite: bool = true
 @export var sprite_rotate_speed: float = 3
 
+@export var vfx_blood_splatter: PackedScene
+
 
 var _acceleration_value: float = 1500.0
 var _friction_value: float = 1000.0

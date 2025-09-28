@@ -11,6 +11,7 @@ script = ExtResource("1_k6sls")
 speed = 80.0
 texture = ExtResource("2_wumwb")
 scale = Vector2(0.6, 0.6)
+texture_z_index = 2
 texture_modulate = Color(1, 0.26, 0.35866654, 1)
 collision_shape = SubResource("CircleShape2D_ymta3")
 collision_layer = 1024

@@ -8,6 +8,7 @@ class_name EntityEnemy2D
 
 @export var start_timer: Timer
 
+
 func _physics_process(_delta: float) -> void:
 	super(_delta)
 	_target_direction = move_direction

@@ -4,7 +4,7 @@
 [ext_resource type="StyleBox" uid="uid://crpci47t7tqbd" path="res://7.UI/Theme/panel_plat_black.tres" id="2_f7fdy"]
 [ext_resource type="Script" uid="uid://c5jby6pa5hqxx" path="res://7.UI/GUI/1.StartScreen/start_screen_gui.gd" id="2_wyoph"]
 [ext_resource type="FontFile" uid="uid://b7pgda0km17t2" path="res://7.UI/Font/vcr_osd_mono/VCR_OSD_MONO_1.001.ttf" id="4_5ddm5"]
-[ext_resource type="Texture2D" uid="uid://jnfvj2y70vrh" path="res://8.Asset/2D/MetaData/texture_title.png" id="4_qulrc"]
+[ext_resource type="Texture2D" uid="uid://clqksejjea6ud" path="res://8.Asset/2D/MetaData/GameSCreen.png" id="4_qulrc"]
 
 [node name="StartScreenGUI" type="Control"]
 process_mode = 3

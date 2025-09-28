@@ -1,16 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://6fh8dpo4usfj"]
+[gd_scene load_steps=18 format=3 uid="uid://6fh8dpo4usfj"]
 
 [ext_resource type="Script" uid="uid://co6iiaejrsqq3" path="res://3.System/Component/Hitbox/hitbox2d.gd" id="2_nqwe6"]
 [ext_resource type="Texture2D" uid="uid://cr11owmfqbn61" path="res://8.Asset/2D/GameLayout/texture_play_area_2.png" id="2_qopj1"]
-
-[sub_resource type="Gradient" id="Gradient_qudss"]
-offsets = PackedFloat32Array(0.03487265)
-colors = PackedColorArray(0.010180006, 0.0036000002, 0.06, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_nqwe6"]
-gradient = SubResource("Gradient_qudss")
-width = 1280
-height = 1280
+[ext_resource type="Script" uid="uid://cmfjfat42wrko" path="res://4.Level/PlayArea/play_area_visual.gd" id="2_qu5vv"]
 
 [sub_resource type="Gradient" id="Gradient_ahp1e"]
 offsets = PackedFloat32Array(0)
@@ -32,24 +24,106 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-64, -64, 128, -64, 128
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qopj1"]
 size = Vector2(24, 216)
 
+[sub_resource type="Gradient" id="Gradient_qopj1"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.25, 0.14750001, 0.24487503, 0.5803922)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qr4c8"]
+gradient = SubResource("Gradient_qopj1")
+width = 300
+height = 20
+
+[sub_resource type="Animation" id="Animation_qu5vv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayAreaVisual:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_nqwe6"]
+resource_name = "character_got_hut"
+length = 0.16666834
+step = 0.016666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayAreaVisual:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.16666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.22745098, 0.105882354, 0.5764706, 1), Color(0.22745098, 0.105882354, 0.5764706, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_qr4c8"]
+resource_name = "enemy_got_hut"
+length = 0.16666834
+step = 0.016666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayAreaVisual:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.16666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.6431373, 0.02745098, 0.21960784, 1), Color(0.6431373, 0.02745098, 0.21960784, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ktq8h"]
+resource_name = "upgrade_got_hut"
+length = 0.16666834
+step = 0.016666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayAreaVisual:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.16666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.30588236, 0.43137255, 0.11764706, 1), Color(0.30588233, 0.43137252, 0.11764705, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qr4c8"]
+_data = {
+&"RESET": SubResource("Animation_qu5vv"),
+&"character_got_hut": SubResource("Animation_nqwe6"),
+&"enemy_got_hut": SubResource("Animation_qr4c8"),
+&"upgrade_got_hut": SubResource("Animation_ktq8h")
+}
+
+[sub_resource type="Gradient" id="Gradient_qudss"]
+offsets = PackedFloat32Array(0.03487265)
+colors = PackedColorArray(0.010180006, 0.0036000002, 0.06, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nqwe6"]
+gradient = SubResource("Gradient_qudss")
+
 [node name="PlayArea" type="Node2D"]
-metadata/hitbox = Object(Area2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":2048,"collision_mask":16,"collision_priority":1.0,"input_pickable":true,"monitoring":true,"monitorable":true,"priority":0,"gravity_space_override":0,"gravity_point":false,"gravity_point_unit_distance":0.0,"gravity_point_center":Vector2(0, 1),"gravity_direction":Vector2(0, 1),"gravity":980.0,"linear_damp_space_override":0,"linear_damp":0.1,"angular_damp_space_override":0,"angular_damp":1.0,"audio_bus_override":false,"audio_bus_name":&"Master","script":ExtResource("2_nqwe6"),"value":1.0,"collision_shape":null,"reset_after":0.5,"active":true,"component":2,"allow_duplicates":false,"reset_timer":null,"metadata/_custom_type_script":"uid://co6iiaejrsqq3")
+metadata/hitbox = Object(Area2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":2048,"collision_mask":16,"collision_priority":1.0,"input_pickable":true,"monitoring":true,"monitorable":true,"priority":0,"gravity_space_override":0,"gravity_point":false,"gravity_point_unit_distance":0.0,"gravity_point_center":Vector2(0, 1),"gravity_direction":Vector2(0, 1),"gravity":980.0,"linear_damp_space_override":0,"linear_damp":0.1,"angular_damp_space_override":0,"angular_damp":1.0,"audio_bus_override":false,"audio_bus_name":&"Master","script":ExtResource("2_nqwe6"),"value":1.0,"collision_shape":null,"reset_after":0.5,"active":true,"component":2,"allow_duplicates":false,"reset_timer":Object(Timer,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","process_callback":1,"wait_time":0.5,"one_shot":true,"autostart":false,"ignore_time_scale":false,"script":null)
+,"metadata/_custom_type_script":"uid://co6iiaejrsqq3")
 
-
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-texture = SubResource("GradientTexture2D_nqwe6")
 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
+z_index = -3
 position = Vector2(-15.999987, 0)
 scale = Vector2(1.4999999, 1)
 texture = SubResource("GradientTexture2D_qu5vv")
-
-[node name="Sprite2D4" type="Sprite2D" parent="."]
-modulate = Color(1, 0, 0, 1)
-texture_filter = 1
-position = Vector2(-15.999998, 0)
-scale = Vector2(0.96000004, 1)
-texture = ExtResource("2_qopj1")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(-7.9999847, 0)
@@ -75,6 +149,7 @@ rotation = 1.5707964
 shape = SubResource("RectangleShape2D_thra4")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
 position = Vector2(-48, 0)
 navigation_polygon = SubResource("NavigationPolygon_thra4")
 
@@ -102,3 +177,70 @@ shape = SubResource("RectangleShape2D_qopj1")
 position = Vector2(-8, 68)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_qopj1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(-16.000002, -60)
+scale = Vector2(0.5866667, 0.4)
+texture = SubResource("GradientTexture2D_qr4c8")
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(-15.999984, 60)
+scale = Vector2(0.58666664, 0.4)
+texture = SubResource("GradientTexture2D_qr4c8")
+
+[node name="Sprite2D6" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(-108.15459, 0.012169139)
+rotation = 1.5707964
+scale = Vector2(0.42609125, 0.41545868)
+texture = SubResource("GradientTexture2D_qr4c8")
+
+[node name="Sprite2D7" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(76.03664, 0.012170878)
+rotation = 1.5707964
+scale = Vector2(0.42609122, 0.40930936)
+texture = SubResource("GradientTexture2D_qr4c8")
+
+[node name="PlayAreaVisual" type="Node2D" parent="." node_paths=PackedStringArray("animation_player")]
+script = ExtResource("2_qu5vv")
+animation_player = NodePath("../AnimationPlayer")
+
+[node name="Sprite2D4" type="Sprite2D" parent="PlayAreaVisual"]
+z_index = 3
+texture_filter = 1
+position = Vector2(-15.999998, 0)
+scale = Vector2(0.96000004, 1)
+texture = ExtResource("2_qopj1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_qr4c8")
+}
+
+[node name="Border" type="Node2D" parent="."]
+z_index = 4
+
+[node name="Sprite2D4" type="Sprite2D" parent="Border"]
+position = Vector2(-144, 3.9999905)
+scale = Vector2(1, 3.125)
+texture = SubResource("GradientTexture2D_nqwe6")
+
+[node name="Sprite2D8" type="Sprite2D" parent="Border"]
+position = Vector2(112, -4)
+scale = Vector2(1, 3.125)
+texture = SubResource("GradientTexture2D_nqwe6")
+
+[node name="Sprite2D9" type="Sprite2D" parent="Border"]
+position = Vector2(-5.507038, 96)
+rotation = 1.5707964
+scale = Vector2(1, 4.077905)
+texture = SubResource("GradientTexture2D_nqwe6")
+
+[node name="Sprite2D11" type="Sprite2D" parent="Border"]
+position = Vector2(-8, -96)
+rotation = 1.5707964
+scale = Vector2(1, 4.077905)
+texture = SubResource("GradientTexture2D_nqwe6")

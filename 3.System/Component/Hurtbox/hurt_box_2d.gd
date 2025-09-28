@@ -136,14 +136,25 @@ func _on_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, 
 			if _custom_data[0] is Dictionary:
 				if _custom_data[0].has("damage"):
 					_damage_value = _custom_data[0]["damage"]
+		print("_hit_direction: ", _hit_direction)
+		spawn_particle(_hit_position, _hit_direction)
 		got_hurt.emit()
 	
 	if health:
+		print("healthhhh")
 		health.call_deferred("take_damage", _damage_value)
 
 	if owner is EntityCharacter2D:
+		spawn_particle(owner.global_position, Utils.rand_direction_cirle())
 
-		return
+		EventBus.character_got_hut.emit()
+
+	elif owner is EntityEnemy2D:
+		EventBus.enemy_got_hut.emit()
+	elif owner is EntityUpgrade2D:
+		EventBus.upgrade_got_hut.emit()
+
+	return
 
 func _on_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	# if area is HitBox2D:
@@ -151,7 +162,18 @@ func _on_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, l
 	pass
 
 
+func spawn_particle(_position: Vector2, _direction: Vector2) -> void:
+	if !owner is Entity2D: return
 
-func spawn_particle() -> void:
-	# var _node: = Utils.instance_node()
+	owner = owner as Entity2D
+	if !owner.vfx_blood_splatter: return
+	var _vfx_blood_splatter : Node = owner.vfx_blood_splatter.instantiate()
+	if !_vfx_blood_splatter is GPUParticles2D: return
+	_vfx_blood_splatter = _vfx_blood_splatter as GPUParticles2D
+	_direction = _direction * 1.0
+	_vfx_blood_splatter.process_material.direction = Vector3(_direction.x, _direction.y, 0)
+	_vfx_blood_splatter.global_position = _position
+	_vfx_blood_splatter.emitting = true
+	ProjectileEngine.projectile_environment.add_child(_vfx_blood_splatter)
+
 	pass

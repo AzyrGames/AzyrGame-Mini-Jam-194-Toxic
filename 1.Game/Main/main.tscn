@@ -118,7 +118,6 @@ offset_bottom = 40.0
 layout_mode = 2
 
 [node name="w" type="Label" parent="Control2/MarginContainer/VBoxContainer"]
-modulate = Color(0.30588236, 0.43137255, 0.11764706, 1)
 layout_mode = 2
 theme = ExtResource("3_rv7se")
 text = "Wave: 
@@ -164,6 +163,7 @@ label_settings = ExtResource("9_y0agr")
 vertical_alignment = 1
 
 [node name="Control" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

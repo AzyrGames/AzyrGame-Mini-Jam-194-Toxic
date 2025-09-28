@@ -13,7 +13,6 @@ config_version=5
 config/name="Mini Jam 194 Toxic Everything Can Die"
 run/main_scene="uid://b0rjmyu6yhxev"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="res://icon.svg"
 
 [autoload]
 
@@ -41,6 +40,7 @@ window/size/viewport_width=240
 window/size/viewport_height=135
 window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
+mouse_cursor/custom_image="uid://b6bxxvex0ww1e"
 
 [editor_plugins]
 

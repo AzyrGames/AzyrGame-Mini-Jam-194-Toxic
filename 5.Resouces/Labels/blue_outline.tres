@@ -2,7 +2,7 @@
 
 [resource]
 line_spacing = 0.0
-font_color = Color(0.3818401, 0.2516, 0.74, 1)
+font_color = Color(0.39800012, 0.27, 0.75, 1)
 stacked_outline_count = 2
 stacked_outline_0/size = 1
 stacked_outline_1/size = 1

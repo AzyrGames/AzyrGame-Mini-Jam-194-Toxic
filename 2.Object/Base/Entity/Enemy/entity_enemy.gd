@@ -23,7 +23,6 @@ func _on_health_depleted() -> void:
 	var _asp_enity_death : Node = asp_entity_death.instantiate()
 	if _asp_enity_death is AudioStreamPlayer2D:
 		_asp_enity_death.global_position = global_position
-		print("_asp_enity_death")
 		ProjectileEngine.projectile_environment.add_child(_asp_enity_death)
 		_asp_enity_death.playing = true
 	EventBus.entity_enemy_destroyed.emit(self)

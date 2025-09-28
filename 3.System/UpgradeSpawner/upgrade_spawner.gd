@@ -57,8 +57,8 @@ var negative_upgrades: Array[NegativeUpgrade] = [
 var positive_upgrade_name: Dictionary[PositiveUpgrade, String] = {
 	PositiveUpgrade.POS_1: "Damage +1",
 	PositiveUpgrade.POS_2: "Atkspeed Up",
-	PositiveUpgrade.POS_3: "TimeGain 15%",
-	PositiveUpgrade.POS_4: "TimeCap 5s",
+	PositiveUpgrade.POS_3: "TimeGain +15%",
+	PositiveUpgrade.POS_4: "TimeCap +6s",
 	PositiveUpgrade.POS_5: "Accuracy Up",
 	PositiveUpgrade.POS_6: "Mobility Up",
 	PositiveUpgrade.POS_7: "Knockback -8",

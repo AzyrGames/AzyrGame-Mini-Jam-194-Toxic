@@ -9,6 +9,7 @@ const GAME_TIME_LIMIT: float = 60*60
 @export var game_timer: Timer
 @export var upgrade_label: UpgradeLabel
 
+@export var background: Control
 
 var game_2d: Game2D
 
@@ -22,8 +23,8 @@ func _ready() -> void:
 
 func start_game() -> void:
 	clear_game()
-
 	await get_tree().create_timer(0.1667).timeout
+	background.visible = false
 	
 	if !sub_viewport: return
 	var _game_node : Node = Utils.instance_node(GAME_PATH)
@@ -45,4 +46,5 @@ func clear_game() -> void:
 	bloody_timer.visible = false
 	bloody_timer.bloody_timer.stop()
 	game_timer.stop()
+	background.visible = true
 	pass

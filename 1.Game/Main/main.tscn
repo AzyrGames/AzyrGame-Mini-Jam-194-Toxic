@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b0rjmyu6yhxev"]
+[gd_scene load_steps=9 format=3 uid="uid://b0rjmyu6yhxev"]
 
 [ext_resource type="Script" uid="uid://ybutnrp1d24r" path="res://1.Game/Main/main.gd" id="1_bhcqt"]
 [ext_resource type="Theme" uid="uid://c55lhrkiw4ysq" path="res://7.UI/Theme/AzyrTheme.tres" id="3_rv7se"]
@@ -7,13 +7,15 @@
 [ext_resource type="Script" uid="uid://co24jiat0y46s" path="res://addons/godot_projectile_engine/core/pattern_composer/component/PCCSingle2D.gd" id="5_5lpr8"]
 [ext_resource type="Script" uid="uid://cm1gi15tdc45s" path="res://addons/godot_projectile_engine/core/pattern_composer/component/PCCPolygon2D.gd" id="6_4vo1p"]
 [ext_resource type="Script" uid="uid://c13euoskuvfdk" path="res://3.System/UpgradeLabels/upgrade_labels.gd" id="7_5lpr8"]
+[ext_resource type="Texture2D" uid="uid://duf1ua7esuy4y" path="res://8.Asset/2D/MetaData/background.png" id="8_4vo1p"]
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("sub_viewport", "bloody_timer", "game_timer", "upgrade_label")]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("sub_viewport", "bloody_timer", "game_timer", "upgrade_label", "background")]
 script = ExtResource("1_bhcqt")
 sub_viewport = NodePath("SubViewportContainer/SubViewport")
 bloody_timer = NodePath("Label")
 game_timer = NodePath("GameTimer")
 upgrade_label = NodePath("UpgradeLabels")
+background = NodePath("Control")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_right = 40.0
@@ -103,6 +105,21 @@ metadata/_custom_type_script = "uid://co24jiat0y46s"
 
 [node name="GameTimer" type="Timer" parent="."]
 
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("8_4vo1p")
+
 [node name="UpgradeLabels" type="Control" parent="." node_paths=PackedStringArray("upgrade_label_1", "upgrade_label_2", "upgrade_label_3", "upgrade_label_4")]
 layout_mode = 3
 anchors_preset = 0
@@ -119,6 +136,7 @@ upgrade_label_4 = NodePath("Label4")
 metadata/_custom_type_script = "uid://c13euoskuvfdk"
 
 [node name="Label" type="RichTextLabel" parent="UpgradeLabels"]
+visible = false
 custom_minimum_size = Vector2(80, -40)
 layout_mode = 0
 offset_left = -112.0
@@ -132,6 +150,7 @@ text = "Testing"
 vertical_alignment = 1
 
 [node name="Label2" type="RichTextLabel" parent="UpgradeLabels"]
+visible = false
 custom_minimum_size = Vector2(80, 42)
 layout_mode = 1
 anchors_preset = 8
@@ -152,6 +171,7 @@ text = "Testing"
 vertical_alignment = 1
 
 [node name="Label3" type="RichTextLabel" parent="UpgradeLabels"]
+visible = false
 custom_minimum_size = Vector2(80, 42)
 layout_mode = 1
 anchors_preset = 8
@@ -172,6 +192,7 @@ text = "Testing"
 vertical_alignment = 1
 
 [node name="Label4" type="RichTextLabel" parent="UpgradeLabels"]
+visible = false
 custom_minimum_size = Vector2(80, 42)
 layout_mode = 1
 anchors_preset = 8

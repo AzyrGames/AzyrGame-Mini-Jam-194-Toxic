@@ -287,7 +287,8 @@ func disconnect_timing_scheduler() -> void:
 
 
 func connect_particle() -> void:
-	projectile_spawned.connect(start_particle)
+	if !projectile_spawned.is_connected(start_particle):
+		projectile_spawned.connect(start_particle)
 	pass
 
 func start_particle(_projectile_template: ProjectileTemplate2D) -> void:

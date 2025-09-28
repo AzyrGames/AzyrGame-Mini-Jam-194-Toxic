@@ -10,8 +10,8 @@
 script = ExtResource("2_mpdgd")
 
 [sub_resource type="BTRandomWait" id="BTRandomWait_a31xt"]
-min_duration = 15.0
-max_duration = 20.0
+min_duration = 8.0
+max_duration = 10.0
 
 [sub_resource type="BTSequence" id="BTSequence_grqkq"]
 children = [SubResource("BTRandomWait_0wovq"), SubResource("BTAction_mpdgd"), SubResource("BTRandomWait_a31xt")]

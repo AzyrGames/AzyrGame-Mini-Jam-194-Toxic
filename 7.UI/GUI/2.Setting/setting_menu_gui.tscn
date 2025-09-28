@@ -64,6 +64,7 @@ theme = ExtResource("1_h80o3")
 
 [node name="Resolution" type="HBoxContainer" parent="AspectRatioContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/ScrollContainer/GridContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_h80o3")

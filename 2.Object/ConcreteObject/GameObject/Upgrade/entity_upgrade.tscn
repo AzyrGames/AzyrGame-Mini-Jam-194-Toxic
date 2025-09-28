@@ -9,6 +9,21 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ftlc"]
 size = Vector2(113, 36)
 
+[sub_resource type="Animation" id="Animation_ikgau"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_5aoes"]
 resource_name = "hurt_flash"
 length = 0.16666834
@@ -26,21 +41,6 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1), Color(0.30588236, 0.43137255, 0.11764706, 1), Color(0.30588236, 0.43137255, 0.11764706, 1), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_ikgau"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_df5u0"]
 _data = {
 &"RESET": SubResource("Animation_ikgau"),
@@ -49,7 +49,7 @@ _data = {
 
 [sub_resource type="Gradient" id="Gradient_7sbyk"]
 offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.23650001, 0.37194997, 0.43, 0.8039216)
+colors = PackedColorArray(0.1887, 0.51, 0.22082998, 0.5294118)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_vnpc8"]
 gradient = SubResource("Gradient_7sbyk")

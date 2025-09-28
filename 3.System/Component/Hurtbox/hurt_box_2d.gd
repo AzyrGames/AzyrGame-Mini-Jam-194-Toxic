@@ -136,12 +136,12 @@ func _on_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, 
 			if _custom_data[0] is Dictionary:
 				if _custom_data[0].has("damage"):
 					_damage_value = _custom_data[0]["damage"]
-		print("_hit_direction: ", _hit_direction)
+		# print("_hit_direction: ", _hit_direction)
 		spawn_particle(_hit_position, _hit_direction)
 		got_hurt.emit()
 	
 	if health:
-		print("healthhhh")
+		# print("healthhhh")
 		health.call_deferred("take_damage", _damage_value)
 
 	if owner is EntityCharacter2D:

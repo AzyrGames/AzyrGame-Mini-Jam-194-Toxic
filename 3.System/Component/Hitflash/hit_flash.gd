@@ -32,7 +32,6 @@ func hitflash() -> void:
 
 
 func _on_health_damaged(_value: int) -> void:
-	print("yeeeeee")
 	hitflash()
 	if hurt_sound:
 		hurt_sound.play()

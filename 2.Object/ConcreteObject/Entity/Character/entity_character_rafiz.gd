@@ -6,7 +6,7 @@ class_name EntityCharacterRafiz2D
 # @export var turn_speed: float = 5.0
 
 const WEAPON_DAMAGE: float = 5.0
-const WEAPON_SHOOT_SPEED: = 0.4
+const WEAPON_SHOOT_SPEED := 0.4
 
 # const CHARACTER_MAX_SPEED:
 
@@ -49,7 +49,7 @@ func _input(event: InputEvent) -> void:
 		GameManager.main_2d.cross_hair.visible = true
 		_aim_direction = Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down").normalized()
 
-		var _aim_position : Vector2 = global_position + _aim_direction * 32
+		var _aim_position: Vector2 = global_position + _aim_direction * 40
 		GameManager.main_2d.cross_hair.global_position = _aim_position + (GameWindow.game_base_resolution / 2.0)
 
 		_target_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
@@ -62,7 +62,6 @@ func _input(event: InputEvent) -> void:
 		_aim_direction = _target_direction
 		GameManager.main_2d.cross_hair.visible = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-
 
 
 	if _aim_direction != Vector2.ZERO:
@@ -99,12 +98,9 @@ func add_weapon_damage(_value: int) -> void:
 func add_weapon_accuracy(_value: int) -> void:
 	%PCCSingle2D.rotation_random.y -= _value
 	if %PCCSingle2D.rotation_random.y < 0:
-		%PCCSingle2D.rotation_random.y = 0 
+		%PCCSingle2D.rotation_random.y = 0
 		GameManager.main_2d.bloody_timer.add_bloody_timer_time(10)
-
 	pass
-
-
 
 
 func add_weapon_shoot_speed(_value: float) -> void:
@@ -123,8 +119,6 @@ func add_mobility() -> void:
 	if friction_ticks < 5:
 		friction_ticks = 5
 	pass
-
-
 
 
 func add_weapon_knock_back(_value: int) -> void:
@@ -155,7 +149,7 @@ func _on_weapon_fired(_projectile_template: ProjectileTemplate2D) -> void:
 	if !_projectile_template.custom_data[0] is Dictionary: return
 	if !_projectile_template.custom_data[0].get("push_back"):
 		return
-	velocity += (- global_position.direction_to(get_global_mouse_position()) *
+	velocity += (-global_position.direction_to(get_global_mouse_position()) *
 		_projectile_template.custom_data[0].get("push_back")
 		)
 	

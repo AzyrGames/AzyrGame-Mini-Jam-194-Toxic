@@ -52,6 +52,8 @@ func start_game() -> void:
 func clear_game() -> void:
 	if game_2d:
 		game_2d.queue_free()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
 	asp_music.set("parameters/switch_to_clip", "Overkill")
 	
 	for child in upgrade_label.get_children():

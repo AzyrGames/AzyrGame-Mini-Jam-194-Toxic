@@ -1,20 +1,32 @@
-[gd_scene load_steps=8 format=3 uid="uid://crbbmjtqbmfn0"]
+[gd_scene load_steps=12 format=3 uid="uid://crbbmjtqbmfn0"]
 
 [ext_resource type="Script" uid="uid://bisu1frs7uncc" path="res://1.Game/Game/game_2d.gd" id="1_fx8dh"]
 [ext_resource type="PackedScene" uid="uid://blfbqbkkgmjan" path="res://2.Object/ConcreteObject/Entity/Character/entity_character_rafiz.tscn" id="1_qudss"]
 [ext_resource type="PackedScene" uid="uid://6fh8dpo4usfj" path="res://4.Level/PlayArea/play_area.tscn" id="2_ahp1e"]
+[ext_resource type="PackedScene" uid="uid://0x3orckja66w" path="res://5.Resouces/VFX/Particle/vfx_projectile_splatter_player.tscn" id="2_ctu1t"]
+[ext_resource type="PackedScene" uid="uid://b1pk48o5a3tj" path="res://5.Resouces/VFX/Particle/vfx_projectile_splatter_enemy.tscn" id="2_fx8dh"]
 [ext_resource type="Script" uid="uid://dn7rm61wq3t3s" path="res://addons/godot_projectile_engine/core/projectile_environment/projectile_environment.gd" id="3_tpeoa"]
 [ext_resource type="Script" uid="uid://eesbgowade3n" path="res://1.Game/Game/enemy_spawner.gd" id="4_o2rhd"]
 [ext_resource type="PackedScene" uid="uid://dhpk36pmphn4r" path="res://2.Object/ConcreteObject/GameObject/Upgrade/entity_upgrade.tscn" id="6_iv6b1"]
 [ext_resource type="Script" uid="uid://coj7jaf8titwf" path="res://3.System/UpgradeSpawner/upgrade_spawner.gd" id="7_jwliw"]
+[ext_resource type="AudioStream" uid="uid://dmowo3teb41j2" path="res://8.Asset/Audio/SFX/sfx_projectile_destroy.ogg" id="10_xs8oe"]
 
-[node name="Game" type="Node2D"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bssge"]
+random_pitch = 1.1
+random_volume_offset_db = 1.0
+streams_count = 1
+stream_0/stream = ExtResource("10_xs8oe")
+
+[node name="Game" type="Node2D" node_paths=PackedStringArray("asp_projectile_destroy")]
 script = ExtResource("1_fx8dh")
+projectile_player = ExtResource("2_ctu1t")
+projectile_enemy = ExtResource("2_fx8dh")
+asp_projectile_destroy = NodePath("AudioStreamPlayer")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="PlayArea" parent="." instance=ExtResource("2_ahp1e")]
-metadata/hitbox = Object(Area2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":2048,"collision_mask":16,"collision_priority":1.0,"input_pickable":true,"monitoring":true,"monitorable":true,"priority":0,"gravity_space_override":0,"gravity_point":false,"gravity_point_unit_distance":0.0,"gravity_point_center":Vector2(0, 1),"gravity_direction":Vector2(0, 1),"gravity":980.0,"linear_damp_space_override":0,"linear_damp":0.1,"angular_damp_space_override":0,"angular_damp":1.0,"audio_bus_override":false,"audio_bus_name":&"Master","script":Resource("res://3.System/Component/Hitbox/hitbox2d.gd"),"value":1.0,"collision_shape":null,"reset_after":0.5,"active":true,"component":2,"allow_duplicates":false,"reset_timer":Object(Timer,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","process_callback":1,"wait_time":0.5,"one_shot":true,"autostart":false,"ignore_time_scale":false,"script":null)
+metadata/hitbox = Object(Area2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":2048,"collision_mask":528,"collision_priority":1.0,"input_pickable":true,"monitoring":true,"monitorable":true,"priority":0,"gravity_space_override":0,"gravity_point":false,"gravity_point_unit_distance":0.0,"gravity_point_center":Vector2(0, 1),"gravity_direction":Vector2(0, 1),"gravity":980.0,"linear_damp_space_override":0,"linear_damp":0.1,"angular_damp_space_override":0,"angular_damp":1.0,"audio_bus_override":false,"audio_bus_name":&"Master","script":Resource("res://3.System/Component/Hitbox/hitbox2d.gd"),"value":1.0,"collision_shape":null,"reset_after":0.5,"active":true,"component":2,"allow_duplicates":false,"reset_timer":Object(Timer,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","process_callback":1,"wait_time":0.5,"one_shot":true,"autostart":false,"ignore_time_scale":false,"script":null)
 ,"metadata/_custom_type_script":"uid://co6iiaejrsqq3")
 
 
@@ -58,3 +70,7 @@ position = Vector2(-16, 40)
 
 [node name="Marker2D6" type="Marker2D" parent="UpgradeSpawner"]
 position = Vector2(48, 40)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_bssge")
+bus = &"SFX"

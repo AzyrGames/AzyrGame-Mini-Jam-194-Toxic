@@ -121,5 +121,6 @@ texture = SubResource("GradientTexture2D_vnpc8")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_xsuu7")
+bus = &"SFX"
 
 [connection signal="body_entered" from="TriggerArea" to="." method="_on_trigger_area_body_entered"]

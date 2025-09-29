@@ -11,11 +11,14 @@ script = ExtResource("1_k6sls")
 speed = 80.0
 projectile_pooling_amount = 100
 texture = ExtResource("2_wumwb")
-scale = Vector2(0.6, 0.6)
+scale = Vector2(0.75, 0.65)
 texture_z_index = 2
 texture_modulate = Color(1, 0.26, 0.35866654, 1)
 collision_shape = SubResource("CircleShape2D_ymta3")
 collision_layer = 1024
 collision_mask = 44
 texture_rotate_direction = true
+custom_data = [{
+"is_player": false
+}]
 metadata/_custom_type_script = "uid://dqlixqba72p5f"

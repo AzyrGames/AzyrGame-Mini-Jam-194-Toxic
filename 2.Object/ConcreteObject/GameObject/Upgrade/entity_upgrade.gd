@@ -31,6 +31,8 @@ func process_ability(_pos_up: UpgradeSpawner.PositiveUpgrade, _neg_up: UpgradeSp
 		# Time Cap
 		UpgradeSpawner.PositiveUpgrade.POS_4:
 			GameManager.main_2d.bloody_timer.add_bloody_time_cap(6.0)
+			GameManager.main_2d.bloody_timer.add_bloody_timer_time(6)
+
 			pass
 		# Accuarcy Up
 		UpgradeSpawner.PositiveUpgrade.POS_5:

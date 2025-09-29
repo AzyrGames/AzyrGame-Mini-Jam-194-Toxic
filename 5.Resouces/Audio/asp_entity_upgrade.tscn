@@ -11,6 +11,7 @@ stream_0/stream = ExtResource("1_ewjd7")
 
 [node name="asp_entity_upgrade" type="AudioStreamPlayer2D"]
 stream = SubResource("AudioStreamRandomizer_r2a0q")
+bus = &"SFX"
 script = ExtResource("2_r2a0q")
 
 [connection signal="finished" from="." to="." method="_on_finished"]

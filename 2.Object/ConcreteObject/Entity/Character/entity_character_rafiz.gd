@@ -113,9 +113,15 @@ func add_weapon_shoot_speed(_value: float) -> void:
 
 
 func add_mobility() -> void:
-	max_speed += 5
+	max_speed += 6
+
 	acceleration_ticks -= 5
-	friction_ticks -= 10
+	if acceleration_ticks < 5:
+		acceleration_ticks = 5
+
+	friction_ticks -= 8
+	if friction_ticks < 5:
+		friction_ticks = 5
 	pass
 
 

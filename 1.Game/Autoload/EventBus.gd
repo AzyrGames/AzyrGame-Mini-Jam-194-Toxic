@@ -17,7 +17,7 @@ signal start_new_wave()
 
 signal upgrade_destroyed(_entity_upgrade: EntityUpgrade2D)
 
-
+signal projectile_destroyed(_projectile_template: ProjectileTemplate2D, _position: Vector2, _direction: Vector2)
 signal enemy_got_hut
 signal character_got_hut
 signal upgrade_got_hut

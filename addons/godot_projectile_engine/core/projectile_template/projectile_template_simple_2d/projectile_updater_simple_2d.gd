@@ -158,6 +158,7 @@ func update_projectile_instances(delta: float) -> void:
 	# Destroy projectile
 	if projectile_remove_index.size() > 0:
 		for index: int in projectile_remove_index:
+			EventBus.projectile_destroyed.emit(projectile_template_2d, projectile_instance_array[index].global_position, projectile_instance_array[index].direction)
 			projectile_active_index.erase(index)
 			if projectile_template_2d.collision_shape:
 				PS.area_set_shape_disabled(projectile_area_rid, index, true)

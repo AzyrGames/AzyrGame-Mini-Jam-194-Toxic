@@ -107,6 +107,7 @@ func _on_entity_enemy_detroyed(_enemy: EntityEnemy2D) -> void:
 func _on_bloody_timer_timeout() -> void:
 	GameManager.toggle_pause()
 	# GameManager.stop_game()
+	await get_tree().create_timer(1.0).timeout
 	GuiManager.switch_gui_panel(GuiManager.GUIPanel.END_SCREEN)
 	GameManager.main_2d.clear_game()
 
@@ -120,10 +121,7 @@ func _on_upgrade_destroyed(_entity_upgrade: EntityUpgrade2D) -> void:
 
 
 func add_bloody_timer_time(_value: float) -> void:
-	# print("_value:", _value)
-	# print(bloody_timer.time_left + _value)
-	# print(bloody_timer.time_left)
 	bloody_time_time = bloody_timer.time_left + _value
-	# print("bloody_time_time: ", bloody_time_time)
-	bloody_timer.start(bloody_time_time)
+	if bloody_time_time > 0:
+		bloody_timer.start(bloody_time_time)
 	pass

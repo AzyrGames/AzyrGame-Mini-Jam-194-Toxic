@@ -229,6 +229,7 @@ emoji_menu_enabled = false
 virtual_keyboard_type = 2
 
 [node name="HBoxContainer6" type="HBoxContainer" parent="AspectRatioContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/ScrollContainer/GridContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_h80o3")

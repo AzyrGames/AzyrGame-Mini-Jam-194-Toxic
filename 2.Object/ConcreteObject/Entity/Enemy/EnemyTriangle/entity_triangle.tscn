@@ -144,5 +144,4 @@ stream = SubResource("AudioStreamRandomizer_ymta3")
 bus = &"SFX"
 
 [node name="EnemySprite" parent="." index="14"]
-modulate = Color(1, 1, 1, 1)
 texture = ExtResource("5_nqt0x")

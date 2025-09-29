@@ -18,7 +18,6 @@ class_name Health
 		current_health = value
 		if current_health <= 0:
 			is_damageable = false
-			# invincible_timer.stop()
 			health_depleted.emit()
 			if !can_negative:
 				current_health = 0

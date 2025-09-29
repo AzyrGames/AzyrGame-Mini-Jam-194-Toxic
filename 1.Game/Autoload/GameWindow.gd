@@ -47,10 +47,10 @@ func _ready() -> void:
 	# set_mouse_cursor(MouseCursorMode.AIM)
 
 func _physics_process(_delta: float) -> void:
-	update_current_monitor()
-	_go_full_screen()
-	_mouse_visibility()
-
+	# update_current_monitor()
+	# _go_full_screen()
+	# _mouse_visibility()
+	pass
 
 func setup_window_resolution_options() -> void:
 	# var screen_rect := DisplayServer.screen_get_usable_rect(current_monitor)

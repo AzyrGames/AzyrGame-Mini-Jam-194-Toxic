@@ -42,7 +42,7 @@ func _physics_process(_delta: float) -> void:
 	
 	pass
 
-var _last_direction : Vector2
+# var _last_direction : Vector2
 var _aim_direction: Vector2
 func _input(event: InputEvent) -> void:
 	if event is InputEventJoypadMotion:
@@ -57,7 +57,7 @@ func _input(event: InputEvent) -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 	if event is InputEventMouseMotion:
-		_mouse_pos = get_global_mouse_position()
+		_mouse_pos = get_global_mouse_position() - Vector2(-6.0, -6.0)
 		_target_direction = (_mouse_pos - global_position).normalized()
 		_aim_direction = _target_direction
 		GameManager.main_2d.cross_hair.visible = false
@@ -100,6 +100,8 @@ func add_weapon_accuracy(_value: int) -> void:
 	%PCCSingle2D.rotation_random.y -= _value
 	if %PCCSingle2D.rotation_random.y < 0:
 		%PCCSingle2D.rotation_random.y = 0 
+		GameManager.main_2d.bloody_timer.add_bloody_timer_time(10)
+
 	pass
 
 
